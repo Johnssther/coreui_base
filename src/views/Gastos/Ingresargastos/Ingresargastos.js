@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
-import DataTable from 'react-data-table-component';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-// Tablas
 
-const data = [
-  { fecha: '1 nov 2019', cantidad: 3, producto: 'empanadas', preciounid: '$1.000', precio: '$3.000' },
-  { fecha: '1 nov 2019', cantidad: 1, producto: 'pan jamo y queso', preciounid: '$1.000', precio: '$1.000' },
-  { fecha: '1 nov 2019', cantidad: 10, producto: 'pan rollo', preciounid: '$200', precio: '$1.000' },
-  { fecha: '1 nov 2019', cantidad: 2, producto: 'empanadas', preciounid: '$1.600', precio: '$3.200' },
-  { fecha: '1 nov 2019', cantidad: 1, producto: 'leche', preciounid: '$2.800', precio: '$2.800' },
-];
+//Componentes de terceros
+import DataTable from 'react-data-table-component';
+import DatePicker from 'react-datepicker2';
+import { Calendar } from 'react-datepicker2';
+import moment from 'moment-jalaali'
+
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+  Col,
+  Form,
+} from 'reactstrap';
+
+// API
+import API from '../../../api/api';
+
 const columns = [
   {
     name: 'Fecha',
@@ -24,8 +36,8 @@ const columns = [
     sortable: true,
   },
   {
-    name: 'Producto',
-    selector: 'producto',
+    name: 'Gasto',
+    selector: 'gasto',
     sortable: true,
   },
   {
@@ -34,10 +46,10 @@ const columns = [
     sortable: true,
   },
   {
-    name: 'Precio',
+    name: 'Precio Total',
     selector: 'precio',
     sortable: true,
-    right: true,
+    // right: true,
   },
 ];
 
@@ -45,44 +57,145 @@ class Ingresargastos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       data : [
-        { fecha: '1 nov 2019', cantidad: 3, producto: 'empanadas', preciounid: '$1.000', precio: '$3.000' },
-        { fecha: '1 nov 2019', cantidad: 1, producto: 'pan jamo y queso', preciounid: '$1.000', precio: '$1.000' },
-        { fecha: '1 nov 2019', cantidad: 10, producto: 'pan rollo', preciounid: '$200', precio: '$1.000' },
-        { fecha: '1 nov 2019', cantidad: 2, producto: 'empanadas', preciounid: '$1.600', precio: '$3.200' },
-        { fecha: '1 nov 2019', cantidad: 1, producto: 'leche', preciounid: '$2.800', precio: '$2.800' },
-      ]
-    }
-  }
-  componentDidMount() {
-    fetch('http://localhost/coysa/public/api/gastos')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        this.setState({ data: data })
-        console.log(data, 'sd');
-        
+      ingresargastos: false,
+      data: [],
+      //Input formulario
+      inputFecha: '',
+      inputCantidad: '',
+      inputGasto: '',
+      inputPrecioUnidad: '',
+      inputPrecioTotal: '',
+      //Calendario
+      value: moment(),
 
-      })
+    }
+    this.disabledRanges = [
+      {
+        color: 'green',
+        start: moment(),
+        end: moment()
+      },
+    ]
+    // Este enlace es necesario para hacer que `this` funcione en el callback
+    this.handleClick = this.handleClick.bind(this);
+    this.addExpenses = this.addExpenses.bind(this);
+  }
+
+  componentDidMount() {
+    this.getGastos()
+    
+  }
+
+  getGastos() {
+    this.setState({
+      data: []
+    })
+    setTimeout(() => {
+      API.getExpenses()
+        .then((response) => {
+          console.log(response, 'john');
+          const data = response.map((item) => {
+            return { fecha: item.fecha, cantidad: item.cantidad, gasto: item.gasto, preciounid: '$ '+new Intl.NumberFormat().format(item.precio_unidad), precio: '$ ' + new Intl.NumberFormat().format(item.precio_total) }
+          })
+
+          this.setState({
+            data
+          })
+        })
+    }, 500)
+  }
+
+  handleClick() {
+    this.setState({
+      ingresargastos: !this.state.ingresargastos,
+    })
+    this.getGastos()
+  }
+  addExpenses() {
+    const data = {
+      gasto: this.state.inputGasto,
+      cantidad: this.state.inputCantidad,
+      precioUnidad: this.state.inputPrecioUnidad,
+      precioTotal: this.state.inputPrecioTotal === '' ? this.state.inputCantidad * this.state.inputPrecioUnidad: this.state.inputPrecioTotal,
+      Fecha: this.state.value.format('YYYY/M/D'),
+      // Fecha: this.state.inputFecha,
+    }
+    console.log(data);
+
+    API.saveExpenses(data)
+    this.handleClick()
   }
 
   render() {
+    if (this.state.ingresargastos === true) {
+      return (
+        <Row>
+          <Col xs='12' sm='6'>
+            <Card>
+              <CardHeader>
+                <strong>Nuevo gasto</strong> generado
+              </CardHeader>
+              <CardBody>
+                <Calendar
+                  style={{ backgroundColo: 'red' }}
+                  onChange={value => this.setState({ value })}
+                  value={this.state.value}
+                />
+                <h6><strong>Fecha: </strong>{this.state.value.format('YYYY/M/D')}</h6>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xs="12" sm="6">
+            <Card>
+              <CardHeader>
+                <strong>Ingresar gastos</strong> diarios
+              </CardHeader>
+              <CardBody>
+                <FormGroup>
+                  <Label htmlFor="inputFecha">Fecha</Label>
+                  <Input type="text" id="inputFecha" value={this.state.value.format('YYYY/M/D')} onChange={(event) => this.setState({ inputFecha: event.target.value })} />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="inputCantidad">Cantidad</Label>
+                  <Input type="text" id="inputCantidad" onChange={(event) => this.setState({ inputCantidad: event.target.value })} />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="inputGasto">Gasto</Label>
+                  <Input type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="inputPrecioUnidad">Precio unidad</Label>
+                  <Input type="text" id="inputPrecioUnidad" onChange={(event) => this.setState({ inputPrecioUnidad: event.target.value })} />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="inputPrecioTotal">Precio Total</Label>
+                  <Input type="text" id="inputPrecioTotal" onChange={(event) => this.setState({ inputPrecioTotal: event.target.value })} />
+                </FormGroup>
+                <Button key="add" onClick={this.addExpenses}>Registrar</Button>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      )
+    }
     return (
       <Card>
         <CardHeader>
-          <i className="fa fa-align-justify"></i><strong>Usuarios</strong>
-          <small> Usuarios</small>
+          <i className="fa fa-align-justify"></i><strong>Gastos diarios</strong>
+          <small> Gastos </small>
         </CardHeader>
         <CardBody>
           <DataTable
             title="Gastos diarios"
             columns={columns}
-            data={data}
+            data={this.state.data}
             highlightOnHover={true}
+            selectableRows
+            actions={<Button key="add" onClick={this.handleClick}>Nuevo</Button>}
+            pagination={true}
           />
         </CardBody>
-      </Card>
+      </Card >
     );
   }
 }
