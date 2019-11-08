@@ -10,23 +10,43 @@
 // import { generalError } from '../services/error'
 // import { AsyncStorage } from 'react-native'
 
-// const URL = "http://104.236.57.82/accesspark/public/api/";
+// const API_TOKEN = "AFF8tI4L4iK1i6exDkExHINKi3RqlrAg9f4sFzsuDwWL4mfMw7hsowmxSDiaCFhKmFpkpxnFgBhWef2V";
+
 
 
 
 
 class Api {
     constructor() {
-        URL = "http://localhost/coysa/public/api/";
+        this.URL = "http://localhost/coysa/public/api/";
+        // this.API_TOKEN = "AFF8tI4L4iK1i6exDkExHINKi3RqlrAg9f4sFzsuDwWL4mfMw7hsowmxSDiaCFhKmFpkpxnFgBhWef2V";
+        this.API_TOKEN = localStorage.getItem('token');
     }
 
-
     //1. Login
-
+    onLogin(userLogin, passwordLogin) {
+        return fetch(`${this.URL}login`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: userLogin,
+                password: passwordLogin,
+            }),
+        }).then((response) => response.json())
+            .then((responseJson) => {
+                return responseJson
+            })
+            .catch(error => {
+                throw error;
+            });
+    }
 
     saveExpenses(data) {
         // B. Guardar los gastos
-        fetch(`${URL}gastos`, {
+        fetch(`${this.URL}gastos`, {
 
             method: 'POST',
             headers: {
@@ -34,6 +54,7 @@ class Api {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                api_token: localStorage.getItem('token'),
                 gasto: data.gasto,
                 cantidad: data.cantidad,
                 precio_unidad: data.precioUnidad,
@@ -50,18 +71,18 @@ class Api {
             });
     }
     // 3. Obtener todos los gastos
-    
+
     getExpenses() {
-        return fetch(`${URL}gastos`)
-          .then((response) => response.json())
-          .then((responseJson) => {
-            return responseJson;
-          })
-          .catch((error) => {
-            throw error;
-          });
-      }
-    
+        return fetch(`${this.URL}gastos?api_token=${localStorage.getItem('token')}`)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    }
+
 
 
 } // close class

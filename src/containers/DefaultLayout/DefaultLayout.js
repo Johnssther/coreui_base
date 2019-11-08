@@ -25,20 +25,29 @@ const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      auth: localStorage.getItem('token') != null ? true:false
+    }
+  }
 
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   signOut(e) {
     e.preventDefault()
     this.props.history.push('/login')
+    localStorage.clear()
   }
 
   render() {
+console.log(this.state.auth);
+
     return (
       <div className="app">
         <AppHeader fixed>
-          <Suspense  fallback={this.loading()}>
-            <DefaultHeader onLogout={e=>this.signOut(e)}/>
+          <Suspense fallback={this.loading()}>
+            <DefaultHeader onLogout={e => this.signOut(e)} />
           </Suspense>
         </AppHeader>
         <div className="app-body">
@@ -46,13 +55,13 @@ class DefaultLayout extends Component {
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>
-            <AppSidebarNav navConfig={navigation} {...this.props} router={router}/>
+              <AppSidebarNav navConfig={navigation} {...this.props} router={router} />
             </Suspense>
             <AppSidebarFooter />
             <AppSidebarMinimizer />
           </AppSidebar>
           <main className="main">
-            <AppBreadcrumb appRoutes={routes} router={router}/>
+            <AppBreadcrumb appRoutes={routes} router={router} />
             <Container fluid>
               <Suspense fallback={this.loading()}>
                 <Switch>
@@ -84,6 +93,9 @@ class DefaultLayout extends Component {
             <DefaultFooter />
           </Suspense>
         </AppFooter>
+        {this.state.auth === false &&
+          <Redirect from="/" to="/login" />
+        }
       </div>
     );
   }

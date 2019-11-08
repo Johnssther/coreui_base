@@ -3,7 +3,7 @@
   "version": "2.6.0",
   "description": "CoreUI React Open Source Bootstrap 4 Admin Template",
   "author": "Łukasz Holeczek",
-  "homepage": "https://coreui.io",
+  "homepage": "https://github.com/Johnssther/coreui_base",
   "copyright": "Copyright 2017-2019 creativeLabs Łukasz Holeczek",
   "license": "MIT",
   "private": true,
@@ -41,6 +41,7 @@
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
+    "gh-pages": "^2.1.1",
     "react-scripts": "^3.0.1"
   },
   "scripts": {

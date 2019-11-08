@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 //Componentes de terceros
 import DataTable from 'react-data-table-component';
-import DatePicker from 'react-datepicker2';
 import { Calendar } from 'react-datepicker2';
 import moment from 'moment-jalaali'
 
@@ -16,7 +15,7 @@ import {
   Label,
   Row,
   Col,
-  Form,
+  Badge
 } from 'reactstrap';
 
 // API
@@ -59,6 +58,7 @@ class Ingresargastos extends Component {
     this.state = {
       ingresargastos: false,
       data: [],
+      gastoTotal:0,
       //Input formulario
       inputFecha: '',
       inputCantidad: '',
@@ -83,7 +83,7 @@ class Ingresargastos extends Component {
 
   componentDidMount() {
     this.getGastos()
-    
+
   }
 
   getGastos() {
@@ -93,13 +93,23 @@ class Ingresargastos extends Component {
     setTimeout(() => {
       API.getExpenses()
         .then((response) => {
-          console.log(response, 'john');
-          const data = response.map((item) => {
-            return { fecha: item.fecha, cantidad: item.cantidad, gasto: item.gasto, preciounid: '$ '+new Intl.NumberFormat().format(item.precio_unidad), precio: '$ ' + new Intl.NumberFormat().format(item.precio_total) }
+          console.log(response);
+          
+          const total = response.map((item) => {
+            return item.precio_total;
           })
+          const data = response.map((item) => {
+            return { fecha: item.fecha, cantidad: item.cantidad, gasto: item.gasto, preciounid: '$ ' + new Intl.NumberFormat().format(item.precio_unidad), precio: '$ ' + new Intl.NumberFormat().format(item.precio_total) }
+          })
+          const Preciototal=0
+          // if ( total.length > 0 ) {
+          // }
+          // const reducer = (accumulator, currentValue) => accumulator + currentValue;
+          // const  Preciototal = total.reduce(reducer)
 
           this.setState({
-            data
+            data,
+            gastoTotal:Preciototal,
           })
         })
     }, 500)
@@ -116,17 +126,18 @@ class Ingresargastos extends Component {
       gasto: this.state.inputGasto,
       cantidad: this.state.inputCantidad,
       precioUnidad: this.state.inputPrecioUnidad,
-      precioTotal: this.state.inputPrecioTotal === '' ? this.state.inputCantidad * this.state.inputPrecioUnidad: this.state.inputPrecioTotal,
+      precioTotal: this.state.inputPrecioTotal === '' ? this.state.inputCantidad * this.state.inputPrecioUnidad : this.state.inputPrecioTotal,
       Fecha: this.state.value.format('YYYY/M/D'),
       // Fecha: this.state.inputFecha,
     }
-    console.log(data);
 
     API.saveExpenses(data)
     this.handleClick()
   }
 
   render() {
+    console.log('-------------------------', this.state.gastoTotal);
+    
     if (this.state.ingresargastos === true) {
       return (
         <Row>
@@ -183,10 +194,11 @@ class Ingresargastos extends Component {
         <CardHeader>
           <i className="fa fa-align-justify"></i><strong>Gastos diarios</strong>
           <small> Gastos </small>
+          
         </CardHeader>
         <CardBody>
           <DataTable
-            title="Gastos diarios"
+            title={<small>Gastos diarios. Total: <Badge className="mr-1" href="#" color="danger">{`$ ${ new Intl.NumberFormat().format(this.state.gastoTotal) }`}</Badge></small>}
             columns={columns}
             data={this.state.data}
             highlightOnHover={true}

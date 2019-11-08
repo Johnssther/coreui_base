@@ -14,7 +14,16 @@ const propTypes = {
 const defaultProps = {};
 
 class DefaultHeader extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      usuario: JSON.parse(localStorage.getItem('auth'))
+    }
+
+  }
   render() {
+   const usuario =  this.state.usuario;
+   
 
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
@@ -45,7 +54,7 @@ class DefaultHeader extends Component {
               <img src={'../../assets/img/avatars/5.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
             </DropdownToggle>
             <DropdownMenu right>
-              <DropdownItem header tag="div" className="text-center"><strong>John Alejandro</strong></DropdownItem>
+              <DropdownItem header tag="div" className="text-center"><strong>{ usuario.name ? usuario.name:'' }</strong></DropdownItem>
               <DropdownItem active={true}><i className="fa fa-user"></i> Perfil</DropdownItem>
               <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Cerrar sesión</DropdownItem>
             </DropdownMenu>
