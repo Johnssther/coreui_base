@@ -60,6 +60,7 @@ class Api {
                 precio_unidad: data.precioUnidad,
                 precio_total: data.precioTotal,
                 fecha: data.Fecha,
+                id_usuario:data.id_usuario
             }),
 
         }).then((response) => {
@@ -73,7 +74,7 @@ class Api {
     // 3. Obtener todos los gastos
 
     getExpenses() {
-        return fetch(`${this.URL}gastos?api_token=${localStorage.getItem('token')}`)
+        return fetch(`${this.URL}gastos?api_token=${localStorage.getItem('token')}&id_usuario=${ JSON.parse(localStorage.getItem('auth')).id }`)
             .then((response) => response.json())
             .then((responseJson) => {
                 return responseJson;

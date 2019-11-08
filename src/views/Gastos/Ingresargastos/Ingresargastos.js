@@ -108,7 +108,7 @@ class Ingresargastos extends Component {
           // const  Preciototal = total.reduce(reducer)
 
           this.setState({
-            data,
+            data, 
             gastoTotal:Preciototal,
           })
         })
@@ -128,6 +128,7 @@ class Ingresargastos extends Component {
       precioUnidad: this.state.inputPrecioUnidad,
       precioTotal: this.state.inputPrecioTotal === '' ? this.state.inputCantidad * this.state.inputPrecioUnidad : this.state.inputPrecioTotal,
       Fecha: this.state.value.format('YYYY/M/D'),
+      id_usuario: JSON.parse(localStorage.getItem('auth')).id,
       // Fecha: this.state.inputFecha,
     }
 
