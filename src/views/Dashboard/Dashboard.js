@@ -39,7 +39,10 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-        <WidgetO1 />
+        <WidgetO1
+          header='$-'
+          mainText='Gastos totales de este mes'
+        />
       </div>
     );
   }

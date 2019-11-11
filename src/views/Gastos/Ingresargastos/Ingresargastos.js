@@ -58,7 +58,7 @@ class Ingresargastos extends Component {
     this.state = {
       ingresargastos: false,
       data: [],
-      gastoTotal:0,
+      gastoTotal: 0,
       //Input formulario
       inputFecha: '',
       inputCantidad: '',
@@ -94,22 +94,25 @@ class Ingresargastos extends Component {
       API.getExpenses()
         .then((response) => {
           console.log(response);
-          
+
           const total = response.map((item) => {
             return item.precio_total;
           })
           const data = response.map((item) => {
             return { fecha: item.fecha, cantidad: item.cantidad, gasto: item.gasto, preciounid: '$ ' + new Intl.NumberFormat().format(item.precio_unidad), precio: '$ ' + new Intl.NumberFormat().format(item.precio_total) }
           })
-          const Preciototal=0
-          // if ( total.length > 0 ) {
-          // }
-          // const reducer = (accumulator, currentValue) => accumulator + currentValue;
-          // const  Preciototal = total.reduce(reducer)
+
+
+          if (total.length > 0) {
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
+            var Preciototal = total.reduce(reducer);
+          } else {
+            var Preciototal = 0;
+          }
 
           this.setState({
-            data, 
-            gastoTotal:Preciototal,
+            data,
+            gastoTotal: Preciototal,
           })
         })
     }, 500)
@@ -137,8 +140,7 @@ class Ingresargastos extends Component {
   }
 
   render() {
-    console.log('-------------------------', this.state.gastoTotal);
-    
+
     if (this.state.ingresargastos === true) {
       return (
         <Row>
@@ -195,11 +197,11 @@ class Ingresargastos extends Component {
         <CardHeader>
           <i className="fa fa-align-justify"></i><strong>Gastos diarios</strong>
           <small> Gastos </small>
-          
+
         </CardHeader>
         <CardBody>
           <DataTable
-            title={<small>Gastos diarios. Total: <Badge className="mr-1" href="#" color="danger">{`$ ${ new Intl.NumberFormat().format(this.state.gastoTotal) }`}</Badge></small>}
+            title={<small>Gastos diarios. Total: <Badge className="mr-1" href="#" color="danger">{`$ ${new Intl.NumberFormat().format(this.state.gastoTotal)}`}</Badge></small>}
             columns={columns}
             data={this.state.data}
             highlightOnHover={true}

@@ -50,7 +50,7 @@ class Widget02 extends Component {
       if (footer) {
         return (
           <CardFooter className="px-3 py-2">
-            <a className="font-weight-bold font-xs btn-block text-muted" href={link}>View More
+            <a className="font-weight-bold font-xs btn-block text-muted" href={link}>Ver Más
               <i className="fa fa-angle-right float-right font-lg"></i></a>
           </CardFooter>
         );

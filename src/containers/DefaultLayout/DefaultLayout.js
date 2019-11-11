@@ -28,7 +28,7 @@ class DefaultLayout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      auth: localStorage.getItem('token') != null ? true:false
+      auth: localStorage.getItem('token') != null ? true : false
     }
   }
 
@@ -41,8 +41,6 @@ class DefaultLayout extends Component {
   }
 
   render() {
-console.log(this.state.auth);
-
     return (
       <div className="app">
         <AppHeader fixed>

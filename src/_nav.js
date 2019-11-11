@@ -4,37 +4,24 @@ export default {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
-      // badge: {
-      //   variant: 'info',
-      //   text: 'Inicio',
-      // },
     },
     // {
-    //   title: true,
-    //   name: 'Gastos',
-    //   wrapper: {
-    //     element: '',
-    //     attributes: {},
-    //   },
+    //   name: 'Example',
+    //   url: '/notifications',
+    //   icon: 'icon-cursor',
+    //   children: [
+    //     {
+    //       name: 'Ingresar gastos',
+    //       url: '/notifications/alerts',
+    //       icon: 'icon-pencil',
+    //     },
+    //     {
+    //       name: 'Informe de gastos',
+    //       url: '/notifications/badges',
+    //       icon: 'icon-pencil',
+    //     },
+    //   ],
     // },
-    
-    {
-      name: 'Example',
-      url: '/notifications',
-      icon: 'icon-cursor',
-      children: [
-        {
-          name: 'Ingresar gastos',
-          url: '/notifications/alerts',
-          icon: 'icon-pencil',
-        },
-        {
-          name: 'Informe de gastos',
-          url: '/notifications/badges',
-          icon: 'icon-pencil',
-        },
-      ],
-    },
     {
       name: 'Gastos',
       url: '/gastos',

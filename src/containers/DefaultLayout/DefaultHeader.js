@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem } from 'reactstrap';
 import PropTypes from 'prop-types';
+import Dialog  from './modals'
 
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/logo.svg'
@@ -64,6 +65,7 @@ class DefaultHeader extends Component {
               <DropdownItem header tag="div" className="text-center"><strong>{ this.state.usuario_nombre }</strong></DropdownItem>
               <DropdownItem active={true}><i className="fa fa-user"></i> Perfil</DropdownItem>
               <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Cerrar sesión</DropdownItem>
+              <Dialog  />
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>

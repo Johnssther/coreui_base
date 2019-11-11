@@ -81,7 +81,7 @@ class Login extends Component {
                       <Row>
                         <Col xs="6">
                           {/* <Link to="/"> */}
-                          <Button color="primary" className="px-4" onClick={this.onLogin}>Iniciar sesón</Button>
+                          <Button color="success" className="px-4" onClick={this.onLogin}>Iniciar sesón</Button>
                           {/* </Link> */}
                         </Col>
                         <Col xs="6" className="text-right">
@@ -91,14 +91,13 @@ class Login extends Component {
                     </Form>
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+                <Card className="text-white bg-success py-5 d-md-down-none" style={{ width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
-                      <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+                      <h2>Crea tu cuenta</h2>
+                      <p>Registrate y vive una verdadera experiencia para llevar el control de tus finanzas personales</p>
                       <Link to="/register">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>
+                        <Button color="success" className="mt-3" active tabIndex={-1}>Registrate Ahora!</Button>
                       </Link>
                     </div>
                   </CardBody>
