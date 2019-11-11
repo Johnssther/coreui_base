@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fd35bde503dd58c5349ace20a96479a3",
+    "revision": "2da6c90da9308e4639ff43039cabb328",
     "url": "/coreui_base/index.html"
   },
   {
