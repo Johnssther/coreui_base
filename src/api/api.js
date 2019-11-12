@@ -18,8 +18,8 @@
 
 class Api {
     constructor() {
-        this.URL = "http://coysa.herokuapp.com/api/";
-        // this.URL = "http://localhost/coysa/public/api/";
+        // this.URL = "http://coysa.herokuapp.com/api/";
+        this.URL = "http://localhost/coysa/public/api/";
         // this.API_TOKEN = "AFF8tI4L4iK1i6exDkExHINKi3RqlrAg9f4sFzsuDwWL4mfMw7hsowmxSDiaCFhKmFpkpxnFgBhWef2V";
         this.API_TOKEN = localStorage.getItem('token');
     }
@@ -84,7 +84,8 @@ class Api {
                 precio_unidad: data.precioUnidad,
                 precio_total: data.precioTotal,
                 fecha: data.Fecha,
-                id_usuario: data.id_usuario
+                user_id: data.id_usuario,
+                tipogasto_id: 1
             }),
 
         }).then((response) => {
@@ -98,7 +99,20 @@ class Api {
     // 3. Obtener todos los gastos
 
     getExpenses() {
-        return fetch(`${this.URL}gastos?api_token=${localStorage.getItem('token')}&id_usuario=${JSON.parse(localStorage.getItem('auth')).id}`)
+        return fetch(`${this.URL}gastos?api_token=${localStorage.getItem('token')}&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    }
+
+    // 4. Obtiene los tipos de gastos
+
+    getTipogastos() {
+        return fetch(`${this.URL}tipogastos?api_token=${localStorage.getItem('token')}&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
             .then((response) => response.json())
             .then((responseJson) => {
                 return responseJson;

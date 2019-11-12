@@ -17,6 +17,7 @@ class Register extends Component {
       password_confirmation: '',
       //errors
       name_error: '',
+      errors_example:'',
     }
     this.validateForm = this.validateForm.bind(this);
     this.registerUser = this.registerUser.bind(this);
@@ -49,6 +50,7 @@ class Register extends Component {
     }
   }
   registerUser() {
+
     let data = {
       name: this.state.name,
       username: this.state.username,
@@ -56,8 +58,46 @@ class Register extends Component {
       password: this.state.password,
       password_confirmation: this.state.password_confirmation,
     }
-    API.registerUser(data)
-    this.props.history.push('/login')
+
+    const validForm = () => {
+      //validacion de correo
+      let regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+      let valid_email = regex.test(data.email) ? true : false;
+      let minimo_name = data.name.length > 4 ? true : false
+      let minimo_username = data.username.length > 4 ? true : false
+      let minimo_password = data.password.length > 7 ? true : false
+      let valid_password = data.password === data.password_confirmation ? true : false
+
+      if (!minimo_name) {
+        this.setState({ errors_example: 'Nombre minimo 4 caracteres'});
+        return false
+      }
+      if (!minimo_username) {
+        this.setState({ errors_example: 'Usuario minimo 4 caracteres'});
+        return false
+      }
+      if (!valid_email) {
+        this.setState({ errors_example: 'Correo invalido'});
+        return false
+      }
+      if (!minimo_password) {
+        this.setState({ errors_example: 'La contraceña debe tener minimo 8 caracteres'});
+        return false
+      }
+      if (!valid_password) {
+        this.setState({ errors_example: 'La contraceñas con considen'});
+        return false
+      }
+      return true
+    }
+    if (validForm(data) === true) {
+      this.setState({ errors_example: 'Campos validos, puede continuar'});
+      API.registerUser(data)
+      this.props.history.push('/login')
+    }
+
+
   }
 
   render() {
@@ -111,6 +151,7 @@ class Register extends Component {
                       <Input type="password" placeholder="Repita tu  contraceña" autoComplete="new-password" name='password_confirmation' onChange={this.validateForm} />
                     </InputGroup>
                     <Button color="success" block onClick={this.registerUser}>Registrarme</Button>
+                    <p>{ this.state.errors_example }</p>
                   </Form>
                 </CardBody>
                 {/* <CardFooter className="p-4">

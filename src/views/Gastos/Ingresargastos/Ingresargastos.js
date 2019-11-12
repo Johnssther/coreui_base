@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import DataTable from 'react-data-table-component';
 import { Calendar } from 'react-datepicker2';
 import moment from 'moment-jalaali'
+import Select from 'react-select'
 
 import {
   Button,
@@ -67,6 +68,13 @@ class Ingresargastos extends Component {
       inputPrecioTotal: '',
       //Calendario
       value: moment(),
+      options: [
+        { value: '1', label: 'Gasto de emergencia' },
+        { value: '2', label: 'Gasto Hormiga' },
+        { value: '3', label: 'Gasto Ocacional' },
+        { value: '4', label: 'Gasto Hormiga' },
+        { value: '5', label: 'Gasto Regalos' },
+      ]
 
     }
     this.disabledRanges = [
@@ -83,6 +91,11 @@ class Ingresargastos extends Component {
 
   componentDidMount() {
     this.getGastos()
+    API.getTipogastos().then((response) => {
+      console.log(response);
+    })
+    //select
+
 
   }
 
@@ -176,6 +189,10 @@ class Ingresargastos extends Component {
                 <FormGroup>
                   <Label htmlFor="inputGasto">Gasto</Label>
                   <Input type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
+                </FormGroup>
+                <FormGroup>
+                  <Label htmlFor="inputTipogasto">Tipo Gasto</Label>
+                  <Select options={this.state.options} />
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="inputPrecioUnidad">Precio unidad</Label>
