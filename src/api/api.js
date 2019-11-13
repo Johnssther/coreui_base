@@ -18,9 +18,8 @@
 
 class Api {
     constructor() {
-        // this.URL = "http://coysa.herokuapp.com/api/";
-        this.URL = "http://localhost/coysa/public/api/";
-        // this.API_TOKEN = "AFF8tI4L4iK1i6exDkExHINKi3RqlrAg9f4sFzsuDwWL4mfMw7hsowmxSDiaCFhKmFpkpxnFgBhWef2V";
+        this.URL = "http://coysa.herokuapp.com/api/";
+        // this.URL = "http://localhost/coysa/public/api/";
         this.API_TOKEN = localStorage.getItem('token');
     }
 
@@ -85,7 +84,7 @@ class Api {
                 precio_total: data.precioTotal,
                 fecha: data.Fecha,
                 user_id: data.id_usuario,
-                tipogasto_id: 1
+                tipogasto_id: data.tipogasto_id,
             }),
 
         }).then((response) => {

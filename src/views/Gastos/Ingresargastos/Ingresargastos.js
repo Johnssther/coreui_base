@@ -12,6 +12,7 @@ import {
   CardBody,
   CardHeader,
   FormGroup,
+  Modal, ModalBody, ModalFooter, ModalHeader,
   Input,
   Label,
   Row,
@@ -57,7 +58,7 @@ class Ingresargastos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingresargastos: false,
+      ingresargastos: true,
       data: [],
       gastoTotal: 0,
       //Input formulario
@@ -66,15 +67,13 @@ class Ingresargastos extends Component {
       inputGasto: '',
       inputPrecioUnidad: '',
       inputPrecioTotal: '',
+      inputTipogasto: '',
       //Calendario
       value: moment(),
-      options: [
-        { value: '1', label: 'Gasto de emergencia' },
-        { value: '2', label: 'Gasto Hormiga' },
-        { value: '3', label: 'Gasto Ocacional' },
-        { value: '4', label: 'Gasto Hormiga' },
-        { value: '5', label: 'Gasto Regalos' },
-      ]
+      options: [],
+
+      danger: false,
+      textError: '',
 
     }
     this.disabledRanges = [
@@ -87,12 +86,20 @@ class Ingresargastos extends Component {
     // Este enlace es necesario para hacer que `this` funcione en el callback
     this.handleClick = this.handleClick.bind(this);
     this.addExpenses = this.addExpenses.bind(this);
+    this.tipoGasto = this.tipoGasto.bind(this);
+    this.toggleDanger = this.toggleDanger.bind(this);
+
   }
 
   componentDidMount() {
     this.getGastos()
     API.getTipogastos().then((response) => {
-      console.log(response);
+      const options = response.map((item) => {
+        return { value: item.id, label: item.gasto }
+      })
+      this.setState({
+        options,
+      })
     })
     //select
 
@@ -138,6 +145,7 @@ class Ingresargastos extends Component {
     this.getGastos()
   }
   addExpenses() {
+
     const data = {
       gasto: this.state.inputGasto,
       cantidad: this.state.inputCantidad,
@@ -145,18 +153,66 @@ class Ingresargastos extends Component {
       precioTotal: this.state.inputPrecioTotal === '' ? this.state.inputCantidad * this.state.inputPrecioUnidad : this.state.inputPrecioTotal,
       Fecha: this.state.value.format('YYYY/M/D'),
       id_usuario: JSON.parse(localStorage.getItem('auth')).id,
+      tipogasto_id: this.state.inputTipogasto,
       // Fecha: this.state.inputFecha,
     }
+    const validateForm = (data) => {
 
-    API.saveExpenses(data)
-    this.handleClick()
+      if (data.tipogasto_id === '') {
+        this.setState({ danger: !this.state.danger, textError: 'Debe seleccionar el tipo de gasto' });
+        return false
+      }
+      if (data.gasto === '') {
+        this.setState({ danger: !this.state.danger, textError: 'Debe ingresar un gasto en el campo gasto' });
+        return false
+      }
+      if (data.cantidad === '') {
+        this.setState({ danger: !this.state.danger, textError: 'Ingrese una cantidad' });
+        return false
+      }
+      if (data.precioUnidad === '') {
+        this.setState({ danger: !this.state.danger, textError: 'Ingrese el costo por unidad' });
+        return false
+      }
+
+      API.saveExpenses(data)
+      this.handleClick()
+      return true
+    }
+    validateForm(data)
+
+
+  }
+  tipoGasto = (newValue: any, actionMeta: any) => {
+    console.log(newValue.value);
+    this.setState({
+      inputTipogasto: newValue.value
+    })
+  }
+  toggleDanger() {
+    this.setState({
+      danger: !this.state.danger,
+    });
+    console.log('sesion cerrada');
+
   }
 
   render() {
-
     if (this.state.ingresargastos === true) {
       return (
         <Row>
+          <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+            className={'modal-danger ' + this.props.className}>
+            <ModalHeader toggle={this.toggleDanger}>Error al intentar registrar este gasto</ModalHeader>
+            <ModalBody>
+              {this.state.textError}
+            </ModalBody>
+            <ModalFooter>
+              <Button color="danger" onClick={this.toggleDanger}>Ok</Button>{' '}
+            </ModalFooter>
+          </Modal>
+
+
           <Col xs='12' sm='6'>
             <Card>
               <CardHeader>
@@ -175,7 +231,8 @@ class Ingresargastos extends Component {
           <Col xs="12" sm="6">
             <Card>
               <CardHeader>
-                <strong>Ingresar gastos</strong> diarios
+                <strong>Ingresar gastos</strong> diarios    
+                <Button style={{ marginLeft:137 }} key="add" onClick={this.handleClick}>Ver Mis gastos</Button>
               </CardHeader>
               <CardBody>
                 <FormGroup>
@@ -183,24 +240,24 @@ class Ingresargastos extends Component {
                   <Input type="text" id="inputFecha" value={this.state.value.format('YYYY/M/D')} onChange={(event) => this.setState({ inputFecha: event.target.value })} />
                 </FormGroup>
                 <FormGroup>
-                  <Label htmlFor="inputCantidad">Cantidad</Label>
-                  <Input type="text" id="inputCantidad" onChange={(event) => this.setState({ inputCantidad: event.target.value })} />
+                  <Label htmlFor="inputTipogasto">Tipo Gasto</Label>
+                  <Select options={this.state.options} onChange={this.tipoGasto} />
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="inputGasto">Gasto</Label>
-                  <Input type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
+                  <Input placeholder='Ingresar Gasto' type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
                 </FormGroup>
                 <FormGroup>
-                  <Label htmlFor="inputTipogasto">Tipo Gasto</Label>
-                  <Select options={this.state.options} />
+                  <Label htmlFor="inputCantidad">Cantidad</Label>
+                  <Input placeholder='Numero Total' type="text" id="inputCantidad" onChange={(event) => this.setState({ inputCantidad: event.target.value })} />
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="inputPrecioUnidad">Precio unidad</Label>
-                  <Input type="text" id="inputPrecioUnidad" onChange={(event) => this.setState({ inputPrecioUnidad: event.target.value })} />
+                  <Input placeholder='$ Costo Unidad' type="text" id="inputPrecioUnidad" onChange={(event) => this.setState({ inputPrecioUnidad: event.target.value })} />
                 </FormGroup>
                 <FormGroup>
                   <Label htmlFor="inputPrecioTotal">Precio Total</Label>
-                  <Input type="text" id="inputPrecioTotal" onChange={(event) => this.setState({ inputPrecioTotal: event.target.value })} />
+                  <Input placeholder='$ Costo Total (opcional)' type="text" id="inputPrecioTotal" onChange={(event) => this.setState({ inputPrecioTotal: event.target.value })} />
                 </FormGroup>
                 <Button key="add" onClick={this.addExpenses}>Registrar</Button>
               </CardBody>
