@@ -6,20 +6,16 @@
 * http://104.236.57.82/accesspark/public/api/login
 */
 
-
-// import { generalError } from '../services/error'
-// import { AsyncStorage } from 'react-native'
-
-// const API_TOKEN = "AFF8tI4L4iK1i6exDkExHINKi3RqlrAg9f4sFzsuDwWL4mfMw7hsowmxSDiaCFhKmFpkpxnFgBhWef2V";
-
-
-
-
-
 class Api {
     constructor() {
-        this.URL = "http://coysa.herokuapp.com/api/";
-        // this.URL = "http://localhost/coysa/public/api/";
+        let host = window.location.host
+        if (host === "localhost:3000") {
+            this.URL = "http://localhost/coysa/public/api/";
+        }
+        if (host === "johnssther.github.io") {
+            this.URL = "http://coysa.herokuapp.com/api/";
+        }
+
         this.API_TOKEN = localStorage.getItem('token');
     }
 
@@ -77,7 +73,7 @@ class Api {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                api_token: localStorage.getItem('token'),
+                api_token: this.API_TOKEN,
                 gasto: data.gasto,
                 cantidad: data.cantidad,
                 precio_unidad: data.precioUnidad,
@@ -98,7 +94,9 @@ class Api {
     // 3. Obtener todos los gastos
 
     getExpenses() {
-        return fetch(`${this.URL}gastos?api_token=${localStorage.getItem('token')}&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
+        var URLactual = window.location;
+        console.log(URLactual, 'oo');
+        return fetch(`${this.URL}gastos?api_token=${ this.API_TOKEN }&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
             .then((response) => response.json())
             .then((responseJson) => {
                 return responseJson;
@@ -111,7 +109,7 @@ class Api {
     // 4. Obtiene los tipos de gastos
 
     getTipogastos() {
-        return fetch(`${this.URL}tipogastos?api_token=${localStorage.getItem('token')}&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
+        return fetch(`${this.URL}tipogastos?api_token=${ this.API_TOKEN }&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
             .then((response) => response.json())
             .then((responseJson) => {
                 return responseJson;

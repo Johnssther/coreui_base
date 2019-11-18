@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
-import { Badge, Card, CardText, CardBody } from 'reactstrap';
+import { Card, CardText, CardBody, Toast, ToastBody, ToastHeader } from 'reactstrap';
 import { Progress } from 'reactstrap';
-import Modals from '../../Notifications/Modals/Modals';
 
 class Informegastos extends Component {
   render() {
     return (
       <div className="animated fadeIn">
         <div>
+        <Toast>
+              <ToastHeader>
+                Reactstrap
+              </ToastHeader>
+              <ToastBody>
+                  This is a toast on a white background — check it out!
+              </ToastBody>
+            </Toast>
+            
           <Card>
             <CardBody>
               <CardText>Módulo no disponible en el moento</CardText>
@@ -16,7 +24,6 @@ class Informegastos extends Component {
               </Progress>
             </CardBody>
           </Card>
-          <Modals />
         </div>
       </div>
     );

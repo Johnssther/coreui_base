@@ -17,11 +17,34 @@ import {
   Label,
   Row,
   Col,
-  Badge
+  Badge,
+  Spinner
 } from 'reactstrap';
 
 // API
 import API from '../../../api/api';
+
+const rowTheme = {
+  header: {
+    borderColor: 'transparent',
+  },
+  rows: {
+    // spaced allows the following properties
+    spacing: 'spaced',
+    spacingBorderRadius: '50px',
+    spacingMargin: '3px',
+
+    borderColor: 'rgba(0,0,0,.12)',
+    backgroundColor: 'white',
+    height: '52px',
+  },
+  cells: {
+    cellPadding: '48px',
+  },
+  footer: {
+    separatorStyle: 'none',
+  },
+};
 
 const columns = [
   {
@@ -52,6 +75,16 @@ const columns = [
     sortable: true,
     // right: true,
   },
+  {
+    name: 'Acciones',
+    selector: 'Editar',
+    sortable: true,
+    cell: () => 
+    <div>
+      {/* <button onClick={()=>{alert('eliminar')}}>Eliminar</button>
+      <button onClick={()=>{alert('actualizar')}}>Actualizar</button> */}
+    </div>
+  },
 ];
 
 class Ingresargastos extends Component {
@@ -74,6 +107,7 @@ class Ingresargastos extends Component {
 
       danger: false,
       textError: '',
+      loading:true,
 
     }
     this.disabledRanges = [
@@ -133,6 +167,7 @@ class Ingresargastos extends Component {
           this.setState({
             data,
             gastoTotal: Preciototal,
+            loading:false,
           })
         })
     }, 500)
@@ -231,8 +266,8 @@ class Ingresargastos extends Component {
           <Col xs="12" sm="6">
             <Card>
               <CardHeader>
-                <strong>Ingresar gastos</strong> diarios    
-                <Button style={{ marginLeft:137 }} key="add" onClick={this.handleClick}>Ver Mis gastos</Button>
+                <strong>Ingresar gastos</strong> diarios
+                <Button style={{ marginLeft: 137 }} key="add" onClick={this.handleClick}>Ver Mis gastos</Button>
               </CardHeader>
               <CardBody>
                 <FormGroup>
@@ -279,9 +314,14 @@ class Ingresargastos extends Component {
             columns={columns}
             data={this.state.data}
             highlightOnHover={true}
-            selectableRows
             actions={<Button key="add" onClick={this.handleClick}>Nuevo</Button>}
             pagination={true}
+            progressPending={this.state.loading}
+            progressComponent={<Spinner animation="border" variant="primary" />}
+            customTheme={rowTheme}
+            expandableRows
+            expandableRowsComponent={<div>Gasto.</div>}
+            expandOnRowClicked
           />
         </CardBody>
       </Card >
