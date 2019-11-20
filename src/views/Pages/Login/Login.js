@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import API from '../../../api/api'
+import { LinearProgress } from '@material-ui/core';
 
 class Login extends Component {
   constructor(props) {
@@ -10,14 +11,15 @@ class Login extends Component {
       inputUsername: '',
       inputPassword: '',
       errorLogin: false,
-      auth: localStorage.getItem('token') != null ? true:false
+      auth: localStorage.getItem('token') != null ? true : false,
+      loading:false,
     }
     // Este enlace es necesario para hacer que `this` funcione en el callback
     this.onLogin = this.onLogin.bind(this);
   }
-  
-  onLogin() {
 
+  onLogin() {
+    this.setState({ loading:true })
     return new Promise((resolve, reject) => {
       API.onLogin(this.state.inputUsername, this.state.inputPassword).then((data) => {  //username, password:%koi.ti% or admin
 
@@ -34,9 +36,10 @@ class Login extends Component {
 
           //Valida si el usuario esta o no bloqueado.
 
-        } else { this.setState({ errorLogin: true }) }
+        } else { this.setState({ errorLogin: false, loading:false }) }
         resolve(data);
       }, (error) => {
+        this.setState({ loading:false })
         reject(error);
       });
     });
@@ -48,6 +51,12 @@ class Login extends Component {
         <Container>
           <Row className="justify-content-center">
             <Col md="8">
+              {this.state.loading === true ?
+                <LinearProgress />
+                :
+                ''
+              }
+
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
