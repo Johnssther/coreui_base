@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 //Componentes de terceros
-import DataTable from 'react-data-table-component';
 import { Calendar } from 'react-datepicker2';
 import moment from 'moment-jalaali'
 import Select from 'react-select'
@@ -18,80 +17,21 @@ import {
   Row,
   Col,
   Badge,
-  Spinner
+  Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
 } from 'reactstrap';
 
-// API
+// Components propios
+import DatatableShowGastos from './components/datatableShowGastos'
+
+// Peticiones api
 import API from '../../../api/api';
 
-const rowTheme = {
-  header: {
-    borderColor: 'transparent',
-  },
-  rows: {
-    // spaced allows the following properties
-    spacing: 'spaced',
-    spacingBorderRadius: '50px',
-    spacingMargin: '3px',
-
-    borderColor: 'rgba(0,0,0,.12)',
-    backgroundColor: 'white',
-    height: '52px',
-  },
-  cells: {
-    cellPadding: '48px',
-  },
-  footer: {
-    separatorStyle: 'none',
-  },
-};
-
-const columns = [
-  {
-    name: 'Fecha',
-    selector: 'fecha',
-    sortable: true,
-    cell: row => <div><div style={{ fontWeight: 700, }}>{row.fecha}</div>{row.summary}</div>,
-
-  },
-  {
-    name: 'Cantidad',
-    selector: 'cantidad',
-    sortable: true,
-  },
-  {
-    name: 'Gasto',
-    selector: 'gasto',
-    sortable: true,
-  },
-  {
-    name: 'Precio Unid.',
-    selector: 'preciounid',
-    sortable: true,
-  },
-  {
-    name: 'Precio Total',
-    selector: 'precio',
-    sortable: true,
-    // right: true,
-  },
-  {
-    name: 'Acciones',
-    selector: 'Editar',
-    sortable: true,
-    cell: () => 
-    <div>
-      {/* <button onClick={()=>{alert('eliminar')}}>Eliminar</button>
-      <button onClick={()=>{alert('actualizar')}}>Actualizar</button> */}
-    </div>
-  },
-];
 
 class Ingresargastos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingresargastos: true,
+      ingresargastos: false,
       data: [],
       gastoTotal: 0,
       //Input formulario
@@ -107,7 +47,8 @@ class Ingresargastos extends Component {
 
       danger: false,
       textError: '',
-      loading:true,
+      loading: true,
+      dropdownOpen: new Array(6).fill(false),
 
     }
     this.disabledRanges = [
@@ -122,6 +63,7 @@ class Ingresargastos extends Component {
     this.addExpenses = this.addExpenses.bind(this);
     this.tipoGasto = this.tipoGasto.bind(this);
     this.toggleDanger = this.toggleDanger.bind(this);
+    this.toggle = this.toggle.bind(this);
 
   }
 
@@ -135,9 +77,15 @@ class Ingresargastos extends Component {
         options,
       })
     })
-    //select
+  }
 
-
+  toggle(i) {
+    const newArray = this.state.dropdownOpen.map((element, index) => {
+      return (index === i ? !element : false);
+    });
+    this.setState({
+      dropdownOpen: newArray,
+    });
   }
 
   getGastos() {
@@ -167,7 +115,7 @@ class Ingresargastos extends Component {
           this.setState({
             data,
             gastoTotal: Preciototal,
-            loading:false,
+            loading: false,
           })
         })
     }, 500)
@@ -176,6 +124,7 @@ class Ingresargastos extends Component {
   handleClick() {
     this.setState({
       ingresargastos: !this.state.ingresargastos,
+      loading: !this.state.loading,
     })
     this.getGastos()
   }
@@ -298,33 +247,43 @@ class Ingresargastos extends Component {
               </CardBody>
             </Card>
           </Col>
+          <Card>
+            <CardHeader>
+              <i className="fa fa-align-justify"></i><strong>Dropdowns</strong>
+              <div className="card-header-actions">
+                <a href="https://reactstrap.github.io/components/dropdowns/" rel="noreferrer noopener" target="_blank" className="card-header-action">
+                  <small className="text-muted">docs</small>
+                </a>
+              </div>
+            </CardHeader>
+
+            {/* botones */}
+            <Dropdown isOpen={this.state.dropdownOpen[0]} toggle={() => {
+              this.toggle(0);
+            }}>
+              <DropdownToggle caret>
+                Acciones
+                  </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem header>Acción</DropdownItem>
+                <DropdownItem>Actualizar</DropdownItem>
+                <DropdownItem>Eliminar</DropdownItem>
+                <DropdownItem>Another Action</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+
+          </Card>
         </Row>
       )
     }
+    const title = <small>Gastos diarios. Total: <Badge className="mr-1" href="#" color="danger">{`$ ${new Intl.NumberFormat().format(this.state.gastoTotal)}`}</Badge></small>
     return (
-      <Card>
-        <CardHeader>
-          <i className="fa fa-align-justify"></i><strong>Gastos diarios</strong>
-          <small> Gastos </small>
-
-        </CardHeader>
-        <CardBody>
-          <DataTable
-            title={<small>Gastos diarios. Total: <Badge className="mr-1" href="#" color="danger">{`$ ${new Intl.NumberFormat().format(this.state.gastoTotal)}`}</Badge></small>}
-            columns={columns}
-            data={this.state.data}
-            highlightOnHover={true}
-            actions={<Button key="add" onClick={this.handleClick}>Nuevo</Button>}
-            pagination={true}
-            progressPending={this.state.loading}
-            progressComponent={<Spinner animation="border" variant="primary" />}
-            customTheme={rowTheme}
-            expandableRows
-            expandableRowsComponent={<div>Gasto.</div>}
-            expandOnRowClicked
-          />
-        </CardBody>
-      </Card >
+      <DatatableShowGastos
+        gastos={this.state.data}
+        loading={this.state.loading}
+        title={title}
+        handleClick={this.handleClick}
+      />
     );
   }
 }
