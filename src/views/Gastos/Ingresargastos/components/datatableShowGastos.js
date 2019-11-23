@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 
 //Componentes de terceros
 import DataTable from 'react-data-table-component';
-import { Calendar } from 'react-datepicker2';
-import moment from 'moment-jalaali'
-import Select from 'react-select'
 import { LinearProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -13,18 +10,10 @@ import {
     Card,
     CardBody,
     CardHeader,
-    FormGroup,
-    Modal, ModalBody, ModalFooter, ModalHeader,
-    Input,
-    Label,
-    Row,
-    Col,
-    Badge,
-    Dropdown, DropdownItem, DropdownMenu, DropdownToggle,
-    Spinner
 } from 'reactstrap';
 
 import Modals from '../../../components/Modals/Modals'
+import ExpandableRowsComponent from './expandableRowsComponent'
 
 const rowTheme = {
     header: {
@@ -49,12 +38,6 @@ const rowTheme = {
 };
 
 const columns = [
-    {
-        cell: row => <button>eliminar</button>,
-        allowOverflow: true,
-        button: true,
-        width: '56px', // custom width for icon button
-    },
     {
         name: 'Fecha',
         selector: 'fecha',
@@ -82,28 +65,29 @@ const columns = [
         selector: 'precio',
         sortable: true,
     },
-];
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        '& > * + *': {
-            marginTop: theme.spacing(2),
-        },
+    {
+        cell: row => <></>,
+        allowOverflow: true,
+        button: true,
+        width: '56px', // custom width for icon button
     },
-}));
+];
 
 const LinearIndeterminate = () => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <LinearProgress color="secondary"  />
+            <LinearProgress color="secondary" />
         </div>
     );
 };
 
+// const ExpanableComponent = ({ data }) => <img src={data.image} />;
+
+
 class DatatableShowGastos extends Component {
+    
     render() {
         return (
             <Card>
@@ -123,17 +107,26 @@ class DatatableShowGastos extends Component {
                         pagination={true}
                         customTheme={rowTheme}
                         expandableRows
-                        expandableRowsComponent={<div>Detalle de los gastos</div>}
+                        expandableRowsComponent={<ExpandableRowsComponent data={this.props.gastos} />}
                         expandOnRowClicked
                         progressPending={this.props.loading}
-                        progressComponent={<LinearIndeterminate />}
+                        progressComponent={<LinearIndeterminate data={this.props.gastos} />}
                         progressShowTableHead
+                        ignoreRowClick={true}
                     />
                 </CardBody>
             </Card >
         );
     }
-
 }
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+    },
+}));
 
 export default DatatableShowGastos;

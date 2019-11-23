@@ -65,7 +65,7 @@ class Api {
 
     saveExpenses(data) {
         // B. Guardar los gastos
-        fetch(`${this.URL}gastos`, {
+        return fetch(`${this.URL}gastos`, {
 
             method: 'POST',
             headers: {
@@ -84,12 +84,12 @@ class Api {
             }),
 
         }).then((response) => {
+            console.log('objeto guardado');
             return response.json();
-
         })
-            .catch(error => {
-                throw error;
-            });
+        .catch(error => {
+            throw error;
+        });
     }
     // 3. Obtener todos los gastos
 
@@ -119,6 +119,23 @@ class Api {
             });
     }
 
+    // 5. Elimina los gastos
+// gastos/85
+deleteExpense(id) {
+    // B. Guardar los gastos
+    return fetch(`${this.URL}gastos/${id}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+    }).then((response) => {
+        return response.json();
+    })
+    .catch(error => {
+        throw error;
+    });
+}
 
 
 } // close class

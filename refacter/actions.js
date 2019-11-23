@@ -1,160 +1,38 @@
-import React, { PureComponent } from 'react';
-import { storiesOf } from '@storybook/react';
-import differenceBy from 'lodash/differenceBy';
-import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Checkbox from '@material-ui/core/Checkbox';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import Delete from '@material-ui/icons/Delete';
-import Add from '@material-ui/icons/Add';
-import CustomMaterialMenu from '../shared/CustomMaterialMenu';
-import tableDataItems from '../constants/sampleDesserts';
-import DataTable, { memoize } from '../../../src/index';
+// addExpenses() {
 
-const sortIcon = <ArrowDownward />;
-const selectProps = { indeterminate: isIndeterminate => isIndeterminate };
-const actions = (
-  <IconButton
-    color="primary"
-  >
-    <Add />
-  </IconButton>
-);
-const contextActions = memoize(deleteHandler => (
-  <IconButton
-    color="secondary"
-    onClick={deleteHandler}
-  >
-    <Delete />
-  </IconButton>
-));
-const columns = memoize(deleteHandler => [
-  {
-    cell: row => <CustomMaterialMenu row={row} onDeleteRow={deleteHandler} />,
-    allowOverflow: true,
-    button: true,
-    width: '56px', // custom width for icon button
-  },
-  {
-    name: 'Name',
-    selector: 'name',
-    sortable: true,
-    grow: 2,
-  },
-  {
-    name: 'Type',
-    selector: 'type',
-    sortable: true,
-  },
-  {
-    name: 'Calories (g)',
-    selector: 'calories',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Fat (g)',
-    selector: 'fat',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Carbs (g)',
-    selector: 'carbs',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Protein (g)',
-    selector: 'protein',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Sodium (mg)',
-    selector: 'sodium',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Calcium (%)',
-    selector: 'calcium',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Iron (%)',
-    selector: 'iron',
-    sortable: true,
-    right: true,
-  },
-  {
-    cell: () => <Button variant="contained" color="primary">Action</Button>,
-    button: true,
-  },
-]);
+//   const data = {
+//     gasto: this.state.inputGasto,
+//     cantidad: this.state.inputCantidad,
+//     precioUnidad: this.state.inputPrecioUnidad,
+//     precioTotal: this.state.inputPrecioTotal === '' ? this.state.inputCantidad * this.state.inputPrecioUnidad : this.state.inputPrecioTotal,
+//     Fecha: this.state.value.format('YYYY/M/D'),
+//     id_usuario: JSON.parse(localStorage.getItem('auth')).id,
+//     tipogasto_id: this.state.inputTipogasto,
+//     // Fecha: this.state.inputFecha,
+//   }
+//   const validateForm = (data) => {
 
-class MaterialTable extends PureComponent {
-  state = { selectedRows: [], toggleCleared: false, data: tableDataItems };
+//     if (data.tipogasto_id === '') {
+//       this.setState({ danger: !this.state.danger, textError: 'Debe seleccionar el tipo de gasto' });
+//       return false
+//     }
+//     if (data.gasto === '') {
+//       this.setState({ danger: !this.state.danger, textError: 'Debe ingresar un gasto en el campo gasto' });
+//       return false
+//     }
+//     if (data.cantidad === '') {
+//       this.setState({ danger: !this.state.danger, textError: 'Ingrese una cantidad' });
+//       return false
+//     }
+//     if (data.precioUnidad === '') {
+//       this.setState({ danger: !this.state.danger, textError: 'Ingrese el costo por unidad' });
+//       return false
+//     }
 
-  handleChange = state => {
-    this.setState({ selectedRows: state.selectedRows });
-  };
+//     API.saveExpenses(data)
+//     this.handleClick()
+//     return true
+//   }
+//   validateForm(data)
 
-  handleRowClicked = row => {
-    
-    console.log(`${row.name} was clicked!`);
-  }
-
-  deleteAll = () => {
-    const { selectedRows } = this.state;
-    const rows = selectedRows.map(r => r.name);
-    
-    if (window.confirm(`Are you sure you want to delete:\r ${rows}?`)) {
-      this.setState(state => ({ toggleCleared: !state.toggleCleared, data: differenceBy(state.data, state.selectedRows, 'name') }));
-    }
-  }
-
-  deleteOne = row => {
-    
-    if (window.confirm(`Are you sure you want to delete:\r ${row.name}?`)) {
-      const { data } = this.state;
-      const index = data.findIndex(r => r === row);
-
-      this.setState(state => ({
-        toggleCleared: !state.toggleCleared,
-        data: [...state.data.slice(0, index), ...state.data.slice(index + 1)],
-      }));
-    }
-  }
-
-  render() {
-    const { data, toggleCleared } = this.state;
-
-    return (
-      <Card style={{ height: '100%' }}>
-        <DataTable
-          title="Desserts"
-          columns={columns(this.deleteOne)}
-          data={data}
-          selectableRows
-          highlightOnHover
-          defaultSortField="name"
-          actions={actions}
-          contextActions={contextActions(this.deleteAll)}
-          sortIcon={sortIcon}
-          selectableRowsComponent={Checkbox}
-          selectableRowsComponentProps={selectProps}
-          onRowSelected={this.handleChange}
-          clearSelectedRows={toggleCleared}
-          onRowClicked={this.handleRowClicked}
-          pagination
-        />
-      </Card>
-    );
-  }
-}
-
-storiesOf('Material UI', module)
-  .add('Action Buttons', () => <MaterialTable />);
+// }
