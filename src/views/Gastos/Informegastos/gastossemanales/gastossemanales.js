@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardText, CardBody, Toast, ToastBody, ToastHeader } from 'reactstrap';
 import { Progress } from 'reactstrap';
 
-class Informegastos extends Component {
+class GastosSemanales extends Component {
   render() {
     return (
       <div className="animated fadeIn">
@@ -12,13 +12,13 @@ class Informegastos extends Component {
                 Reactstrap
               </ToastHeader>
               <ToastBody>
-                  This is a toast on a----llllllllllllll white background — check it out!
+                  Gastos semanales
               </ToastBody>
             </Toast>
-
+            
           <Card>
             <CardBody>
-              <CardText>Módulo no disponible en el moento</CardText>
+              <CardText>Gastos semanales D - S</CardText>
               <Progress multi>
                 <Progress bar animated color="success" value="98">100% cargado</Progress>
               </Progress>
@@ -30,4 +30,4 @@ class Informegastos extends Component {
   }
 }
 
-export default Informegastos;
+export default GastosSemanales;

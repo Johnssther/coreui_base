@@ -104,17 +104,8 @@ class Ingresargastos extends Component {
 
 
   render() {
-    // if (this.state.ingresargastos === true) {
-    //   return (
-    //     <AddGastosForm
-    //       addExpense={this.addExpense}
-    //       handleClick={this.handleClick}
-    //     />
-    //   )
-    // }
     const title = <small>Gastos diarios. Total: <Badge className="mr-1" href="#" color="danger">{`$ ${new Intl.NumberFormat().format(this.state.gastoTotal)}`}</Badge></small>
     return (
-      // <ComponentDate />
       <DatatableShowGastos
         gastos={this.state.data}
         loading={this.state.loading}

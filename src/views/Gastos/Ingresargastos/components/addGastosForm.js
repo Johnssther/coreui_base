@@ -76,23 +76,23 @@ class AddGastosForm extends Component {
         }
         // Validaciones del formulario
         if (data.Fecha === '') {
-            this.setState({textError:'Seleccione una fecha por favor'})
+            this.setState({ textError: 'Seleccione una fecha por favor' })
             return false
         }
         if (data.tipogasto_id === '') {
-            this.setState({textError:'Seleccione el tipo de gasto por favor'})
+            this.setState({ textError: 'Seleccione el tipo de gasto por favor' })
             return false
         }
         if (data.cantidad === '') {
-            this.setState({textError:'Debe ingresar la cantidad'})
+            this.setState({ textError: 'Debe ingresar la cantidad' })
             return false
         }
         if (data.gasto === '') {
-            this.setState({textError:'No ha ingresado ningun gasto'})
+            this.setState({ textError: 'No ha ingresado ningun gasto' })
             return false
         }
         if (data.precioUnidad === '') {
-            this.setState({textError:'No ha ingresado el precio por unidad'})
+            this.setState({ textError: 'No ha ingresado el precio por unidad' })
             return false
         }
 
@@ -116,83 +116,59 @@ class AddGastosForm extends Component {
 
     render() {
         return (
-            <Row>
-                {/* <Button color="danger" onClick={this.toggleLarge} className="mr-1">Ingrese un gasto </Button> */}
-
+            <>
                 <Modal isOpen={this.state.large} toggle={this.toggleLarge}
                     className={'modal-danger ' + this.props.className}>
-                    <ModalHeader toggle={this.toggleLarge}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.toggleLarge}>Calendario</ModalHeader>
                     <ModalBody>
-
+                        <Calendar
+                            style={{ backgroundColo: 'red' }}
+                            onChange={inputFecha => this.setState({ inputFecha })}
+                            value={this.state.inputFecha}
+                        />
+                        <h6><strong>Fecha: </strong>{this.state.inputFecha.format('YYYY/M/D')}</h6>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggleLarge}>Do Something</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleLarge}>Cancel</Button>
+                        <Button color="primary" onClick={this.toggleLarge}>Ok</Button>{' '}
                     </ModalFooter>
                 </Modal>
 
-                <Col xs='12' sm='6'>
-                    <Card>
-                        <CardHeader>
-                            <strong>Nuevo gasto</strong> generado
-                            <Button
-                                onClick={this.toggleLarge}
-                            >
-                                Abrir modal
-                            </Button>
-                        </CardHeader>
-                        <CardBody>
-                            <Calendar
-                                style={{ backgroundColo: 'red' }}
-                                onChange={inputFecha => this.setState({ inputFecha })}
-                                value={this.state.inputFecha}
-                            />
-                            <h6><strong>Fecha: </strong>{this.state.inputFecha.format('YYYY/M/D')}</h6>
-                        </CardBody>
-                    </Card>
-                </Col>
-                <Col xs="12" sm="6">
-                    <Card>
-                        <CardHeader>
-                            <strong>Ingresar gastos</strong> diarios
-                            <Button style={{ marginLeft: 137 }} key="add" onClick={this.props.handleClick}>Ver Mis gastos</Button>
-                        </CardHeader>
-                        <CardBody>
-                            <FormGroup>
-                                <Label htmlFor="inputFecha">Fecha</Label>
-                                <Input type="text" id="inputFecha" value={this.state.inputFecha.format('YYYY/M/D')} onChange={(event) => null} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="inputTipogasto">Tipo Gasto</Label>
-                                <Select options={this.state.options} onChange={this.tipoGasto} />
-                                {this.state.loading === true ?
-                                    <Spinner color="success" />
-                                    :
-                                    ''
-                                }
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="inputCantidad">Cantidad</Label>
-                                <Input placeholder='Numero Total' type="text" id="inputCantidad" onChange={(event) => this.setState({ inputCantidad: event.target.value })} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="inputGasto">Gasto</Label>
-                                <Input placeholder='Ingresar Gasto' type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="inputPrecioUnidad">Precio unidad</Label>
-                                <Input placeholder='$ Costo Unidad' type="text" id="inputPrecioUnidad" onChange={(event) => this.setState({ inputPrecioUnidad: event.target.value })} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="inputPrecioTotal">Precio Total</Label>
-                                <Input placeholder='$ Costo Total (opcional)' type="text" id="inputPrecioTotal" onChange={(event) => this.setState({ inputPrecioTotal: event.target.value })} />
-                            </FormGroup>
-                            <Button key="add" onClick={this.addExpenses}>Guardar</Button>
-                            <h6>{this.state.textError}</h6>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+                <Card>
+                    <CardBody>
+                        <FormGroup>
+                            <Label htmlFor="inputFecha">Fecha</Label>
+                            <Input onClick={this.toggleLarge} type="text" id="inputFecha" value={this.state.inputFecha.format('YYYY/M/D')} onChange={(event) => null} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label htmlFor="inputTipogasto">Tipo Gasto</Label>
+                            <Select options={this.state.options} onChange={this.tipoGasto} />
+                            {this.state.loading === true ?
+                                <Spinner color="success" />
+                                :
+                                ''
+                            }
+                        </FormGroup>
+                        <FormGroup>
+                            <Label htmlFor="inputCantidad">Cantidad</Label>
+                            <Input placeholder='Numero Total' type="text" id="inputCantidad" onChange={(event) => this.setState({ inputCantidad: event.target.value })} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label htmlFor="inputGasto">Gasto</Label>
+                            <Input placeholder='Ingresar Gasto' type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label htmlFor="inputPrecioUnidad">Precio unidad</Label>
+                            <Input placeholder='$ Costo Unidad' type="text" id="inputPrecioUnidad" onChange={(event) => this.setState({ inputPrecioUnidad: event.target.value })} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label htmlFor="inputPrecioTotal">Precio Total</Label>
+                            <Input placeholder='$ Costo Total (opcional)' type="text" id="inputPrecioTotal" onChange={(event) => this.setState({ inputPrecioTotal: event.target.value })} />
+                        </FormGroup>
+                        <Button color="primary" key="add" onClick={this.addExpenses}>Guardar</Button>
+                        <h6>{this.state.textError}</h6>
+                    </CardBody>
+                </Card>
+            </>
         );
     }
 }

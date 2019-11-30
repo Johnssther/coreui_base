@@ -43,17 +43,14 @@ class DefaultHeader extends Component {
           full={{ src: logo, width: 89, height: 25, alt: 'CoreUI Logo' }}
           minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
         />
-        <AppSidebarToggler className="d-md-down-none" display="lg" />
+        <AppSidebarToggler className="d-md-down-none" display="lg"  style={{ background:'white' }}/>
 
         <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
-            <NavLink to="/dashboard" className="nav-link" >Dashboard</NavLink>
+            <NavLink to="/dashboard" className="nav-link" style={{ color:'white' }} >Dashboard</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <Link to="/users" className="nav-link">Usuarios</Link>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink to="/gastos/ingresargastos" className="nav-link">Registrar de gastos</NavLink>
+            <NavLink to="/gastos/ingresargastos" className="nav-link" style={{ color:'white' }}>Registrar de gastos</NavLink>
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
@@ -69,7 +66,7 @@ class DefaultHeader extends Component {
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
-        <AppAsideToggler className="d-md-down-none" />
+        <AppAsideToggler className="d-md-down-none" style={{ background:'white' }}/>
         {/*<AppAsideToggler className="d-lg-none" mobile />*/}
       </React.Fragment>
     );

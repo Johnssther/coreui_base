@@ -1,27 +1,12 @@
 export default {
   items: [
+    //Dashboard
     {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
     },
-    // {
-    //   name: 'Example',
-    //   url: '/notifications',
-    //   icon: 'icon-cursor',
-    //   children: [
-    //     {
-    //       name: 'Ingresar gastos',
-    //       url: '/notifications/alerts',
-    //       icon: 'icon-pencil',
-    //     },
-    //     {
-    //       name: 'Informe de gastos',
-    //       url: '/notifications/badges',
-    //       icon: 'icon-pencil',
-    //     },
-    //   ],
-    // },
+    //Modulo gastos
     {
       name: 'Gastos',
       url: '/gastos',
@@ -39,17 +24,17 @@ export default {
           children: [
             {
               name: 'Gastos diarios',
-              url: '/gastos/informegastos',
+              url: '/gastos/informegastos/diarios',
               icon: 'icon-puzzle',
             },
             {
               name: 'Gastos semanales',
-              url: '/gastos/informegastos',
+              url: '/gastos/informegastos/semanales',
               icon: 'icon-puzzle',
             },
             {
               name: 'Gastos mensuales',
-              url: '/gastos/informegastos',
+              url: '/gastos/informegastos/mensuales',
               icon: 'icon-puzzle',
             },
           ]

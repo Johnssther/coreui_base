@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { AppSwitch } from '@coreui/react'
 
+//redux
+import { connect } from 'react-redux'
+import { actions } from '../../redux/actions/index'
+import { log } from 'util';
+
 const propTypes = {
   children: PropTypes.node,
 };
@@ -19,6 +24,8 @@ class DefaultAside extends Component {
     this.state = {
       activeTab: '2',
     };
+
+    this.activeModal = this.activeModal.bind(this)
   }
 
   toggle(tab) {
@@ -27,6 +34,10 @@ class DefaultAside extends Component {
         activeTab: tab,
       });
     }
+  }
+  
+  activeModal() {
+    this.props.actions.addConfig({modalActiva:!this.props.config.modalActiva}); //  1.    Cambia el estado de la aplicacion en redux
   }
 
   render() {
@@ -39,25 +50,25 @@ class DefaultAside extends Component {
         <Nav tabs>
           <NavItem>
             <NavLink className={classNames({ active: this.state.activeTab === '1' })}
-                     onClick={() => {
-                       this.toggle('1');
-                     }}>
+              onClick={() => {
+                this.toggle('1');
+              }}>
               <i className="icon-list"></i>
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink className={classNames({ active: this.state.activeTab === '2' })}
-                     onClick={() => {
-                       this.toggle('2');
-                     }}>
+              onClick={() => {
+                this.toggle('2');
+              }}>
               <i className="icon-speech"></i>
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink className={classNames({ active: this.state.activeTab === '3' })}
-                     onClick={() => {
-                       this.toggle('3');
-                     }}>
+              onClick={() => {
+                this.toggle('3');
+              }}>
               <i className="icon-settings"></i>
             </NavLink>
           </NavItem>
@@ -235,16 +246,16 @@ class DefaultAside extends Component {
             </div>
           </TabPane>
           <TabPane tabId="3" className="p-3">
-            <h6>Settings</h6>
+            <h6>Configuraciones</h6>
 
             <div className="aside-options">
               <div className="clearfix mt-4">
-                <small><b>Option 1</b></small>
-                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'} defaultChecked size={'sm'}/>
+                <small><b>Mostrar modal </b></small>
+                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'}  size={'sm'} onChange={this.activeModal} defaultChecked={this.props.config.modalActiva} />
               </div>
               <div>
-                <small className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua.
+                <small className="text-muted">Si esta activo cada vez que ingrese a registrar un gasto muestra inmediatamente el fomulario par ingresar
+                de lo contrario no la muestra.
                 </small>
               </div>
             </div>
@@ -252,7 +263,7 @@ class DefaultAside extends Component {
             <div className="aside-options">
               <div className="clearfix mt-3">
                 <small><b>Option 2</b></small>
-                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'} size={'sm'}/>
+                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'} size={'sm'} />
               </div>
               <div>
                 <small className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -264,7 +275,7 @@ class DefaultAside extends Component {
             <div className="aside-options">
               <div className="clearfix mt-3">
                 <small><b>Option 3</b></small>
-                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'} defaultChecked size={'sm'} disabled/>
+                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'} defaultChecked size={'sm'} disabled />
                 <div>
                   <small className="text-muted">Option disabled.</small>
                 </div>
@@ -314,4 +325,16 @@ class DefaultAside extends Component {
 DefaultAside.propTypes = propTypes;
 DefaultAside.defaultProps = defaultProps;
 
-export default DefaultAside;
+const mapStateToProps = state => ({
+  config: state.configuracion.configuracionUsuario
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    addConfig(config) {
+      dispatch(actions.configuracion.setConfiguracion(config))
+    },
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DefaultAside);

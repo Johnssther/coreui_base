@@ -88,7 +88,7 @@ const LinearIndeterminate = () => {
 
 
 class DatatableShowGastos extends Component {
-    
+
     render() {
         return (
             <Card>
@@ -103,8 +103,7 @@ class DatatableShowGastos extends Component {
                         columns={columns}
                         data={this.props.gastos}
                         highlightOnHover={true}
-                        actions={<Modals modal='toggleLarge' name='New' cerrarmodal={this.props.cerrarmodal}> <AddGastosForm addExpense={this.props.addExpense} handleClick={this.props.handleClick}/> </Modals>}
-                        // actions={<Button key="add" onClick={this.props.handleClick}>Nuevo</Button>}
+                        actions={<Modals modal='toggleLarge' name='Nuevo' title="Ingresar nuevo gasto" cerrarmodal={this.props.cerrarmodal}> <AddGastosForm addExpense={this.props.addExpense} handleClick={this.props.handleClick} /> </Modals>}
                         pagination={true}
                         customTheme={rowTheme}
                         expandableRows

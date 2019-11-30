@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
 
+//redux
+import { connect } from 'react-redux'
+import { actions } from '../../../redux/actions/index'
+
 class Modals extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      large: true,
+      large: this.props.config.modalActiva,
       small: false,
       primary: false,
       success: false,
@@ -75,7 +79,7 @@ class Modals extends Component {
   }
 
   render() {
-    
+
     return (
       <div className="animated fadeIn">
         {
@@ -132,7 +136,7 @@ class Modals extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
           <ModalBody>
-            { this.props.children }
+            {this.props.children}
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
@@ -141,15 +145,14 @@ class Modals extends Component {
         </Modal>
 
 
-        <Modal isOpen={this.state.large === this.props.cerrarmodal ? false:true} toggle={this.toggleLarge}
+        <Modal isOpen={this.state.large === this.props.cerrarmodal ? false : true} toggle={this.toggleLarge}
           className={'modal-lg ' + this.props.className}>
-          <ModalHeader toggle={this.toggleLarge}>Modal title</ModalHeader>
+          <ModalHeader toggle={this.toggleLarge}>{this.props.title}</ModalHeader>
           <ModalBody>
-            { this.props.children }
+            {this.props.children}
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggleLarge}>Finalizar</Button>{' '}
-            {/* <Button color="secondary" onClick={this.toggleLarge}>Cancel</Button> */}
+            <Button onClick={this.toggleLarge}>Cancelar</Button>{' '}
           </ModalFooter>
         </Modal>
 
@@ -158,12 +161,8 @@ class Modals extends Component {
           className={'modal-sm ' + this.props.className}>
           <ModalHeader toggle={this.toggleSmall}>Modal title</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-                  </ModalBody>
+            { this.props.children }
+          </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggleSmall}>Do Something</Button>{' '}
             <Button color="secondary" onClick={this.toggleSmall}>Cancel</Button>
@@ -172,17 +171,12 @@ class Modals extends Component {
 
         <Modal isOpen={this.state.primary} toggle={this.togglePrimary}
           className={'modal-primary ' + this.props.className}>
-          <ModalHeader toggle={this.togglePrimary}>Modal title</ModalHeader>
+          <ModalHeader toggle={this.togglePrimary}>{this.props.title}</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-                  </ModalBody>
+            { this.props.children }
+          </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.togglePrimary}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.togglePrimary}>Cancel</Button>
+            <Button onClick={this.togglePrimary}>Cancelar</Button>{' '}
           </ModalFooter>
         </Modal>
 
@@ -223,7 +217,7 @@ class Modals extends Component {
           className={'modal-danger   ' + this.props.className}>
           <ModalHeader toggle={this.toggleDanger}>Modal title</ModalHeader>
           <ModalBody>
-            { this.props.children }  
+            {this.props.children}
           </ModalBody>
           <ModalFooter>
             <Button color="danger" onClick={this.toggleDanger}>Do Something</Button>{' '}
@@ -251,4 +245,15 @@ class Modals extends Component {
   }
 }
 
-export default Modals;
+const mapStateToProps = state => ({
+  config: state.configuracion.configuracionUsuario
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: {
+
+
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modals);

@@ -6,9 +6,11 @@ const Dashboard = React.lazy(() => import('./views/Dashboard'));
 const Alerts = React.lazy(() => import('./views/Notifications/Alerts'));
 const Badges = React.lazy(() => import('./views/Notifications/Badges'));
 
-// gastos
+// modulo gastos
 const Ingresargastos = React.lazy(() => import('./views/Gastos/Ingresargastos/Ingresargastos'));
-const Informegastos = React.lazy(() => import('./views/Gastos/Informegastos/Informegastos'));
+const GastosDiarios = React.lazy(() => import('./views/Gastos/Informegastos/gastosdiarios/gastosdiarios'));
+const GastosSemanales = React.lazy(() => import('./views/Gastos/Informegastos/gastossemanales/gastossemanales'));
+const GastosMensuales = React.lazy(() => import('./views/Gastos/Informegastos/gastosmensuales/gastosmensuales'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 
@@ -20,9 +22,12 @@ const routes = [
   { path: '/notifications/alerts', name: 'Alerts', component: Alerts },
   { path: '/notifications/badges', name: 'Badges', component: Badges },
   
-  //gastos
+  // modulo gastos
   { path: '/gastos/ingresargastos', name: 'Ingresar gastos', component: Ingresargastos },
-  { path: '/gastos/informegastos', name: 'Informe gastos', component: Informegastos },
+  { path: '/gastos/informegastos/diarios', name: 'Gastos diarios', component: GastosDiarios },
+  { path: '/gastos/informegastos/semanales', name: 'Gastos semanales', component: GastosSemanales },
+  { path: '/gastos/informegastos/mensuales', name: 'Gastos mensuales', component: GastosMensuales },
+
 ];
 
 export default routes;

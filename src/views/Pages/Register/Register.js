@@ -81,11 +81,11 @@ class Register extends Component {
         return false
       }
       if (!minimo_password) {
-        this.setState({ errors_example: 'La contraceña debe tener minimo 8 caracteres'});
+        this.setState({ errors_example: 'La contraseña debe tener minimo 8 caracteres'});
         return false
       }
       if (!valid_password) {
-        this.setState({ errors_example: 'La contraceñas con considen'});
+        this.setState({ errors_example: 'Las contraseñas con considen'});
         return false
       }
       return true
@@ -139,7 +139,7 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Ingresa Contraceña" autoComplete="new-password" name='password' onChange={this.validateForm} />
+                      <Input type="password" placeholder="Ingresa Contraseña" autoComplete="new-password" name='password' onChange={this.validateForm} />
                     </InputGroup>
                     <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
@@ -147,9 +147,9 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Repita tu  contraceña" autoComplete="new-password" name='password_confirmation' onChange={this.validateForm} />
+                      <Input type="password" placeholder="Repita tu  contraseña" autoComplete="new-password" name='password_confirmation' onChange={this.validateForm} />
                     </InputGroup>
-                    <Button color="success" block onClick={this.registerUser}>Registrarme</Button>
+                    <Button color="primary" block onClick={this.registerUser}>Registrarme</Button>
                     <p>{ this.state.errors_example }</p>
                   </Form>
                 </CardBody>
