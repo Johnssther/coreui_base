@@ -37,12 +37,13 @@ class AddGastosForm extends Component {
 
             inputGasto: '',
             inputPrecioUnidad: '',
+            inputCantidad: '',
             inputPrecioTotal: '',
             inputTipogasto: '',
             options: [],
             loading: true,
             large: false,
-            textError: ''
+            textError: 'No ha ingresado ningun gasto'
         }
         this.addExpenses = this.addExpenses.bind(this);
         this.toggleLarge = this.toggleLarge.bind(this);
@@ -57,6 +58,7 @@ class AddGastosForm extends Component {
             this.setState({
                 options,
                 loading: false,
+                textError: '',
             })
         })
     }
@@ -72,7 +74,32 @@ class AddGastosForm extends Component {
             id_usuario: JSON.parse(localStorage.getItem('auth')).id,
             tipogasto_id: this.state.inputTipogasto,
         }
+        // Validaciones del formulario
+        if (data.Fecha === '') {
+            this.setState({textError:'Seleccione una fecha por favor'})
+            return false
+        }
+        if (data.tipogasto_id === '') {
+            this.setState({textError:'Seleccione el tipo de gasto por favor'})
+            return false
+        }
+        if (data.cantidad === '') {
+            this.setState({textError:'Debe ingresar la cantidad'})
+            return false
+        }
+        if (data.gasto === '') {
+            this.setState({textError:'No ha ingresado ningun gasto'})
+            return false
+        }
+        if (data.precioUnidad === '') {
+            this.setState({textError:'No ha ingresado el precio por unidad'})
+            return false
+        }
+
         this.props.addExpense(data)
+
+        return true
+
     }
 
     toggleLarge() {
@@ -90,8 +117,10 @@ class AddGastosForm extends Component {
     render() {
         return (
             <Row>
+                {/* <Button color="danger" onClick={this.toggleLarge} className="mr-1">Ingrese un gasto </Button> */}
+
                 <Modal isOpen={this.state.large} toggle={this.toggleLarge}
-                    className={'modal-sm ' + this.props.className}>
+                    className={'modal-danger ' + this.props.className}>
                     <ModalHeader toggle={this.toggleLarge}>Modal title</ModalHeader>
                     <ModalBody>
 
@@ -143,12 +172,12 @@ class AddGastosForm extends Component {
                                 }
                             </FormGroup>
                             <FormGroup>
-                                <Label htmlFor="inputGasto">Gasto</Label>
-                                <Input placeholder='Ingresar Gasto' type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
-                            </FormGroup>
-                            <FormGroup>
                                 <Label htmlFor="inputCantidad">Cantidad</Label>
                                 <Input placeholder='Numero Total' type="text" id="inputCantidad" onChange={(event) => this.setState({ inputCantidad: event.target.value })} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor="inputGasto">Gasto</Label>
+                                <Input placeholder='Ingresar Gasto' type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="inputPrecioUnidad">Precio unidad</Label>
@@ -158,7 +187,8 @@ class AddGastosForm extends Component {
                                 <Label htmlFor="inputPrecioTotal">Precio Total</Label>
                                 <Input placeholder='$ Costo Total (opcional)' type="text" id="inputPrecioTotal" onChange={(event) => this.setState({ inputPrecioTotal: event.target.value })} />
                             </FormGroup>
-                            <Button key="add" onClick={this.addExpenses}>Registrar</Button>
+                            <Button key="add" onClick={this.addExpenses}>Guardar</Button>
+                            <h6>{this.state.textError}</h6>
                         </CardBody>
                     </Card>
                 </Col>

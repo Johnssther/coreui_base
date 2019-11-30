@@ -14,6 +14,7 @@ import {
 
 import Modals from '../../../components/Modals/Modals'
 import ExpandableRowsComponent from './expandableRowsComponent'
+import AddGastosForm from '../components/addGastosForm'
 
 const rowTheme = {
     header: {
@@ -102,8 +103,8 @@ class DatatableShowGastos extends Component {
                         columns={columns}
                         data={this.props.gastos}
                         highlightOnHover={true}
-                        // actions={<Modals modal='toggle' name='New' />}
-                        actions={<Button key="add" onClick={this.props.handleClick}>Nuevo</Button>}
+                        actions={<Modals modal='toggleLarge' name='New' cerrarmodal={this.props.cerrarmodal}> <AddGastosForm addExpense={this.props.addExpense} handleClick={this.props.handleClick}/> </Modals>}
+                        // actions={<Button key="add" onClick={this.props.handleClick}>Nuevo</Button>}
                         pagination={true}
                         customTheme={rowTheme}
                         expandableRows

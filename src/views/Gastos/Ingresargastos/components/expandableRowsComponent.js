@@ -27,14 +27,14 @@ class ComponentDate extends Component {
     render() {
         return (
             <div>
-                <Card className="text-white bg-primary">
+                <Card>
                     <CardHeader>
                         Codigo: {this.props.data.id}
                     </CardHeader>
                     <CardBody>
                         Gasto: {this.props.data.gasto} <br></br>
                         Acciones:
-                        <Button key="add" onClick={this.delete}>Eliminar Gasto</Button>
+                        <Button key="delete" className="btn-sm btn-danger" onClick={this.delete}>Eliminar Gasto</Button>
                     </CardBody>
                 </Card>
             </div>

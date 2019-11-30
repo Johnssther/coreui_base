@@ -6,6 +6,7 @@ import moment from 'moment-jalaali'
 import {
   Badge,
 } from 'reactstrap';
+import ComponentDate from '../../components/calendar/calendario'
 
 // Components propios
 import DatatableShowGastos from './components/datatableShowGastos'
@@ -23,6 +24,7 @@ class Ingresargastos extends Component {
       data: [],
       gastoTotal: 0,
       loading: true,
+      cerrarmodal:false,
     }
     // Este enlace es necesario para hacer que `this` funcione en el callback
     this.handleClick = this.handleClick.bind(this);
@@ -94,28 +96,33 @@ class Ingresargastos extends Component {
   handleClick() {
     this.setState({
       ingresargastos: !this.state.ingresargastos,
-      loading: !this.state.loading,
+      cerrarmodal:!this.state.cerrarmodal,
+      // loading: !this.state.loading,
     })
     this.getGastos()
   }
 
 
   render() {
-    if (this.state.ingresargastos === true) {
-      return (
-        <AddGastosForm
-          addExpense={this.addExpense}
-          handleClick={this.handleClick}
-        />
-      )
-    }
+    // if (this.state.ingresargastos === true) {
+    //   return (
+    //     <AddGastosForm
+    //       addExpense={this.addExpense}
+    //       handleClick={this.handleClick}
+    //     />
+    //   )
+    // }
     const title = <small>Gastos diarios. Total: <Badge className="mr-1" href="#" color="danger">{`$ ${new Intl.NumberFormat().format(this.state.gastoTotal)}`}</Badge></small>
     return (
+      // <ComponentDate />
       <DatatableShowGastos
         gastos={this.state.data}
         loading={this.state.loading}
         title={title}
+        addExpense={this.addExpense}
         handleClick={this.handleClick}
+        cerrarmodal={this.state.cerrarmodal}
+        
       />
     );
   }

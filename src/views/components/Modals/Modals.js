@@ -7,7 +7,7 @@ class Modals extends Component {
     super(props);
     this.state = {
       modal: false,
-      large: false,
+      large: true,
       small: false,
       primary: false,
       success: false,
@@ -75,6 +75,7 @@ class Modals extends Component {
   }
 
   render() {
+    
     return (
       <div className="animated fadeIn">
         {
@@ -131,27 +132,7 @@ class Modals extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
           <ModalBody>
-            <FormGroup>
-              <Label htmlFor="inputFecha">Fecha</Label>
-              <Input placeholder='Ingresar Fecha' type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="inputGasto">Gasto</Label>
-              <Input placeholder='Ingresar Gasto' type="text" id="inputGasto" onChange={(event) => this.setState({ inputGasto: event.target.value })} />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="inputCantidad">Cantidad</Label>
-              <Input placeholder='Numero Total' type="text" id="inputCantidad" onChange={(event) => this.setState({ inputCantidad: event.target.value })} />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="inputPrecioUnidad">Precio unidad</Label>
-              <Input placeholder='$ Costo Unidad' type="text" id="inputPrecioUnidad" onChange={(event) => this.setState({ inputPrecioUnidad: event.target.value })} />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="inputPrecioTotal">Precio Total</Label>
-              <Input placeholder='$ Costo Total (opcional)' type="text" id="inputPrecioTotal" onChange={(event) => this.setState({ inputPrecioTotal: event.target.value })} />
-            </FormGroup>
-            <Button key="add" onClick={this.addExpenses}>Registrar</Button>
+            { this.props.children }
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
@@ -160,19 +141,15 @@ class Modals extends Component {
         </Modal>
 
 
-        <Modal isOpen={this.state.large} toggle={this.toggleLarge}
+        <Modal isOpen={this.state.large === this.props.cerrarmodal ? false:true} toggle={this.toggleLarge}
           className={'modal-lg ' + this.props.className}>
           <ModalHeader toggle={this.toggleLarge}>Modal title</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-                  </ModalBody>
+            { this.props.children }
+          </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggleLarge}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggleLarge}>Cancel</Button>
+            <Button color="primary" onClick={this.toggleLarge}>Finalizar</Button>{' '}
+            {/* <Button color="secondary" onClick={this.toggleLarge}>Cancel</Button> */}
           </ModalFooter>
         </Modal>
 
@@ -243,15 +220,11 @@ class Modals extends Component {
         </Modal>
 
         <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
-          className={'modal-danger ' + this.props.className}>
+          className={'modal-danger   ' + this.props.className}>
           <ModalHeader toggle={this.toggleDanger}>Modal title</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-                  </ModalBody>
+            { this.props.children }  
+          </ModalBody>
           <ModalFooter>
             <Button color="danger" onClick={this.toggleDanger}>Do Something</Button>{' '}
             <Button color="secondary" onClick={this.toggleDanger}>Cancel</Button>
