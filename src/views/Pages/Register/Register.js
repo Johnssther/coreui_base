@@ -4,7 +4,6 @@ import {
 
 } from 'reactstrap';
 import API from '../../../api/api'
-import validateForm from '../../../utils/validateForms'
 
 class Register extends Component {
   constructor(props) {

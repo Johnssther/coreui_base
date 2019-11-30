@@ -16,7 +16,6 @@ class ValidateForms {
                 } else {
                     return ``
                 }
-                break;
             case 'Martes':
                 console.log('martesss...');
                 break;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, ModalBody, ModalFooter, ModalHeader, Button } from 'reactstrap';
+import { Modal, ModalBody, ModalHeader, Button } from 'reactstrap';
 import moment from 'moment-jalaali'
 import { Calendar } from 'react-datepicker2';
 
