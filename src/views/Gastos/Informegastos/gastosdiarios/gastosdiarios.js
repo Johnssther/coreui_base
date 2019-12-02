@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody, Toast, ToastBody, ToastHeader } from 'reactstrap';
+import { Card, CardText, CardBody, Toast, ToastBody, ToastHeader,
+  CardHeader,
+  Form,
+  Label,
+  Input,
+  FormGroup,
+  CardFooter,
+  Button,
+  
+ } from 'reactstrap';
 import { Progress } from 'reactstrap';
 
 class GastosDiarios extends Component {
@@ -7,23 +16,55 @@ class GastosDiarios extends Component {
     return (
       <div className="animated fadeIn">
         <div>
-        <Toast>
-              <ToastHeader>
-                Reactstrap
-              </ToastHeader>
-              <ToastBody>
-                  Gastos diarios
-              </ToastBody>
-            </Toast>
-            
-          <Card>
-            <CardBody>
-              <CardText>Gastos diarios</CardText>
-              <Progress multi>
-                <Progress bar animated color="success" value="98">100% cargado</Progress>
-              </Progress>
-            </CardBody>
-          </Card>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <Card>
+              <CardHeader>
+                <strong>1 Dic</strong>
+              </CardHeader>
+              <CardBody>
+                Total: 
+                <hr></hr>
+                Lista ingresada $ 36.000
+              </CardBody>
+              <CardFooter>
+                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Mas información</Button>
+              </CardFooter>
+            </Card>
+            </div>
+            <div class="col-sm">
+              <Card>
+              <CardHeader>
+                <strong>2 Dic</strong>
+              </CardHeader>
+              <CardBody>
+                Total:
+                <hr></hr>
+                Lista ingresada
+              </CardBody>
+              <CardFooter>
+                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Mas información</Button>
+              </CardFooter>
+            </Card>
+            </div>
+            <div class="col-sm">
+              <Card>
+              <CardHeader>
+                <strong>3 Dic</strong>
+              </CardHeader>
+              <CardBody>
+                Total:
+                <hr></hr>
+                Lista ingresada
+              </CardBody>
+              <CardFooter>
+                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Mas información</Button>
+              </CardFooter>
+            </Card>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     );
