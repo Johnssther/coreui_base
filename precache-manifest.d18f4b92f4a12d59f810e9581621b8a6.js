@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d64a65f86815bd73d516e944f63fb936",
+    "revision": "7fe55563f715b669eacb9752f6770fff",
     "url": "/coreui_base/index.html"
   },
   {
@@ -60,8 +60,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/js/18.8125f37e.chunk.js"
   },
   {
-    "revision": "81dd4efd467b9bc50c07",
-    "url": "/coreui_base/static/js/19.23da96da.chunk.js"
+    "revision": "0aefd35dc6725ce0e84e",
+    "url": "/coreui_base/static/js/19.a47a8435.chunk.js"
   },
   {
     "revision": "83e3668a65ad5bcde4d1",
@@ -112,8 +112,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/js/main.f80c9609.chunk.js"
   },
   {
-    "revision": "dc42f98bb7430375dfe2",
-    "url": "/coreui_base/static/js/runtime-main.1b07969d.js"
+    "revision": "c55cc9c4470f21411940",
+    "url": "/coreui_base/static/js/runtime-main.9ce88f15.js"
   },
   {
     "revision": "0087dce419a7376eb06c837f740d31eb",
