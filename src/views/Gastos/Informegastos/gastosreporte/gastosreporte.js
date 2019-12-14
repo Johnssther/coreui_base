@@ -104,13 +104,13 @@ class GastosReport extends Component {
                         <div className="col-sm">
                           <FormGroup>
                             <Label htmlFor="filterDate_in">Fecha Inicial</Label>
-                            <Input onClick={this.toggleLarge} value={this.state.filterDate_in.format('YYYY/M/D')} placeholder='Fecha de inicio' type="texty" id="filterDate_in" name="filterDate_in" onChange={(event) => this.setState({ filterDate_in: event.target.value })} />
+                            <Input onClick={this.toggleLarge} value={this.state.filterDate_in.format('YYYY/M/D')} placeholder='Fecha de inicio' type="texty" id="filterDate_in" name="filterDate_in" />
                           </FormGroup>
                         </div>
                         <div className="col-sm">
                           <FormGroup>
                             <Label htmlFor="filterDate_out">Fecha Final</Label>
-                            <Input onClick={this.toggleLargeOut} value={this.state.filterDate_out.format('YYYY/M/D')} placeholder='Fecha Fin' type="text" id="filterDate_out" name="filterDate_out" onChange={(event) => this.setState({ filterDate_out: event.target.value })} />
+                            <Input onClick={this.toggleLargeOut} value={this.state.filterDate_out.format('YYYY/M/D')} placeholder='Fecha Fin' type="text" id="filterDate_out" name="filterDate_out" />
                           </FormGroup>
                         </div>
                         <div className="col-sm">
