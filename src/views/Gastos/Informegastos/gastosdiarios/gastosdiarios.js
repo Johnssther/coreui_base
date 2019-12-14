@@ -7,7 +7,6 @@ import { Card, CardText, CardBody, Toast, ToastBody, ToastHeader,
   FormGroup,
   CardFooter,
   Button,
-  
  } from 'reactstrap';
 import { Progress } from 'reactstrap';
 
@@ -16,9 +15,9 @@ class GastosDiarios extends Component {
     return (
       <div className="animated fadeIn">
         <div>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
               <Card>
               <CardHeader>
                 <strong>1 Dic</strong>
@@ -33,7 +32,7 @@ class GastosDiarios extends Component {
               </CardFooter>
             </Card>
             </div>
-            <div class="col-sm">
+            <div className="col-sm">
               <Card>
               <CardHeader>
                 <strong>2 Dic</strong>
@@ -48,7 +47,7 @@ class GastosDiarios extends Component {
               </CardFooter>
             </Card>
             </div>
-            <div class="col-sm">
+            <div className="col-sm">
               <Card>
               <CardHeader>
                 <strong>3 Dic</strong>

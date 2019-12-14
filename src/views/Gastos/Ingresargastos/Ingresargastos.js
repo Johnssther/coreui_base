@@ -47,14 +47,17 @@ class Ingresargastos extends Component {
     this.setState({
       data: []
     })
-    API.getExpenses()
+    let data = {
+      mes:null,
+    }
+    API.getExpenses(data)
       .then((response) => {
 
         const total = response.map((item) => {
           return item.precio_total;
         })
         const data = response.map((item) => {
-          return { id:item.id, fecha: item.fecha, cantidad: item.cantidad, gasto: item.gasto, preciounid: '$ ' + new Intl.NumberFormat().format(item.precio_unidad), precio: '$ ' + new Intl.NumberFormat().format(item.precio_total) }
+          return { id:item.id, fecha: item.fecha, tipo_gasto:item.tipo_gasto , cantidad: item.cantidad, gasto: item.gasto, preciounid: '$ ' + new Intl.NumberFormat().format(item.precio_unidad), precio: '$ ' + new Intl.NumberFormat().format(item.precio_total) }
         })
 
 

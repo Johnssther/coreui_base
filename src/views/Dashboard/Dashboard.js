@@ -19,7 +19,10 @@ class Dashboard extends Component {
       data: []
     })
     setTimeout(() => {
-      API.getExpenses()
+      let data = {
+        mes:null,
+      }
+      API.getExpenses(data)
         .then((response) => {
 
           const total = response.map((item) => {
@@ -46,7 +49,7 @@ class Dashboard extends Component {
     return (
       <div className="animated fadeIn">
         <WidgetO1
-          header={'$'+this.state.gastoTotal.toString()}
+          header={'$'+ new Intl.NumberFormat().format(this.state.gastoTotal.toString())}
           mainText='Gastos totales de este mes'
         />
       </div>

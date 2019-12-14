@@ -66,7 +66,6 @@ class Api {
     saveExpenses(data) {
         // B. Guardar los gastos
         return fetch(`${this.URL}gastos`, {
-
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -93,10 +92,11 @@ class Api {
     }
     // 3. Obtener todos los gastos
 
-    getExpenses() {
-        var URLactual = window.location;
-        console.log(URLactual, 'oo');
-        return fetch(`${this.URL}gastos?api_token=${ this.API_TOKEN }&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
+    getExpenses(data) {
+        return fetch(`${this.URL}gastos?api_token=${ this.API_TOKEN }
+        &user_id=${JSON.parse(localStorage.getItem('auth')).id}
+        &mes=${data.mes}`)
+
             .then((response) => response.json())
             .then((responseJson) => {
                 return responseJson;

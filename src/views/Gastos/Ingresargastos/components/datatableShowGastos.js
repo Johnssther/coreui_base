@@ -47,6 +47,11 @@ const columns = [
 
     },
     {
+        name: 'Tipo de gasto',
+        selector: 'tipo_gasto',
+        sortable: true,
+    },
+    {
         name: 'Cantidad',
         selector: 'cantidad',
         sortable: true,
