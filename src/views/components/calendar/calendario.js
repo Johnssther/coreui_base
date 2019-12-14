@@ -20,11 +20,11 @@ class ComponentDate extends Component {
     });
   }
 
-
     render() {
         return(
             <>
-                <Button color="danger" onClick={this.toggleDanger} className="mr-1">Danger modal</Button>
+                {/* <Button color="danger" onClick={this.toggleDanger} className="mr-1">Danger modal</Button> */}
+                { this.props.child }
                 <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
                        className={this.props.className}>
                   <ModalHeader toggle={this.toggleDanger}>Seleccione una fecha</ModalHeader>
