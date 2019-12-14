@@ -116,7 +116,6 @@ class Ingresargastos extends Component {
         addExpense={this.addExpense}
         handleClick={this.handleClick}
         cerrarmodal={this.state.cerrarmodal}
-        
       />
     );
   }

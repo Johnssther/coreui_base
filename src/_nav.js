@@ -23,6 +23,11 @@ export default {
           icon: 'icon-pencil',
           children: [
             {
+              name: 'Reporte Gastos',
+              url: '/gastos/informegastos/reporte',
+              icon: 'icon-puzzle',
+            },
+            {
               name: 'Gastos diarios',
               url: '/gastos/informegastos/diarios',
               icon: 'icon-puzzle',
