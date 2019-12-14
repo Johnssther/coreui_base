@@ -29,6 +29,7 @@ class GastosReport extends Component {
       gastosShow: true,
       data: [],
       inputFecha: moment(),
+      loading:false,
     }
     this.getGastosReport = this.getGastosReport.bind(this);
     this.toggleLarge = this.toggleLarge.bind(this);
@@ -40,6 +41,7 @@ class GastosReport extends Component {
       alert('Debe ingresar una fecha inicial y una fecha final')
       return false
     }
+    this.setState({loading:true})
     let data = {
       filterDate_in: this.state.filterDate_in.format('YYYY/M/D'),
       filterDate_out: this.state.filterDate_out.format('YYYY/M/D'),
@@ -52,6 +54,7 @@ class GastosReport extends Component {
         })
         this.setState({
           data,
+          loading:false,
         })
       })
       .catch(e => console.log(e))
