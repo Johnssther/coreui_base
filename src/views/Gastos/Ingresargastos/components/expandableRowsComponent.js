@@ -11,6 +11,9 @@ import {
 class ComponentDate extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            delete:''
+        }
         this.delete = this.delete.bind(this);
     }
     delete() {
@@ -19,6 +22,7 @@ class ComponentDate extends Component {
             API.deleteExpense(this.props.data.id)
                 .then((resp) => {
                     console.log(resp)
+                    this.setState({delete:''})
                 })
         }
 

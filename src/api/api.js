@@ -123,7 +123,7 @@ class Api {
 // gastos/85
 deleteExpense(id) {
     // B. Guardar los gastos
-    return fetch(`${this.URL}gastos/${id}`, {
+    return fetch(`${this.URL}gastos/${id}?api_token=${ this.API_TOKEN }`, {
         method: 'DELETE',
         headers: {
             Accept: 'application/json',
