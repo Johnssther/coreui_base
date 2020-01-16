@@ -41,7 +41,7 @@ class GastosMensuales extends Component {
               <div className="col-sm">
                 <Card>
                   <CardHeader>
-                    <strong>Noviembre 2019</strong>
+                    <strong>Diciembre 2019</strong>
                   </CardHeader>
                   <CardBody>
                     Tus gastos del noviembre fueron de: { `$ ${new Intl.NumberFormat().format(this.state.noviembre)}`}

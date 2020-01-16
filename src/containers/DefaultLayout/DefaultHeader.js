@@ -54,6 +54,7 @@ class DefaultHeader extends Component {
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
+          <strong style={{color:'white'}}>{this.state.usuario_nombre}</strong>
           <UncontrolledDropdown nav direction="down">
             <DropdownToggle nav>
               <img src={'assets/img/avatars/4.jpg'} className="img-avatar" alt="avatar" />
