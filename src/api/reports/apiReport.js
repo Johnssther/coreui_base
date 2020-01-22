@@ -19,7 +19,9 @@ class ApiReport {
     }
      // 3. Obtener todos los gastos
      getGastosReport(data) {
-        return fetch(`${this.URL}gastosreport?api_token=${this.API_TOKEN}&user_id=${JSON.parse(localStorage.getItem('auth')).id}&filterDate_in=${data.filterDate_in}&filterDate_out=${data.filterDate_out}`)
+         console.log(data);
+         
+        return fetch(`${this.URL}gastosreport?api_token=${this.API_TOKEN}&user_id=${JSON.parse(localStorage.getItem('auth')).id}&filterDate_in=${data.filterDate_in}&filterDate_out=${data.filterDate_out}&filterTipogasto=${data.filterTipogasto}`)
             .then((response) => response.json())
             .then((responseJson) => {
                 return responseJson;

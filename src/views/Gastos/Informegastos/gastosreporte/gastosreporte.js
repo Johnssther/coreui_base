@@ -7,11 +7,12 @@ import {
   Input,
   FormGroup,
   Button,
-  Modal, ModalBody, ModalFooter, ModalHeader,
+  Modal, ModalBody, Spinner, ModalHeader,
 } from 'reactstrap';
 
 import Calendario from '../../../components/calendar/calendario';
 import API_REPORT from '../../../../api/reports/apiReport';
+import API from '../../../../api/api';
 import DatatableShowGastos from './datatableShowGastosReporte'
 
 //componentes de terceros
@@ -26,6 +27,8 @@ class GastosReport extends Component {
     this.state = {
       filterDate_in: moment(),
       filterDate_out: moment(),
+      inputTipogasto:'',
+
       gastosShow: true,
       data: [],
       inputFecha: moment(),
@@ -45,7 +48,10 @@ class GastosReport extends Component {
     let data = {
       filterDate_in: this.state.filterDate_in.format('YYYY/M/D'),
       filterDate_out: this.state.filterDate_out.format('YYYY/M/D'),
+      filterTipogasto: this.state.inputTipogasto,
     }
+    console.log(this.state.inputTipogasto);
+    
     API_REPORT.getGastosReport(data)
       .then((response) => {
         console.log(response, 'Estos son los gastos de las fechas que seleccionaste');
@@ -66,6 +72,25 @@ class GastosReport extends Component {
   toggleLargeOut() {
     this.setState({ largeout: !this.state.largeout })
   }
+
+  tipoGasto = (newValue: any, actionMeta: any) => {
+    this.setState({
+        inputTipogasto: newValue.value
+    })
+  }
+
+  componentDidMount() {
+    API.getTipogastos().then((response) => {
+        const options = response.map((item) => {
+            return { value: item.id, label: item.gasto }
+        })
+        this.setState({
+            options,
+            loading: false,
+            textError: '',
+        })
+    })
+}
 
   render() {
 
@@ -112,6 +137,17 @@ class GastosReport extends Component {
                             <Label htmlFor="filterDate_out">Fecha Final</Label>
                             <Input onClick={this.toggleLargeOut} value={this.state.filterDate_out.format('YYYY/M/D')} placeholder='Fecha Fin' type="text" id="filterDate_out" name="filterDate_out" />
                           </FormGroup>
+                        </div>
+                        <div className="col-sm">
+                        <FormGroup>
+                            <Label htmlFor="inputTipogasto">Tipo Gasto</Label>
+                            <Select options={this.state.options} onChange={this.tipoGasto} />
+                            {this.state.loading === true ?
+                                <Spinner color="success" />
+                                :
+                                ''
+                            }
+                        </FormGroup>
                         </div>
                         <div className="col-sm">
                           <FormGroup>
