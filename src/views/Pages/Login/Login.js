@@ -93,10 +93,14 @@ class Login extends Component {
                           <Button color="primary" className="px-4" onClick={this.onLogin}>Iniciar sesón</Button>
                           {/* </Link> */}
                         </Col>
-                        <Col xs="6" className="text-right">
+                        <Col xs="6" className="text-right">  
+                          <Link to="/register">
+                            Crear una cuenta.
+                          </Link>
                           {/* <Button color="link" className="px-0">Olvide mi contraceña</Button> */}
                         </Col>
                       </Row>
+
                     </Form>
                   </CardBody>
                 </Card>
