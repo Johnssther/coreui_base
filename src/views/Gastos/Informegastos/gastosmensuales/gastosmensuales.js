@@ -16,7 +16,7 @@ class GastosMensuales extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      noviembre:0,
+      mes:0,
     }
   }
   componentDidMount() {
@@ -27,7 +27,7 @@ class GastosMensuales extends Component {
       .then((response)=>{
         console.log(response);
         this.setState({
-          noviembre:response
+          mes:response
         })
       })
       .catch(e=>console.log(e))
@@ -44,7 +44,7 @@ class GastosMensuales extends Component {
                     <strong>Mes pasado 2019</strong>
                   </CardHeader>
                   <CardBody>
-                    Tus gastos del mes pasado fueron de: { `$ ${new Intl.NumberFormat().format(this.state.noviembre)}`}
+                    Tus gastos del mes pasado fueron de: 24000
                   <hr></hr>
                     
                   </CardBody>
