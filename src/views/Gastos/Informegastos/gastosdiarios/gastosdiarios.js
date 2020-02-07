@@ -20,36 +20,6 @@ class GastosDiarios extends Component {
             <div className="col-sm">
               <Card>
               <CardHeader>
-                <strong>1 Dic</strong>
-              </CardHeader>
-              <CardBody>
-                Total: 
-                <hr></hr>
-                Lista ingresada $ 36.000
-              </CardBody>
-              <CardFooter>
-                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Mas información</Button>
-              </CardFooter>
-            </Card>
-            </div>
-            <div className="col-sm">
-              <Card>
-              <CardHeader>
-                <strong>2 Dic</strong>
-              </CardHeader>
-              <CardBody>
-                Total:
-                <hr></hr>
-                Lista ingresada
-              </CardBody>
-              <CardFooter>
-                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Mas información</Button>
-              </CardFooter>
-            </Card>
-            </div>
-            <div className="col-sm">
-              <Card>
-              <CardHeader>
                 <strong>3 Dic</strong>
               </CardHeader>
               <CardBody>

@@ -41,10 +41,10 @@ class GastosMensuales extends Component {
               <div className="col-sm">
                 <Card>
                   <CardHeader>
-                    <strong>Diciembre 2019</strong>
+                    <strong>Mes pasado 2019</strong>
                   </CardHeader>
                   <CardBody>
-                    Tus gastos del noviembre fueron de: { `$ ${new Intl.NumberFormat().format(this.state.noviembre)}`}
+                    Tus gastos del mes pasado fueron de: { `$ ${new Intl.NumberFormat().format(this.state.noviembre)}`}
                   <hr></hr>
                     
                   </CardBody>
