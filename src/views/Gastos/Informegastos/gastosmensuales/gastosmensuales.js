@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { Card, CardText, CardBody, Toast, ToastBody, ToastHeader,
+import {
+  Card, CardText, CardBody, Toast, ToastBody, ToastHeader,
   CardHeader,
   Form,
   Label,
@@ -8,51 +9,58 @@ import { Card, CardText, CardBody, Toast, ToastBody, ToastHeader,
   FormGroup,
   CardFooter,
   Button,
- } from 'reactstrap';
+} from 'reactstrap';
 
- import API from '../../../../api/api'
+import API from '../../../../api/api'
 
 class GastosMensuales extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      mes:0,
+      mes: [],
     }
   }
   componentDidMount() {
     let data = {
-      mes:11,
+      mes: 11,
     }
     API.getExpenses(data)
-      .then((response)=>{
+      .then((response) => {
         console.log(response);
         this.setState({
-          mes:response
+          mes: response
         })
       })
-      .catch(e=>console.log(e))
+      .catch(e => console.log(e))
   }
   render() {
+    let mes_nombre = ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre',]
+    
     return (
       <div className="animated fadeIn">
         <div>
           <div className="container">
             <div className="row">
-              <div className="col-sm">
-                <Card>
-                  <CardHeader>
-                    <strong>Mes pasado 2019</strong>
-                  </CardHeader>
-                  <CardBody>
-                    Tus gastos del mes pasado fueron de: 24000
-                  <hr></hr>
-                    
-                  </CardBody>
-                  <CardFooter>
-                    {/* <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Mas información</Button> */}
-                  </CardFooter>
-                </Card>
-              </div>
+              {this.state.mes.map(
+                (item, index) =>
+                  <div className="col-sm" key={index}>
+                    <Card>
+                      <CardHeader>
+                        <strong>{ mes_nombre[item.mes-1] } { item.anio }</strong>
+                      </CardHeader>
+                      <CardBody>
+                        Tus gastos del {mes_nombre[item.mes-1]} del { item.anio } fueron de: { `$ ${new Intl.NumberFormat().format(item.precio_total_mes)}`}
+                      <hr></hr>
+
+                      </CardBody>
+                      <CardFooter>
+                        <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Imprimir Gastos</Button>
+                      </CardFooter>
+                    </Card>
+                  </div>
+                )
+              }
+
             </div>
           </div>
         </div>
