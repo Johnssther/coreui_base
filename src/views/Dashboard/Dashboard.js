@@ -94,10 +94,10 @@ class Dashboard extends Component {
                         Tus gastos de {mes_nombre[item.mes-1]} del { item.anio } fueron de: { `$ ${new Intl.NumberFormat().format(item.precio_total_mes)}`}
                       <hr></hr>
 
-                      </CardBody>
+                      </CardBody>{/* 
                       <CardFooter>
                         <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Imprimir Gastos</Button>
-                      </CardFooter>
+                      </CardFooter> */}
                     </Card>
                   </div>
                 )
