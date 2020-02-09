@@ -21,21 +21,39 @@ class GastosMensuales extends Component {
     }
   }
   componentDidMount() {
-    let data = {
-      mes: 11,
-    }
-    API.getExpenses(data)
-      .then((response) => {
-        console.log(response);
-        this.setState({
-          mes: response
+      let data = {
+        mes: 11,
+      }
+    
+      API.getExpenses(data)
+        .then((response) => {
+          this.setState({
+            mes: response
+          })
         })
-      })
-      .catch(e => console.log(e))
+        .catch(e => console.log(e))
   }
   render() {
     let mes_nombre = ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre',]
     
+    if(this.state.mes.length == 0) {
+      return(
+      <div className="animated fadeIn">
+        <div>
+          <div className="container">
+            <div className="row">
+              
+                  <div className="col-sm">
+                      No tienes gastos registrados
+                  </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      )
+    }
+
     return (
       <div className="animated fadeIn">
         <div>
@@ -49,7 +67,7 @@ class GastosMensuales extends Component {
                         <strong>{ mes_nombre[item.mes-1] } { item.anio }</strong>
                       </CardHeader>
                       <CardBody>
-                        Tus gastos del {mes_nombre[item.mes-1]} del { item.anio } fueron de: { `$ ${new Intl.NumberFormat().format(item.precio_total_mes)}`}
+                        Tus gastos de {mes_nombre[item.mes-1]} del { item.anio } fueron de: { `$ ${new Intl.NumberFormat().format(item.precio_total_mes)}`}
                       <hr></hr>
 
                       </CardBody>
