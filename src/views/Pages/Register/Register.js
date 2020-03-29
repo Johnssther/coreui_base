@@ -23,7 +23,6 @@ class Register extends Component {
   }
   componentDidMount() {
     // API.registerUser()
-    console.log('usuario registrado');
 
   }
 

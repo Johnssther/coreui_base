@@ -7,7 +7,6 @@ import { AppSwitch } from '@coreui/react'
 //redux
 import { connect } from 'react-redux'
 import { actions } from '../../redux/actions/index'
-import { log } from 'util';
 
 const propTypes = {
   children: PropTypes.node,

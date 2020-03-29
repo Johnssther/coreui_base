@@ -21,7 +21,6 @@ class ComponentDate extends Component {
         if (delt === true) {
             API.deleteExpense(this.props.data.id)
                 .then((resp) => {
-                    console.log(resp)
                     this.setState({delete:''})
                 })
         }

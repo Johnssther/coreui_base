@@ -27,7 +27,6 @@ class Login extends Component {
         if (data.username) {
           localStorage.setItem('auth', JSON.stringify(data));
           localStorage.setItem('token', data.api_token);
-          console.log(data.api_token);
           // localStorage.clear()
           this.props.history.push('/')
 

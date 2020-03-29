@@ -50,7 +50,6 @@ class GastosReport extends Component {
       filterDate_out: this.state.filterDate_out.format('YYYY/M/D'),
       filterTipogasto: this.state.inputTipogasto,
     }
-    console.log(this.state.inputTipogasto);
     
     API_REPORT.getGastosReport(data)
       .then((response) => {

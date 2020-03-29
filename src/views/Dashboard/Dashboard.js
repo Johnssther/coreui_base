@@ -81,7 +81,6 @@ class Dashboard extends Component {
       </div>
       <div className="animated fadeIn">
         <div>
-          <div className="container">
             <div className="row">
               {this.state.mes.map(
                 (item, index) =>
@@ -103,7 +102,6 @@ class Dashboard extends Component {
                 )
               }
 
-            </div>
           </div>
         </div>
       </div>

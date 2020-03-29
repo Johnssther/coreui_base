@@ -16,7 +16,6 @@ class Dialog extends Component {
         this.setState({
             danger: !this.state.danger,
         });
-        console.log('sesion cerrada');
         
     }
 

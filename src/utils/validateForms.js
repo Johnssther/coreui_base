@@ -17,7 +17,6 @@ class ValidateForms {
                     return ``
                 }
             case 'Martes':
-                console.log('martesss...');
                 break;
             default:
                 break;

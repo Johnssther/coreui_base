@@ -83,7 +83,6 @@ class Api {
             }),
 
         }).then((response) => {
-            console.log('objeto guardado');
             return response.json();
         })
         .catch(error => {
