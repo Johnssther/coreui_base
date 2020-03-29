@@ -1,2 +1,0 @@
-(this["webpackJsonp@coreui/coreui-free-react-admin-template"]=this["webpackJsonp@coreui/coreui-free-react-admin-template"]||[]).push([[28],{1041:function(e,t,a){"use strict";a.r(t);var n=a(2),r=a.n(n);var c=function(){return r.a.createElement(r.a.Fragment,null,r.a.createElement("h1",null,"Tipo de Gastos."))};t.default=function(){return r.a.createElement(c,null)}}}]);
-//# sourceMappingURL=28.e9a290d1.chunk.js.map
