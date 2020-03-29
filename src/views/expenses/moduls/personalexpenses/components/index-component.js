@@ -6,11 +6,13 @@ import { LinearProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
-  Button,
   Card,
   CardBody,
   CardHeader,
 } from 'reactstrap';
+import ButtonComponent from '../../../../components/button'
+
+/* DataTables */
 
 const rowTheme = {
   header: {
@@ -43,6 +45,7 @@ const columns = [
     name: 'Tipo de gasto',
     selector: 'tipo_gasto',
     sortable: true,
+    grow:0,
   },
   {
     name: 'Cantidad',
@@ -86,7 +89,7 @@ const LinearIndeterminate = () => {
 
 
 function IndexComponent(props) {
-  const { expenses, loading } = props;
+  const { expenses, loading, onNew } = props;
   return (
     <Card>
       <CardHeader>
@@ -99,11 +102,12 @@ function IndexComponent(props) {
           title={'Personal Expenses'}
           columns={columns}
           data={expenses}
-          actions={<button className="btn btn-success btn-sm">Nuevo</button>}
+          actions={<ButtonComponent name="Add" onPress={onNew}/>}
           highlightOnHover={true}
           pagination={true}
           customTheme={rowTheme}
           progressPending={loading}
+          progressComponent={<LinearIndeterminate data={expenses} />}
           progressShowTableHead
           ignoreRowClick={true}
         />

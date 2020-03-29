@@ -11,8 +11,14 @@ getExpenses();
 
 function Index(props) {
   const { expenses } = props;
+  
+  // add new register
+  const onNew = () => {
+    props.history.push('/expenses/moduls/personalexpenses/create')
+  }
+
   return (
-    <IndexComponent expenses={expenses}/>
+    <IndexComponent expenses={expenses} onNew={onNew}/>
   );
 }
 

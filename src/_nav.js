@@ -51,12 +51,15 @@ export default {
       ],
     },
 
-
     /* Expenses Module */
     {
       name: 'Expenses',
       url: '/expenses',
       icon: 'icon-cursor',
+      badge: {
+        variant: 'danger',
+        text: 'NEW'
+      },
       children: [
         {
           name: 'Moduls',
@@ -82,10 +85,6 @@ export default {
           url: '/expenses/references',
           icon: 'icon-folder',
           class: 'bg-dark',
-          badge: {
-            variant: 'danger',
-            text: 'NEW'
-          },
           children: [
             {
               name: 'Expenses Type',
@@ -94,11 +93,8 @@ export default {
               class: '',
               attributes: { 
                 activeStyle: { backgroundColor: backgroundactive, color: coloractive },
+                exact:true,
               },
-              badge: {
-                variant: 'danger',
-                text: 'NEW'
-              }
             },
           ]
         },
@@ -117,6 +113,7 @@ export default {
               icon: 'icon-doc',
               attributes: {
                 activeStyle: { backgroundColor: backgroundactive, color: coloractive },
+                exact:true,
               }
             },
           ]

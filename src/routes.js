@@ -15,6 +15,7 @@ const GastosMensuales = React.lazy(() => import('./views/Gastos/Informegastos/ga
 
 // Expenses Module.
 const PersonalExpensesIndex = React.lazy(() => import('./views/expenses/moduls/personalexpenses/containers/index'));
+const PersonalExpensesCreate = React.lazy(() => import('./views/expenses/moduls/personalexpenses/containers/create'));
 // Expenses References.
 const ExpensesTypeIndex = React.lazy(() => import('./views/expenses/references/expensestype/containers/index'));
 // Expenses Reports.
@@ -39,13 +40,14 @@ const routes = [
   //    Routes Expenses
   //------------------------------------------
   // module - expenses
-  { path: '/expenses/moduls/personalexpenses', name: 'Expenses', component: PersonalExpensesIndex },
+  { exact: true, path: '/expenses/moduls/personalexpenses', name: 'Expenses', component: PersonalExpensesIndex },
+  { exact: true, path: '/expenses/moduls/personalexpenses/create', name: 'ExpensesCreate', component: PersonalExpensesCreate },
   
   // references - typeexpenses
-  { path: '/expenses/references/expensestype', name: 'Expenses Type', component: ExpensesTypeIndex },
+  { exact: true, path: '/expenses/references/expensestype', name: 'Expenses Type', component: ExpensesTypeIndex },
   
   // report - typeexpenses
-  { path: '/expenses/reports/rpersonalexpenses', name: 'Personal Report Expenses', component: ReportExpensesIndex },
+  { exact: true, path: '/expenses/reports/rpersonalexpenses', name: 'Personal Report Expenses', component: ReportExpensesIndex },
 ];
 
 export default routes;
