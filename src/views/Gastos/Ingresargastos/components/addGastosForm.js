@@ -48,7 +48,7 @@ class AddGastosForm extends Component {
     }
 
     componentDidMount() {
-        API.getTipogastos().then((response) => {
+        API.getExpensesType().then((response) => {
             const options = response.map((item) => {
                 return { value: item.id, label: item.gasto }
             })

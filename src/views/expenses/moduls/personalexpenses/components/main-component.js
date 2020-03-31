@@ -3,11 +3,15 @@ import {
     Card,
     CardBody,
     CardHeader,
+    Spinner,
 } from 'reactstrap';
+import Select from 'react-select'
 import { Formik, Form } from 'formik';
 import InputField from './input';
+import InputDate from './inputDate';
 import * as Yup from 'yup';
 
+import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 
 //services
@@ -15,8 +19,11 @@ import { getExpenses } from '../services/personalexpenses'
 
 getExpenses();
 
-const MainComponent = (props) => {
-    const { onCreate } = props;
+const LoginComponent = (props) => {
+    const { onCreate, expensestype } = props;
+
+    const [tipogasto, setTipogasto] = useState('');
+
     return (
         <div className="container">
             <Card>
@@ -25,7 +32,7 @@ const MainComponent = (props) => {
                 </CardHeader>
                 <CardBody>
                     <Formik
-                        initialValues={{ gasto: '', cantidad: '', precio_unidad: '', precio_total: '', fecha: '', tipo_gasto: '' }}
+                        initialValues={{ gasto: '', cantidad: '', precio_unidad: '', precio_total: '', fecha: '', tipo_gasto: tipogasto }}
                         validationSchema={Yup.object({
                             gasto: Yup.string()
                                 .min(3, 'Un gasto debe tener minimo 3 caracteres.')
@@ -41,8 +48,6 @@ const MainComponent = (props) => {
                                 .positive('La cantidad no puede ser negativa.'),
                             fecha: Yup.date()
                                 .required('La fecha es obligatoria'),
-                            tipo_gasto: Yup.date()
-                                .required('El tipo de gasto es obligatorio'),
                         })}
                         onSubmit={(values, { setSubmitting }) => {
                             onCreate(values);
@@ -52,10 +57,13 @@ const MainComponent = (props) => {
                         <Form>
                             <div className="row">
                                 <div className="col-sm-6">
-                                    <InputField name="fecha" type="date" label="Fecha" placeholder="Ingrese la fecha." />
+                                    <InputField name="fecha" type="date" label="Fecha" placeholder="Ingrese una fecha." />
                                 </div>
                                 <div className="col-sm-6">
-                                    <InputField name="tipo_gasto" type="text" label="Tipo Gasto" placeholder="Ingrese el tipo de gasto." />
+                                    <div className="form-group">
+                                        <label htmlFor="tipo_gasto">Tipo de gasto</label>
+                                        <Select options={expensestype} onChange={(newValue) => { setTipogasto(newValue.value) }}/>
+                                    </div>
                                 </div>
                             </div>
                             <div className="row">
@@ -83,4 +91,4 @@ const MainComponent = (props) => {
     );
 };
 
-export default MainComponent
+export default LoginComponent

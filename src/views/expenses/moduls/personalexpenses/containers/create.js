@@ -2,18 +2,25 @@ import  React from 'react';
 
 import MainComponent from '../components/main-component'
 //services
-import { getExpenses } from '../services/personalexpenses'
+import { getExpensesType } from '../services/expensestype'
+//redux
+import { connect } from 'react-redux'
 
-getExpenses();
+getExpensesType();
 
-function Create() {
+function Create(props) {
+  const { expensestype } = props
     const onCreate = (values) => {
         console.log(values);
     }
 
   return (
-    <MainComponent onCreate={onCreate}/>
+    <MainComponent onCreate={onCreate} expensestype={expensestype}/>
   );
 }
 
-export default Create
+const mapStateToProps = state => ({
+  expensestype: state.expensestype.expensestype,
+})
+
+export default connect(mapStateToProps)(Create)

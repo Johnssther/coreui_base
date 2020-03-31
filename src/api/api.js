@@ -85,14 +85,14 @@ class Api {
         }).then((response) => {
             return response.json();
         })
-        .catch(error => {
-            throw error;
-        });
+            .catch(error => {
+                throw error;
+            });
     }
     // 3. Obtener todos los gastos
 
     getExpenses(data) {
-        return fetch(`${this.URL}gastos?api_token=${ this.API_TOKEN }
+        return fetch(`${this.URL}gastos?api_token=${this.API_TOKEN}
         &user_id=${JSON.parse(localStorage.getItem('auth')).id}
         &mes=${data.mes}`)
 
@@ -107,8 +107,8 @@ class Api {
 
     // 4. Obtiene los tipos de gastos
 
-    getTipogastos() {
-        return fetch(`${this.URL}tipogastos?api_token=${ this.API_TOKEN }&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
+    getExpensesType() {
+        return fetch(`${this.URL}tipogastos?api_token=${this.API_TOKEN}&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
             .then((response) => response.json())
             .then((responseJson) => {
                 return responseJson;
@@ -119,22 +119,22 @@ class Api {
     }
 
     // 5. Elimina los gastos
-// gastos/85
-deleteExpense(id) {
-    // B. Guardar los gastos
-    return fetch(`${this.URL}gastos/${id}?api_token=${ this.API_TOKEN }`, {
-        method: 'DELETE',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-    }).then((response) => {
-        return response.json();
-    })
-    .catch(error => {
-        throw error;
-    });
-}
+    // gastos/85
+    deleteExpense(id) {
+        // B. Guardar los gastos
+        return fetch(`${this.URL}gastos/${id}?api_token=${this.API_TOKEN}`, {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => {
+            return response.json();
+        })
+            .catch(error => {
+                throw error;
+            });
+    }
 
 
 } // close class

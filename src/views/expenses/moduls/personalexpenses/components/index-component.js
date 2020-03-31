@@ -61,12 +61,12 @@ const columns = [
   },
   {
     name: 'Precio Unid.',
-    selector: 'preciounid',
+    selector: 'precio_unidad',
     sortable: true,
   },
   {
     name: 'Precio Total',
-    selector: 'precio',
+    selector: 'precio_total',
     sortable: true,
   },
   {
@@ -90,6 +90,8 @@ const LinearIndeterminate = () => {
 
 function IndexComponent(props) {
   const { expenses, loading, onNew } = props;
+  console.log(expenses);
+  
   return (
     <Card>
       <CardHeader>

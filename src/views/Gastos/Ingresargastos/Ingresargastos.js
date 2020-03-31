@@ -33,7 +33,7 @@ class Ingresargastos extends Component {
 
   componentDidMount() {
     this.getGastos()
-    API.getTipogastos().then((response) => {
+    API.getExpensesType().then((response) => {
       const options = response.map((item) => {
         return { value: item.id, label: item.gasto }
       })
