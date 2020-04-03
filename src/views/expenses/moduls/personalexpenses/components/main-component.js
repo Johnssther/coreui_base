@@ -3,16 +3,13 @@ import {
     Card,
     CardBody,
     CardHeader,
-    Spinner,
 } from 'reactstrap';
 import Select from 'react-select'
 import { Formik, Form } from 'formik';
 import InputField from './input';
-import InputDate from './inputDate';
 import * as Yup from 'yup';
 
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css";
+import InputCalendar from '../../../../components/calendar/calendario'
 
 //services
 import { getExpenses } from '../services/personalexpenses'
@@ -22,13 +19,13 @@ getExpenses();
 const LoginComponent = (props) => {
     const { onCreate, expensestype } = props;
 
-    const [tipogasto, setTipogasto] = useState('');
+    const [tipogasto, setTipogasto] = useState(2);
 
     return (
         <div className="container">
             <Card>
                 <CardHeader>
-                    Ingresar GastoI
+                    Ingresar Gasto
                 </CardHeader>
                 <CardBody>
                     <Formik
@@ -48,6 +45,7 @@ const LoginComponent = (props) => {
                                 .positive('La cantidad no puede ser negativa.'),
                             fecha: Yup.date()
                                 .required('La fecha es obligatoria'),
+                            tipo_gasto: Yup.number()
                         })}
                         onSubmit={(values, { setSubmitting }) => {
                             onCreate(values);
@@ -57,12 +55,12 @@ const LoginComponent = (props) => {
                         <Form>
                             <div className="row">
                                 <div className="col-sm-6">
-                                    <InputField name="fecha" type="date" label="Fecha" placeholder="Ingrese una fecha." />
+                                    <InputCalendar name="fecha" type="text" label="Fecha" placeholder="Ingrese la fecha del gasto."/>
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="form-group">
                                         <label htmlFor="tipo_gasto">Tipo de gasto</label>
-                                        <Select options={expensestype} onChange={(newValue) => { setTipogasto(newValue.value) }}/>
+                                        <Select options={expensestype} onChange={(newValue) => { setTipogasto(newValue.value) }} name="tipo_gasto" id="tipo_gasto" value="tipo_gasto" />
                                     </div>
                                 </div>
                             </div>

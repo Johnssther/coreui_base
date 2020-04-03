@@ -13,10 +13,11 @@ const InputField = ({ label, placeholder, ...props }) => {
             <label htmlFor={field.name}>{label}</label>
                 <input 
                     className={`form-control ${showFeedback ? (meta.error ? "is-invalid" : "is-valid") : ""}` } 
-                    {...field} 
+                    {...field}
                     {...props}
                     placeholder={placeholder}
-                    onFocus={handleFocus} 
+                    onFocus={handleFocus}
+                    onClick={ ()=>{ console.log('fg') } }
                 />
                 <div className={ `valid-feedback` }>
                     Completado
