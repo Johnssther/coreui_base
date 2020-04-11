@@ -11,8 +11,8 @@
     "static/js/4.a648651b.chunk.js": "/coreui_base/static/js/4.a648651b.chunk.js",
     "static/js/4.a648651b.chunk.js.map": "/coreui_base/static/js/4.a648651b.chunk.js.map",
     "main.css": "/coreui_base/static/css/main.384382ae.chunk.css",
-    "main.js": "/coreui_base/static/js/main.dde4c7f9.chunk.js",
-    "main.js.map": "/coreui_base/static/js/main.dde4c7f9.chunk.js.map",
+    "main.js": "/coreui_base/static/js/main.3ef5b005.chunk.js",
+    "main.js.map": "/coreui_base/static/js/main.3ef5b005.chunk.js.map",
     "runtime-main.js": "/coreui_base/static/js/runtime-main.0a7e7ba4.js",
     "runtime-main.js.map": "/coreui_base/static/js/runtime-main.0a7e7ba4.js.map",
     "static/css/7.ad1d76e5.chunk.css": "/coreui_base/static/css/7.ad1d76e5.chunk.css",
@@ -74,7 +74,7 @@
     "static/js/34.b38fffae.chunk.js": "/coreui_base/static/js/34.b38fffae.chunk.js",
     "static/js/34.b38fffae.chunk.js.map": "/coreui_base/static/js/34.b38fffae.chunk.js.map",
     "index.html": "/coreui_base/index.html",
-    "precache-manifest.621139f64884691a8a17d77424ecc101.js": "/coreui_base/precache-manifest.621139f64884691a8a17d77424ecc101.js",
+    "precache-manifest.51cd12eb9aa997bee7d8155552c6ad72.js": "/coreui_base/precache-manifest.51cd12eb9aa997bee7d8155552c6ad72.js",
     "service-worker.js": "/coreui_base/service-worker.js",
     "static/css/7.ad1d76e5.chunk.css.map": "/coreui_base/static/css/7.ad1d76e5.chunk.css.map",
     "static/css/8.fa4a79a6.chunk.css.map": "/coreui_base/static/css/8.fa4a79a6.chunk.css.map",
@@ -88,6 +88,6 @@
     "static/css/7.ad1d76e5.chunk.css",
     "static/js/7.2f4a6668.chunk.js",
     "static/css/main.384382ae.chunk.css",
-    "static/js/main.dde4c7f9.chunk.js"
+    "static/js/main.3ef5b005.chunk.js"
   ]
 }
