@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "edb8d8bb81703aa06f8208f773fdd424",
+    "revision": "9156dcbec2e3260dd7a53de056917ad2",
     "url": "/coreui_base/index.html"
   },
   {
@@ -32,12 +32,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/js/11.268beddf.chunk.js"
   },
   {
-    "revision": "6d9df3e6e1fcc5b44b32",
-    "url": "/coreui_base/static/js/12.3df003d3.chunk.js"
+    "revision": "0ad918b9505c09b66d79",
+    "url": "/coreui_base/static/js/12.4fc770f3.chunk.js"
   },
   {
-    "revision": "7478499e45ccb26ce8ac",
-    "url": "/coreui_base/static/js/13.f8aa0261.chunk.js"
+    "revision": "83c5a8c91c5b9f89a870",
+    "url": "/coreui_base/static/js/13.85f15220.chunk.js"
   },
   {
     "revision": "5f3626a08aff8b3dc301",
@@ -48,12 +48,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/js/15.6b09a375.chunk.js"
   },
   {
-    "revision": "1382b32b70be67c0ab20",
-    "url": "/coreui_base/static/js/16.a1aea19a.chunk.js"
+    "revision": "f5ee7990a738b9696915",
+    "url": "/coreui_base/static/js/16.5ebb2993.chunk.js"
   },
   {
-    "revision": "449e43a698d49253ba0c",
-    "url": "/coreui_base/static/js/17.4795308c.chunk.js"
+    "revision": "63d0e2628e7502cce3e5",
+    "url": "/coreui_base/static/js/17.43c646ef.chunk.js"
   },
   {
     "revision": "e4f091679822af08c68f",
@@ -76,8 +76,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/js/21.d51ca6cb.chunk.js"
   },
   {
-    "revision": "9e883b4e854869663045",
-    "url": "/coreui_base/static/js/22.b9932c75.chunk.js"
+    "revision": "e7a8cc33c00132ffe765",
+    "url": "/coreui_base/static/js/22.24d901d2.chunk.js"
   },
   {
     "revision": "eb6f17f4ec3cf3e57ed1",
@@ -156,8 +156,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/js/main.dc99a32c.chunk.js"
   },
   {
-    "revision": "d9dc354ff771f3b05325",
-    "url": "/coreui_base/static/js/runtime-main.a9ef00ee.js"
+    "revision": "89dd80cdb31cef13d25c",
+    "url": "/coreui_base/static/js/runtime-main.5f6feaa0.js"
   },
   {
     "revision": "0087dce419a7376eb06c837f740d31eb",
