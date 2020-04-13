@@ -71,6 +71,7 @@ class AddGastosForm extends Component {
             id_usuario: JSON.parse(localStorage.getItem('auth')).id,
             tipogasto_id: this.state.inputTipogasto,
         }
+        
         // Validaciones del formulario
         if (data.Fecha === '') {
             this.setState({ textError: 'Seleccione una fecha por favor' })

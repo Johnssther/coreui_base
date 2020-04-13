@@ -1,14 +1,18 @@
 const initialState = {
     personalexpense: {
-        gasto:'',
-        cantidad:'',
-        precio_unidad:'',
-        precio_total:'',
-        fecha:'',
-        user_id:'',
-        tipogasto_id:'',
+        gasto: '',
+        cantidad: '',
+        precio_unidad: '',
+        precio_total: '',
+        fecha: '',
+        user_id: '',
+        tipogasto_id: '',
+        tipogasto: {
+            id: '',
+            gasto: '',
+        }
     },
-    personalexpenses:[]
+    personalexpenses: []
 }
 
 function personalexpenses(state = initialState, action) {

@@ -10,7 +10,7 @@ import {
   Modal, ModalBody, Spinner, ModalHeader,
 } from 'reactstrap';
 
-import Calendario from '../../../components/calendar/calendario';
+
 import API_REPORT from '../../../../api/reports/apiReport';
 import API from '../../../../api/api';
 import DatatableShowGastos from './datatableShowGastosReporte'

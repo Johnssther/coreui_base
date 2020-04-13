@@ -12,35 +12,37 @@ class Login extends Component {
       inputPassword: '',
       errorLogin: false,
       auth: localStorage.getItem('token') != null ? true : false,
-      loading:false,
+      loading: false,
     }
     // Este enlace es necesario para hacer que `this` funcione en el callback
     this.onLogin = this.onLogin.bind(this);
   }
 
   onLogin() {
-    this.setState({ loading:true })
+    this.setState({ loading: true, errorLogin: false })
     return new Promise((resolve, reject) => {
-      API.onLogin(this.state.inputUsername, this.state.inputPassword).then((data) => {  //username, password:%koi.ti% or admin
+      API.onLogin(this.state.inputUsername, this.state.inputPassword)
+        .then((data) => {
+          //Valida si existe un username valido
+          if (data.username) {
+            localStorage.setItem('auth', JSON.stringify(data));
+            localStorage.setItem('token', data.api_token);
+            // localStorage.clear()
+            this.props.history.push('/')
 
-        //Valida si existe un username valido
-        if (data.username) {
-          localStorage.setItem('auth', JSON.stringify(data));
-          localStorage.setItem('token', data.api_token);
-          // localStorage.clear()
-          this.props.history.push('/')
+          }
+          if (data.message !== "The given data was invalid.") {
 
-        }
-        if (data.message !== "The given data was invalid.") {
+            //Valida si el usuario esta o no bloqueado.
 
-          //Valida si el usuario esta o no bloqueado.
-
-        } else { this.setState({ errorLogin: false, loading:false }) }
-        resolve(data);
-      }, (error) => {
-        this.setState({ loading:false })
-        reject(error);
-      });
+          } else {
+            this.setState({ errorLogin: true, loading: false })
+          }
+          resolve(data);
+        }, (error) => {
+          this.setState({ loading: false })
+          reject(error);
+        });
     });
   }
 
@@ -48,6 +50,14 @@ class Login extends Component {
     return (
       <div className="app flex-row align-items-center">
         <Container>
+          {
+            this.state.errorLogin === true ?
+              <div className="alert alert-warning" role="alert">
+                Error: Credenciales incorrectas
+                          </div>
+              :
+              <div />
+          }
           <Row className="justify-content-center">
             <Col md="8">
               {this.state.loading === true ?
@@ -78,21 +88,13 @@ class Login extends Component {
                         </InputGroupAddon>
                         <Input type="password" placeholder="Contraceña" autoComplete="current-password" onChange={(event) => this.setState({ inputPassword: event.target.value })} />
                       </InputGroup>
-                      {
-                        this.state.errorLogin === true ?
-                          <div className="alert alert-danger" role="alert">
-                            Error: Credenciales incorrectas
-                          </div>
-                          :
-                          <div />
-                      }
                       <Row>
                         <Col xs="6">
                           {/* <Link to="/"> */}
-                          <Button color="primary" className="px-4" onClick={this.onLogin}>Iniciar sesón</Button>
+                          <Button color="warning" className="px-4" onClick={this.onLogin}>Iniciar sesón</Button>
                           {/* </Link> */}
                         </Col>
-                        <Col xs="6" className="text-right">  
+                        <Col xs="6" className="text-right">
                           <Link to="/register">
                             Crear una cuenta.
                           </Link>
@@ -103,13 +105,13 @@ class Login extends Component {
                     </Form>
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+                <Card className="text-white bg-warning py-5 d-md-down-none" style={{ width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
                       <h2>Crea tu cuenta</h2>
                       <p>Registrate y vive una verdadera experiencia para llevar el control de tus finanzas personales</p>
                       <Link to="/register">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>Registrate Ahora!</Button>
+                        <Button color="warning" className="mt-3" active tabIndex={-1}>Registrate Ahora!</Button>
                       </Link>
                     </div>
                   </CardBody>

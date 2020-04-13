@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 
 //Componentes de terceros
 import DataTable from 'react-data-table-component';
-import { LinearProgress } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import LinearIndeterminateju from '../../../components/linearIndeterminate'
 
 import {
-    Button,
     Card,
     CardBody,
     CardHeader,
@@ -79,21 +77,7 @@ const columns = [
     },
 ];
 
-const LinearIndeterminate = () => {
-    const classes = useStyles();
-
-    return (
-        <div className={classes.root}>
-            <LinearProgress color="secondary" />
-        </div>
-    );
-};
-
-// const ExpanableComponent = ({ data }) => <img src={data.image} />;
-
-
 class DatatableShowGastos extends Component {
-
     render() {
         return (
             <Card>
@@ -115,7 +99,7 @@ class DatatableShowGastos extends Component {
                         expandableRowsComponent={<ExpandableRowsComponent data={this.props.gastos} />}
                         expandOnRowClicked
                         progressPending={this.props.loading}
-                        progressComponent={<LinearIndeterminate data={this.props.gastos} />}
+                        progressComponent={<LinearIndeterminateju data={this.props.gastos} />}
                         progressShowTableHead
                         ignoreRowClick={true}
                     />
@@ -125,13 +109,5 @@ class DatatableShowGastos extends Component {
     }
 }
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        '& > * + *': {
-            marginTop: theme.spacing(2),
-        },
-    },
-}));
 
 export default DatatableShowGastos;

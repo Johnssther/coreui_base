@@ -1,4 +1,4 @@
-import  React from 'react';
+import React from 'react';
 import IndexComponent from '../components/index-component'
 
 //redux
@@ -11,14 +11,14 @@ getExpenses();
 
 function Index(props) {
   const { expenses } = props;
-  
+
   // add new register
   const onNew = () => {
     props.history.push('/expenses/moduls/personalexpenses/create')
   }
 
   return (
-    <IndexComponent expenses={expenses} onNew={onNew}/>
+    <IndexComponent expenses={expenses} onNew={onNew} />
   );
 }
 

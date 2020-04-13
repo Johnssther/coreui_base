@@ -6,7 +6,6 @@ import moment from 'moment-jalaali'
 import {
   Badge,
 } from 'reactstrap';
-import ComponentDate from '../../components/calendar/calendario'
 
 // Components propios
 import DatatableShowGastos from './components/datatableShowGastos'
@@ -24,7 +23,7 @@ class Ingresargastos extends Component {
       data: [],
       gastoTotal: 0,
       loading: true,
-      cerrarmodal:false,
+      cerrarmodal: false,
     }
     // Este enlace es necesario para hacer que `this` funcione en el callback
     this.handleClick = this.handleClick.bind(this);
@@ -48,7 +47,7 @@ class Ingresargastos extends Component {
       data: []
     })
     let data = {
-      mes:null,
+      mes: null,
     }
     API.getExpenses(data)
       .then((response) => {
@@ -57,9 +56,8 @@ class Ingresargastos extends Component {
           return item.precio_total;
         })
         const data = response.map((item) => {
-          return { id:item.id, fecha: item.fecha, tipo_gasto:item.tipo_gasto , cantidad: item.cantidad, gasto: item.gasto, preciounid: '$ ' + new Intl.NumberFormat().format(item.precio_unidad), precio: '$ ' + new Intl.NumberFormat().format(item.precio_total) }
+          return { id: item.id, fecha: item.fecha, tipo_gasto: item.tipo_gasto, cantidad: item.cantidad, gasto: item.gasto, preciounid: '$ ' + new Intl.NumberFormat().format(item.precio_unidad), precio: '$ ' + new Intl.NumberFormat().format(item.precio_total) }
         })
-
 
         if (total.length > 0) {
           const reducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -80,12 +78,14 @@ class Ingresargastos extends Component {
     const dataExpense = {
       gasto: data.gasto,
       cantidad: data.cantidad,
-      precioUnidad: data.precioUnidad,
-      precioTotal: data.precioTotal,
-      Fecha: data.Fecha,
-      id_usuario: data.id_usuario,
+      precio_unidad: data.precioUnidad,
+      precio_total: data.precioTotal,
+      fecha: data.Fecha,
+      user_id: data.id_usuario,
       tipogasto_id: data.tipogasto_id,
     }
+    console.log(dataExpense);
+
     API.saveExpenses(dataExpense)
       .then((resp) => {
         this.handleClick()
@@ -99,7 +99,7 @@ class Ingresargastos extends Component {
   handleClick() {
     this.setState({
       ingresargastos: !this.state.ingresargastos,
-      cerrarmodal:!this.state.cerrarmodal,
+      cerrarmodal: !this.state.cerrarmodal,
       // loading: !this.state.loading,
     })
     this.getGastos()

@@ -1,26 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 //Componentes de terceros
 import DataTable from 'react-data-table-component';
-import { LinearProgress } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import LinearIndeterminate from '../../../../components/linearIndeterminate'
+import { Card, CardBody, CardHeader, Button } from 'reactstrap';
 
-import {
-  Card,
-  CardBody,
-  CardHeader,
-} from 'reactstrap';
-import ButtonComponent from '../../../../components/button'
-
-/* DataTables */
-
+// DataTables
 const rowTheme = {
   header: {
-    borderColor: 'transparent',
+    borderColor: 'red',
+    backgroundColor:'red',
   },
   rows: {
-    //Propiedades de la tabla
-    // spacing: 'spaced',
     spacingBorderRadius: '7px',
     spacingMargin: '1px',
     backgroundColor: 'white',
@@ -34,38 +26,55 @@ const rowTheme = {
 
 const columns = [
   {
-    name: 'Fecha',
+    name: 'Actions',
+    selector: 'id',
+    sortable: true,
+    cell: row => {
+      return (
+        <>
+          <Link to={`/expenses/moduls/personalexpenses/show/${row.id}`}><i title="Edit" className="text-primary cui-pencil m-1"></i></Link>
+          <Link to={`/expenses/moduls/personalexpenses/show/${row.id}`}><i title="Show" className="text-success icon-eye m-1"></i></Link>
+          <Link to={`/expenses/moduls/personalexpenses/show/${row.id}`}><i title="Delete" className="text-danger fa fa-eraser m-1"></i></Link>
+        </>
+      )
+    },
+    grow: 0,
+  },
+  {
+    name: 'Date',
     selector: 'fecha',
+    wrap: true,
     sortable: true,
     cell: row => <div><div style={{ fontWeight: 700, }}>{row.fecha}</div>{row.summary}</div>,
-    grow:0,
-
+    grow: 0,
   },
   {
-    name: 'Tipo de gasto',
+    name: 'Expense type',
     selector: 'tipo_gasto',
+    wrap: true,
     sortable: true,
-    grow:0,
+    grow: 0,
   },
   {
-    name: 'Cantidad',
+    name: 'Count',
     selector: 'cantidad',
     sortable: true,
-    grow:0,
+    grow: 0,
   },
   {
-    name: 'Gasto',
+    name: 'Expense',
     selector: 'gasto',
+    wrap: true,
     sortable: true,
-    grow:2,
+    grow: 4,
   },
   {
-    name: 'Precio Unid.',
+    name: 'Unit price',
     selector: 'precio_unidad',
     sortable: true,
   },
   {
-    name: 'Precio Total',
+    name: 'Total price',
     selector: 'precio_total',
     sortable: true,
   },
@@ -77,34 +86,21 @@ const columns = [
   },
 ];
 
-const LinearIndeterminate = () => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.root}>
-      <LinearProgress color="secondary" />
-    </div>
-  );
-};
-
-
 function IndexComponent(props) {
   const { expenses, loading, onNew } = props;
-  console.log(expenses);
-  
+
   return (
     <Card>
       <CardHeader>
         <i className="fa fa-align-justify"></i><strong>Daily Expenses</strong>
         <small> Expenses </small>
       </CardHeader>
-
       <CardBody>
         <DataTable
           title={'Personal Expenses'}
           columns={columns}
           data={expenses}
-          actions={<ButtonComponent name="Add" onPress={onNew}/>}
+          actions={<Button name="Add" onClick={onNew} ><i className="fa fa-plus m-1"></i>Add</Button>}
           highlightOnHover={true}
           pagination={true}
           customTheme={rowTheme}
@@ -112,20 +108,11 @@ function IndexComponent(props) {
           progressComponent={<LinearIndeterminate data={expenses} />}
           progressShowTableHead
           ignoreRowClick={true}
+          theme="solarized"
         />
       </CardBody>
     </Card >
   );
-
 }
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
 
 export default IndexComponent;

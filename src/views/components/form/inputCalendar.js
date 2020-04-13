@@ -46,13 +46,12 @@ const InputCalendar = ({ label, placeholder, ...props }) => {
         isOpen={toggle}
         toggle={() => { Toggle() }}
         fade={false}
-        style={{ width: '88%' }}
       >
         <ModalBody
         >
           <Calendar
             style={{ backgroundColor: 'red' }}
-            onChange={inputFecha => { setValue((inputFecha.format('YYYY/M/D'))); setInputFecha(inputFecha) }}
+            onChange={inputFecha => { setValue((inputFecha.format('YYYY/M/D HH:mm:ss'))); setInputFecha(inputFecha); Toggle() }}
             value={inputFecha}
           />
         </ModalBody>
@@ -62,64 +61,3 @@ const InputCalendar = ({ label, placeholder, ...props }) => {
 
 };
 export default InputCalendar
-
-
-
-
-/*
-
-import React, { Component } from 'react'
-import { Modal, ModalBody, Input } from 'reactstrap';
-import moment from 'moment-jalaali'
-import { Calendar } from 'react-datepicker2';
-
-class ComponentDate extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      danger: false,
-      inputFecha: moment(),
-    };
-
-    this.toggleDanger = this.toggleDanger.bind(this);
-    console.log(this.state.inputFecha);
-  }
-
-  toggleDanger() {
-    this.setState({
-      danger: !this.state.danger,
-    });
-  }
-
-  render() {
-    return (
-      <>
-        <div className="form-group">
-          <label htmlFor="">Ingrese una Fecha</label>
-            <Input onClick={this.toggleDanger} value={this.state.inputFecha} className="mr-1 is-valid" placeholder="Seleccione una fecha">Fecha</Input>
-            <div className={`valid-feedback`}>
-              Completado
-            </div>
-        </div>
-
-        {this.props.child}
-        <Modal
-          isOpen={this.state.danger}
-          toggle={this.toggleDanger}
-          fade={false}
-          style={{ width: '88%' }}
-        >
-          <ModalBody
-          >
-            <Calendar
-              style={{ backgroundColor: 'red' }}
-              onChange={inputFecha => this.setState({ inputFecha })}
-              value={this.state.inputFecha}
-            />
-          </ModalBody>
-        </Modal>
-      </>
-    );
-  }
-}
-export default ComponentDate */

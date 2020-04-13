@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Card,
     CardBody,
     CardHeader,
+    Col,
+    Row,
+    FormGroup,
+    Container,
+    Button,
 } from 'reactstrap';
-import Select from 'react-select'
 import { Formik, Form } from 'formik';
-import InputField from './input';
 import * as Yup from 'yup';
+import moment from 'moment-jalaali'
 
-import InputCalendar from '../../../../components/calendar/calendario'
+import InputField from '../../../../components/form/inputField';
+import InputCalendar from '../../../../components/form/inputCalendar'
+import InputCheckbox from '../../../../components/form/inputCheckbox'
+import InputSelect from '../../../../components/form/inputSelect'
 
 //services
 import { getExpenses } from '../services/personalexpenses'
@@ -19,17 +26,23 @@ getExpenses();
 const LoginComponent = (props) => {
     const { onCreate, expensestype } = props;
 
-    const [tipogasto, setTipogasto] = useState(2);
-
     return (
-        <div className="container">
+        <Container>
             <Card>
                 <CardHeader>
                     Ingresar Gasto
                 </CardHeader>
                 <CardBody>
                     <Formik
-                        initialValues={{ gasto: '', cantidad: '', precio_unidad: '', precio_total: '', fecha: '', tipo_gasto: tipogasto }}
+                        initialValues={{
+                            gasto: '',
+                            cantidad: '',
+                            precio_unidad: '',
+                            precio_total: '',
+                            fecha: moment().format('YYYY/M/D  HH:mm:ss'),
+                            tipogasto_id: '',
+                            jobType: 2,
+                        }}
                         validationSchema={Yup.object({
                             gasto: Yup.string()
                                 .min(3, 'Un gasto debe tener minimo 3 caracteres.')
@@ -45,7 +58,16 @@ const LoginComponent = (props) => {
                                 .positive('La cantidad no puede ser negativa.'),
                             fecha: Yup.date()
                                 .required('La fecha es obligatoria'),
-                            tipo_gasto: Yup.number()
+                            tipogasto_id: Yup.string()
+                                .required('Debe seleccionar un tipo de gasto'),
+                            jobType: Yup.string()
+                                // specify the set of valid values for job type
+                                // @see http://bit.ly/yup-mixed-oneOf
+                                /*  .oneOf(
+                                     ["designer", "development", "product", "other"],
+                                     "Invalid Job Type"
+                                 ) */
+                                .required("Required")
                         })}
                         onSubmit={(values, { setSubmitting }) => {
                             onCreate(values);
@@ -53,39 +75,44 @@ const LoginComponent = (props) => {
                         }}
                     >
                         <Form>
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <InputCalendar name="fecha" type="text" label="Fecha" placeholder="Ingrese la fecha del gasto."/>
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label htmlFor="tipo_gasto">Tipo de gasto</label>
-                                        <Select options={expensestype} onChange={(newValue) => { setTipogasto(newValue.value) }} name="tipo_gasto" id="tipo_gasto" value="tipo_gasto" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-3">
+                            <Row>
+                                <Col sm="6">
+                                    <InputCalendar name="fecha" type="text" label="Fecha" placeholder="Ingrese la fecha del gasto." />
+                                </Col>
+                                <Col sm="6">
+                                    <FormGroup>
+                                        <InputSelect type="input" label="Tipo Gasto" name="tipogasto_id" expensestype={expensestype} />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm="3">
                                     <InputField name="cantidad" type="text" label="Cantidad" placeholder="Ingrese una cantidad." />
-                                </div>
-                                <div className="col-sm-9">
+                                </Col>
+                                <Col sm="9">
                                     <InputField name="gasto" type="text" label="Gasto" placeholder="Ingrese un gasto." />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-6">
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm="6">
                                     <InputField name="precio_unidad" type="text" label="Precio unid." placeholder="Ingrese el precio por unidad." />
-                                </div>
-                                <div className="col-sm-6">
+                                </Col>
+                                <Col sm="6">
                                     <InputField name="precio_total" type="text" label="Precio total" placeholder="Ingrese el precio total (opcional)." />
-                                </div>
-                            </div>
-                            <button className="btn btn-success btn-sm" type="submit">Enviar</button>
+                                </Col>
+                            </Row>
+                            <hr></hr>
+                            <Row>
+                                <Col sm={{ size: 6, offset: 4 }}>
+                                    <Button className="col-sm-3 m-1" type="reset" color="secondary" size="sm">Reset</Button>
+                                    <Button className="col-sm-3 m-1" type="submit" color="dark" size="sm">Register</Button>
+                                </Col>
+                            </Row>
                         </Form>
                     </Formik>
                 </CardBody>
             </Card>
-        </div>
+        </Container>
     );
 };
 
