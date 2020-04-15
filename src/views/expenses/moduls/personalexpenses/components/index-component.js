@@ -10,7 +10,7 @@ import { Card, CardBody, CardHeader, Button } from 'reactstrap';
 const rowTheme = {
   header: {
     borderColor: 'red',
-    backgroundColor:'red',
+    backgroundColor:'primary',
   },
   rows: {
     spacingBorderRadius: '7px',

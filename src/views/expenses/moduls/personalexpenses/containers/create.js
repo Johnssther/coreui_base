@@ -14,7 +14,9 @@ function Create(props) {
   const { expensestypes } = props
   const expensestype = expensestypes.map((item) => {
     return { value: item.id, label: item.gasto }
-})
+  })
+  const [success, setSuccess] = React.useState({success:false, error:null});
+
 
   const onCreate = async (values) => {
     try {
@@ -29,12 +31,14 @@ function Create(props) {
       props.history.push('/expenses/moduls/personalexpenses')
 
     } catch (error) {
-      console.log(error);
+      Object.assign(error, { success: true })
+      Object.assign(error, { error: error.errors })
+      setSuccess(error)
     }
   }
 
   return (
-    <MainComponent onCreate={onCreate} expensestype={expensestype} />
+    <MainComponent onCreate={onCreate} expensestype={expensestype} success={success}/>
   );
 }
 

@@ -1,6 +1,6 @@
 //Llamadas al api
 import API from '../../../../../api/api';
-import { handleErrors } from '../../../../../utils/errors';
+import { handleErrors, generalErrorApi } from '../../../../../utils/errors';
 
 
 //redux
@@ -15,6 +15,7 @@ export const getExpenses = async () => {
     try {
         const expenses = await API.getExpenses(data);
         store.dispatch(actions.personalexpenses.setPersonalexpenses(expenses))
+        
     } catch (e) {
         handleErrors(e)
     }
@@ -23,8 +24,13 @@ export const getExpenses = async () => {
 //store
 export const createExpense = async (data) => {
     try {
-        const createExpense = await API.saveExpenses(data);
-        console.log(createExpense);
+        const response = await API.saveExpenses(data);
+        
+        if(response.success === false) {
+            generalErrorApi(response)
+        } else {
+            return response;
+        }
     } catch (e) {
         handleErrors(e)
     }

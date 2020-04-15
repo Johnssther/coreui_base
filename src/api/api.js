@@ -6,6 +6,8 @@
 * http://104.236.57.82/accesspark/public/api/login
 */
 
+import { generalErrorApi } from '../utils/errors';
+
 class Api {
     constructor() {
         let host = window.location.host
@@ -88,12 +90,12 @@ class Api {
                 tipogasto_id: data.tipogasto_id,
             }),
 
-        }).then((response) => {
+        }).then((response) => { 
             return response.json();
         })
-            .catch(error => {
-                throw error;
-            });
+        .catch(error => {
+            throw error;
+        });
     }
     // 3. Obtener todos los gastos
 

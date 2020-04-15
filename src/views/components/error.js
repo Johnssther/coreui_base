@@ -1,27 +1,21 @@
 import React from 'react'
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
-const Errors = () => {
-    const [toggle, setToggle] = React.useState(true);
+const Errors = (props) => {
+    const { text } = props
+    const [toggle, setToggle] = React.useState(false);
 
     // Toggle Modal
-    const Toggle = () => {
+    const toggleDanger = () => {
         setToggle(!toggle);
     }
-
-    React.useEffect(() => {
-        // code to run on component mount
-        setTimeout(() => {
-            setToggle(!toggle);
-        }, 3000);
-    }, [])
 
     return (
         <>
             <Modal
                 isOpen={toggle}
                 // isOpen={ true }
-                toggle={() => { Toggle() }}
+                toggle={() => { toggleDanger() }}
                 style={{ width: '88%' }}
                 className="modal-danger"
             >
@@ -29,10 +23,11 @@ const Errors = () => {
                     Error
                 </ModalHeader>
                 <ModalBody>
-                    Ha ocurrido un error inesperado, por favor vuelve a intentarlo.
+                    {text.error}
                 </ModalBody>
                 <ModalFooter>
-                    Salir
+                    <Button color="danger" onClick={toggleDanger}>Do Something</Button>{' '}
+                    <Button color="secondary" onClick={toggleDanger}>Cancel</Button>
                 </ModalFooter>
             </Modal>
         </>

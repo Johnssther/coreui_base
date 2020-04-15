@@ -6,7 +6,7 @@ const InputField = ({ label, placeholder, ...props }) => {
     const [didFocus, setDidFocus] = React.useState(false);
     const handleFocus = () => setDidFocus(true);
     const showFeedback =
-        (!!didFocus && field.value.trim().length > 2) || meta.touched;
+        (!!didFocus && field.value.length > 2) || meta.touched;
 
     return (
         <div className="form-group">
@@ -17,7 +17,6 @@ const InputField = ({ label, placeholder, ...props }) => {
                 {...props}
                 placeholder={placeholder}
                 onFocus={handleFocus}
-                onClick={() => { console.log('fg') }}
             />
             <div className={`valid-feedback`}>
                 Completado

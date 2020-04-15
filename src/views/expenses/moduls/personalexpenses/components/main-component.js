@@ -9,6 +9,8 @@ import {
     Container,
     Button,
 } from 'reactstrap';
+import Main from '../../../../layout/main'
+
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment-jalaali'
@@ -24,10 +26,10 @@ import { getExpenses } from '../services/personalexpenses'
 getExpenses();
 
 const LoginComponent = (props) => {
-    const { onCreate, expensestype } = props;
+    const { onCreate, expensestype, success } = props;
 
     return (
-        <Container>
+        <Main success={success}>
             <Card>
                 <CardHeader>
                     Ingresar Gasto
@@ -112,7 +114,7 @@ const LoginComponent = (props) => {
                     </Formik>
                 </CardBody>
             </Card>
-        </Container>
+        </Main>
     );
 };
 
