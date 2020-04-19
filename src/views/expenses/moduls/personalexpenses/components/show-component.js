@@ -9,6 +9,7 @@ import {
     Col,
     Button,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const ShowComponent = (props) => {
     const { expense } = props
@@ -16,7 +17,14 @@ const ShowComponent = (props) => {
         <Container>
             <Card>
                 <CardHeader>
-                    Show Expense
+                    <Row>
+                        <Col sm="2">
+                            Show Expense
+                        </Col>
+                        <Col className="text-right" sm="10">
+                            <i style={{ fontSize: 17, cursor:'pointer' }} title="Destroy" className="text-danger fa fa-eraser"></i>
+                        </Col>
+                    </Row>
                 </CardHeader>
                 <CardBody>
                     <Container>
@@ -55,7 +63,11 @@ const ShowComponent = (props) => {
                     <Row>
                         <Col sm={{ size: 6, offset: 4 }}>
                             <Button className="col-sm-3 m-1" color="secondary" size="sm">To return</Button>
-                            <Button className="col-sm-3 m-1" color="dark" size="sm">Edit</Button>
+                            <Link to={`/expenses/moduls/personalexpenses/edit/${expense.id}`}>
+                                <Button className="col-sm-3 m-1" color="dark" size="sm">
+                                    Edit
+                                </Button>
+                            </Link>
                         </Col>
                     </Row>
                 </CardFooter>

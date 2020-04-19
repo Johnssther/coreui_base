@@ -35,6 +35,20 @@ export const createExpense = async (data) => {
         handleErrors(e)
     }
 }
+//update
+export const updateExpense = async (data) => {
+    try {
+        const response = await API.updateExpense(data);
+        
+        if(response.success === false) {
+            generalErrorApi(response)
+        } else {
+            return response;
+        }
+    } catch (e) {
+        handleErrors(e)
+    }
+}
 
 //show
 export const showExpense = async (data) => {

@@ -1,4 +1,6 @@
 export const handleErrors = response => {
+    console.log(response);
+    
     //errores del api
     if(response.success === false) {
         throw response;

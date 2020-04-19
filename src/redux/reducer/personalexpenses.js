@@ -1,5 +1,20 @@
 const initialState = {
+    createpersonalexpense: {
+        id:null,
+        gasto: '',
+        cantidad: '',
+        precio_unidad: '',
+        precio_total: '',
+        fecha: '',
+        user_id: '',
+        tipogasto_id: '',
+        tipogasto: {
+            id: '',
+            gasto: '',
+        }
+    },
     personalexpense: {
+        id:null,
         gasto: '',
         cantidad: '',
         precio_unidad: '',

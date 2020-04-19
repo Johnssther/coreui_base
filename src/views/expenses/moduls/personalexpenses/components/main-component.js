@@ -26,7 +26,7 @@ import { getExpenses } from '../services/personalexpenses'
 getExpenses();
 
 const LoginComponent = (props) => {
-    const { onCreate, expensestype, success } = props;
+    const { onCreate, expensestype, success, expense } = props;
 
     return (
         <Main success={success}>
@@ -37,13 +37,13 @@ const LoginComponent = (props) => {
                 <CardBody>
                     <Formik
                         initialValues={{
-                            gasto: '',
-                            cantidad: '',
-                            precio_unidad: '',
-                            precio_total: '',
-                            fecha: moment().format('YYYY/M/D  HH:mm:ss'),
-                            tipogasto_id: '',
-                            jobType: 2,
+                            gasto: expense.gasto,
+                            cantidad: expense.cantidad,
+                            precio_unidad: expense.precio_unidad,
+                            precio_total: expense.precio_total,
+                            fecha: expense.fecha,//moment().format('YYYY/M/D  HH:mm:ss'),
+                            tipogasto_id: expense.tipogasto_id,
+                            id: expense.id,
                         }}
                         validationSchema={Yup.object({
                             gasto: Yup.string()
@@ -62,14 +62,14 @@ const LoginComponent = (props) => {
                                 .required('La fecha es obligatoria'),
                             tipogasto_id: Yup.string()
                                 .required('Debe seleccionar un tipo de gasto'),
-                            jobType: Yup.string()
+                            //jobType: Yup.string()
                                 // specify the set of valid values for job type
                                 // @see http://bit.ly/yup-mixed-oneOf
                                 /*  .oneOf(
                                      ["designer", "development", "product", "other"],
                                      "Invalid Job Type"
                                  ) */
-                                .required("Required")
+                             //   .required("Required")
                         })}
                         onSubmit={(values, { setSubmitting }) => {
                             onCreate(values);

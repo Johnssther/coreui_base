@@ -6,17 +6,16 @@ import { getExpensesType } from '../services/expensestype'
 import { getExpenses, createExpense } from '../services/personalexpenses'
 //redux
 import { connect } from 'react-redux'
-import { actions } from '../../../../../redux/actions/index'
 
 getExpensesType();
 
 function Create(props) {
-  const { expensestypes } = props
+  const { expensestypes, expense } = props  
+
   const expensestype = expensestypes.map((item) => {
     return { value: item.id, label: item.gasto }
   })
   const [success, setSuccess] = React.useState({success:false, error:null});
-
 
   const onCreate = async (values) => {
     try {
@@ -38,18 +37,13 @@ function Create(props) {
   }
 
   return (
-    <MainComponent onCreate={onCreate} expensestype={expensestype} success={success}/>
+    <MainComponent onCreate={onCreate} expensestype={expensestype} success={success} expense={expense}/>
   );
 }
 
 const mapStateToProps = state => ({
   expensestypes: state.expensestype.expensestype,
-  createexpense: state.personalexpenses.personalexpense,
+  expense: state.personalexpenses.createpersonalexpense,
 })
 
-const mapDispatchToProps = dispatch => ({
-  actions: {
-  }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Create)
+export default connect(mapStateToProps)(Create)

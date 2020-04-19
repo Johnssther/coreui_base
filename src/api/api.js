@@ -66,7 +66,19 @@ class Api {
     }
 
 
+    getExpenses(data) {
+        return fetch(`${this.URL}gastos?api_token=${this.API_TOKEN}
+        &user_id=${JSON.parse(localStorage.getItem('auth')).id}
+        &mes=${data.mes}`)
 
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    }
 
     /* Expense */
     saveExpenses(data) {
@@ -90,25 +102,39 @@ class Api {
                 tipogasto_id: data.tipogasto_id,
             }),
 
-        }).then((response) => { 
+        }).then((response) => {
             return response.json();
         })
-        .catch(error => {
-            throw error;
-        });
+            .catch(error => {
+                throw error;
+            });
     }
-    // 3. Obtener todos los gastos
+    /* Expense */
+    updateExpense(data) {
+        console.log(data);
+        
+        // B. Guardar los gastos
+        return fetch(`${this.URL}gastos/${data.id}`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                api_token: this.API_TOKEN,
+                gasto: data.gasto,
+                cantidad: data.cantidad,
+                precio_unidad: data.precio_unidad,
+                precio_total: data.precio_total,
+                fecha: data.fecha,
+                user_id: data.user_id,
+                tipogasto_id: data.tipogasto_id,
+            }),
 
-    getExpenses(data) {
-        return fetch(`${this.URL}gastos?api_token=${this.API_TOKEN}
-        &user_id=${JSON.parse(localStorage.getItem('auth')).id}
-        &mes=${data.mes}`)
-
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return responseJson;
-            })
-            .catch((error) => {
+        }).then((response) => {
+            return response.json();
+        })
+            .catch(error => {
                 throw error;
             });
     }
@@ -126,18 +152,6 @@ class Api {
             });
     }
 
-    // 4. Obtiene los tipos de gastos
-
-    getExpensesType() {
-        return fetch(`${this.URL}tipogastos?api_token=${this.API_TOKEN}&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return responseJson;
-            })
-            .catch((error) => {
-                throw error;
-            });
-    }
 
     // 5. Elimina los gastos
     // gastos/85
@@ -153,6 +167,19 @@ class Api {
             return response.json();
         })
             .catch(error => {
+                throw error;
+            });
+    }
+
+
+
+    getExpensesType() {
+        return fetch(`${this.URL}tipogastos?api_token=${this.API_TOKEN}&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((error) => {
                 throw error;
             });
     }
