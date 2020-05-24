@@ -14,8 +14,9 @@ const Main = (props) => {
     return (
         <Container>
             {success.success === false ? null :
-                <Alert style={{ background: '#f44336', color: 'white' }} isOpen={visible} toggle={onDismiss}>
-                    <b>Error: {success.error} </b>
+                <Alert className="bg-danger" isOpen={visible} /* toggle={onDismiss} */>
+                    <b>Error: {success.error}</b><br></br>
+                    <b>{success.error === 'Error de conexion' ? 'Ocurrio un error inesperado al momento de intetar establecer conexión por favor recargue su navegador nuevamente.':''}  </b><br></br>
                 </Alert>
             }
             <Errors text={success} />

@@ -5,17 +5,30 @@ import { connect } from 'react-redux'
 //services
 import { showExpense } from '../services/personalexpenses'
 import ShowComponent from '../components/show-component'
+import Loading from '../../../../components/loading';
+
 
 function Show(props) {
     const { match, expense } = props
     const { params } = match
 
+    const [loading, setLoading] = React.useState(true);
+
     useEffect(() => {
         // code to run on component mount
-        showExpense(params)
+        async function anyNameFunction() {
+            await showExpense(params)
+            setLoading(false)
+            
+        }
+        anyNameFunction()
     }, [])
 
-    console.log(expense);
+    if( loading ) {
+        return (
+            <Loading />
+        );   
+    }
     return (
         <>
             <ShowComponent expense={expense} />

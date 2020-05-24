@@ -1,5 +1,5 @@
 // para crear el store
-import { createStore, applyMiddleware } from 'redux' 
+import { createStore, applyMiddleware } from 'redux'
 //Persistir los datos del store
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
@@ -13,6 +13,9 @@ const persistConfig = {
     storage,
     blacklist: [
         '',
+        'configuracion',
+        'personalexpenses',
+        'expensestype',
     ]
 }
 

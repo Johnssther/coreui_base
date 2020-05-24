@@ -22,6 +22,7 @@ const Page500 = React.lazy(() => import('./views/Pages/Page500'));
 
 class App extends Component {
   componentDidMount() {
+//    localStorage.clear();
   }
 
   render() {
