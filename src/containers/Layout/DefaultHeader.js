@@ -30,11 +30,8 @@ class DefaultHeader extends Component {
   }
   render() {
 
-
-
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
-
     return (
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
@@ -60,7 +57,7 @@ class DefaultHeader extends Component {
             </DropdownToggle>
             <DropdownMenu right>
               <DropdownItem header tag="div" className="text-center"><strong>{this.state.usuario_nombre}</strong></DropdownItem>
-              <DropdownItem active={true}><i className="fa fa-user"></i> Perfil</DropdownItem>
+              <DropdownItem active={true} onClick={ e => this.props.onProfile(e) }><i className="fa fa-user"></i> Perfil</DropdownItem>
               <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Cerrar sesión</DropdownItem>
               <Dialog />
             </DropdownMenu>

@@ -6,12 +6,26 @@ const Dashboard = React.lazy(() => import('./views/Dashboard'));
 const Alerts = React.lazy(() => import('./views/Notifications/Alerts'));
 const Badges = React.lazy(() => import('./views/Notifications/Badges'));
 
+
+//------------------------------------------
+//    Profile
+//------------------------------------------
+const Profile = React.lazy(() => import('./views/profile/profile'));
+
+//------------------------------------------
+//     Gastos
+//------------------------------------------
 // modulo gastos
 const Ingresargastos = React.lazy(() => import('./views/Gastos/Ingresargastos/Ingresargastos'));
 const GastosReport = React.lazy(() => import('./views/Gastos/Informegastos/gastosreporte/gastosreporte'));
 const GastosDiarios = React.lazy(() => import('./views/Gastos/Informegastos/gastosdiarios/gastosdiarios'));
 const GastosSemanales = React.lazy(() => import('./views/Gastos/Informegastos/gastossemanales/gastossemanales'));
 const GastosMensuales = React.lazy(() => import('./views/Gastos/Informegastos/gastosmensuales/gastosmensuales'));
+
+
+//------------------------------------------
+//    Expenses
+//------------------------------------------
 
 // Expenses Module.
 const PersonalExpensesIndex = React.lazy(() => import('./views/expenses/moduls/personalexpenses/containers/index'));
@@ -29,17 +43,22 @@ const ReportExpensesIndex = React.lazy(() => import('./views/expenses/reports/rp
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  
+
   // ejemplo
   { path: '/notifications/alerts', name: 'Alerts', component: Alerts },
   { path: '/notifications/badges', name: 'Badges', component: Badges },
-  
+
   // modulo gastos
   { path: '/gastos/ingresargastos', name: 'Ingresar gastos', component: Ingresargastos },
   { path: '/gastos/informegastos/reporte', name: 'Reporte de gastos', component: GastosReport },
   { path: '/gastos/informegastos/diarios', name: 'Gastos diarios', component: GastosDiarios },
   { path: '/gastos/informegastos/semanales', name: 'Gastos semanales', component: GastosSemanales },
   { path: '/gastos/informegastos/mensuales', name: 'Gastos mensuales', component: GastosMensuales },
+
+  //------------------------------------------
+  //    Routes Profile
+  //------------------------------------------
+  { exact: true, path: '/profile', name: 'Profile', component: Profile },
 
   //------------------------------------------
   //    Routes Expenses
@@ -53,7 +72,7 @@ const routes = [
   // references - typeexpenses
   { exact: true, path: '/expenses/references/expensestype', name: 'Expenses Type', component: ExpensesTypeIndex },
   { exact: true, path: '/expenses/references/expensestype/create', name: 'ExpensesTypeCreate', component: ExpensesTypeCreate },
-  
+
   // report - typeexpenses
   { exact: true, path: '/expenses/reports/rpersonalexpenses', name: 'Personal Report Expenses', component: ReportExpensesIndex },
 ];

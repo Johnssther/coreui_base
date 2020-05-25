@@ -39,13 +39,17 @@ class DefaultLayout extends Component {
     this.props.history.push('/login')
     localStorage.clear()
   }
+  onProfile(e) {
+    e.preventDefault()
+    this.props.history.push('/profile')
+  }
 
   render() {
     return (
       <div className="app">
         <AppHeader fixed style={{ background:'#428bca', border:'none' }}>
           <Suspense fallback={this.loading()}>
-            <DefaultHeader onLogout={e => this.signOut(e)} />
+            <DefaultHeader onLogout={e => this.signOut(e)} onProfile={e => this.onProfile(e) }/>
           </Suspense>
         </AppHeader>
         <div className="app-body">
