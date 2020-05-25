@@ -1,0 +1,2 @@
+(this["webpackJsonp@coreui/coreui-free-react-admin-template"]=this["webpackJsonp@coreui/coreui-free-react-admin-template"]||[]).push([[36],{1110:function(e,t,r){"use strict";r.r(t);var a=r(2),c=r.n(a);t.default=function(){return c.a.createElement("h2",null,"reportes")}}}]);
+//# sourceMappingURL=36.6588d8f2.chunk.js.map
