@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Swal from 'sweetalert2'
+
 import MainComponent from '../components/main-component'
 //services
 import { getExpensesType } from '../services/expensestype'
@@ -32,7 +34,15 @@ function Create(props) {
     } catch (error) {
       Object.assign(error, { success: true })
       Object.assign(error, { error: error.errors })
-      setSuccess(error)
+      console.log(error);
+      
+      Swal.fire({
+        title: 'Error!',
+        text: error.error,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      })
+     // setSuccess(error)
     }
   }
 

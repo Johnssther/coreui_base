@@ -13,6 +13,8 @@ const InputSelect = ({ label, expensestype, ...props }) => {
             return item;
         }
     })
+    console.log(expensestype, 'expensestype STEFFY');
+    
     return (
         <>
             <label htmlFor={field.name}>{label}</label>

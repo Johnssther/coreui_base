@@ -10,7 +10,8 @@ const Badges = React.lazy(() => import('./views/Notifications/Badges'));
 //------------------------------------------
 //    Profile
 //------------------------------------------
-const Profile = React.lazy(() => import('./views/profile/profile'));
+const ProfileShow = React.lazy(() => import('./views/profile/containers/show'));
+const ProfileEdit = React.lazy(() => import('./views/profile/containers/edit'));
 
 //------------------------------------------
 //     Gastos
@@ -58,7 +59,9 @@ const routes = [
   //------------------------------------------
   //    Routes Profile
   //------------------------------------------
-  { exact: true, path: '/profile', name: 'Profile', component: Profile },
+  { exact: true, path: '/profile', name: 'ProfileShow', component: ProfileShow },
+  { exact: true, path: '/profile/edit/:id', name: 'ProfileEdit', component: ProfileEdit },
+
 
   //------------------------------------------
   //    Routes Expenses
