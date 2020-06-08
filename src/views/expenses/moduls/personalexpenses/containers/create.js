@@ -18,6 +18,7 @@ function Create(props) {
     return { value: item.id, label: item.gasto }
   })
   const [success, setSuccess] = React.useState({success:false, error:null});
+  const [count, setCount] = React.useState(1);
 
   const onCreate = async (values) => {
     try {
@@ -27,9 +28,21 @@ function Create(props) {
       }
       Object.assign(values, { user_id: JSON.parse(localStorage.getItem('auth')).id })
 
-      await createExpense(values) //save expense api
+      let res = await createExpense(values) //save expense api
       await getExpenses()
-      props.history.push('/expenses/moduls/personalexpenses')
+      setCount(count+1); 
+      if(parseInt(values.numeroregistros) === count) {
+        props.history.push('/expenses/moduls/personalexpenses')
+      } else {
+        if(res.success === true) {
+          Swal.fire({
+            title: 'Success!',
+            text: res.gasto,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+        }
+      }
 
     } catch (error) {
       Object.assign(error, { success: true })
@@ -47,7 +60,9 @@ function Create(props) {
   }
 
   return (
-    <MainComponent onCreate={onCreate} expensestype={expensestype} success={success} expense={expense}/>
+    <>
+    <MainComponent count={count} onCreate={onCreate} expensestype={expensestype} success={success} expense={expense}/>
+    </>
   );
 }
 

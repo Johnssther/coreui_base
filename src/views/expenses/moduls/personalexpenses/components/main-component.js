@@ -26,13 +26,13 @@ import { getExpenses } from '../services/personalexpenses'
 getExpenses();
 
 const LoginComponent = (props) => {
-    const { onCreate, expensestype, success, expense } = props;
+    const { count, onCreate, expensestype, success, expense } = props;
 
     return (
         <Main success={success}>
             <Card>
                 <CardHeader>
-                    Ingresar Gasto
+                    Ingresar Gasto {count-1}
                 </CardHeader>
                 <CardBody>
                     <Formik
@@ -44,6 +44,7 @@ const LoginComponent = (props) => {
                             fecha: expense.fecha,//moment().format('YYYY/M/D  HH:mm:ss'),
                             tipogasto_id: expense.tipogasto_id,
                             id: expense.id,
+                            numeroregistros: 1,
                         }}
                         validationSchema={Yup.object({
                             gasto: Yup.string()
@@ -62,14 +63,17 @@ const LoginComponent = (props) => {
                                 .required('La fecha es obligatoria'),
                             tipogasto_id: Yup.string()
                                 .required('Debe seleccionar un tipo de gasto'),
+                            numeroregistros: Yup.number()
+                                .max(99999, 'La cantidad no puede exceder de 99.999')
+                                .positive('La cantidad no puede ser negativa.')
                             //jobType: Yup.string()
-                                // specify the set of valid values for job type
-                                // @see http://bit.ly/yup-mixed-oneOf
-                                /*  .oneOf(
-                                     ["designer", "development", "product", "other"],
-                                     "Invalid Job Type"
-                                 ) */
-                             //   .required("Required")
+                            // specify the set of valid values for job type
+                            // @see http://bit.ly/yup-mixed-oneOf
+                            /*  .oneOf(
+                                 ["designer", "development", "product", "other"],
+                                 "Invalid Job Type"
+                             ) */
+                            //   .required("Required")
                         })}
                         onSubmit={(values, { setSubmitting }) => {
                             onCreate(values);
@@ -77,6 +81,11 @@ const LoginComponent = (props) => {
                         }}
                     >
                         <Form>
+                            <Row>
+                                <Col sm="3">
+                                    <InputField name="numeroregistros" type="text" label="Numero registros" placeholder="Ingrese una numeroregistros." />
+                                </Col>
+                            </Row>
                             <Row>
                                 <Col sm="6">
                                     <InputCalendar name="fecha" type="text" label="Fecha" placeholder="Ingrese la fecha del gasto." />

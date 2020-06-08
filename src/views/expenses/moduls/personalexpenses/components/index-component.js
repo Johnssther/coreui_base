@@ -88,6 +88,7 @@ const columns = [
 
 function IndexComponent(props) {
   const { expenses, loading, onNew } = props;
+console.log(loading);
 
   return (
     <Card>

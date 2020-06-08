@@ -9,7 +9,7 @@ export const handleErrors = response => {
     if (response) {
         let messg = {
             success:false,
-            errors:'Error de conexion'
+            errors:'Ocurrio un error inesperado de conexión por favor recargue su navegador nuevamente.'
         }
         if (response !== "TypeError: Failed to fetch") {
             throw messg;

@@ -8,13 +8,15 @@ import {
   CardFooter,
   Button,
 } from 'reactstrap';
+import Loading from '../components/loading'
 
 class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       gastoTotal: '',
-      mes:[]
+      mes: [],
+      loading: true,
 
     }
   }
@@ -27,71 +29,72 @@ class Dashboard extends Component {
     this.setState({
       data: []
     })
-    setTimeout(() => {
-      let data = {
-        mes:null,
-      }
-      API.getExpenses(data)
-        .then((response) => {
+    let data = {
+      mes: null,
+    }
+    API.getExpenses(data)
+      .then((response) => {
 
-          const total = response.map((item) => {
-            return item.precio_total;
-          })
-
-          if (total.length > 0) {
-            const reducer = (accumulator, currentValue) => accumulator + currentValue;
-            var Preciototal = total.reduce(reducer);
-          } else {
-            var Preciototal = 0;
-          }
-
-          this.setState({
-            gastoTotal: Preciototal,
-          })
+        const total = response.map((item) => {
+          return item.precio_total;
         })
-    }, 500)
+
+        if (total.length > 0) {
+          const reducer = (accumulator, currentValue) => accumulator + currentValue;
+          var Preciototal = total.reduce(reducer);
+        } else {
+          var Preciototal = 0;
+        }
+
+        this.setState({
+          gastoTotal: Preciototal,
+        })
+      })
   }
 
   getGastosMensuales() {
     let data = {
       mes: 11,
     }
-  
+
     API.getExpenses(data)
       .then((response) => {
         this.setState({
-          mes: response
+          mes: response,
+          loading: false,
         })
       })
       .catch(e => console.log(e))
   }
 
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
-
   render() {
-    let mes_nombre = ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre',]
-    
+    let mes_nombre = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',]
+    if (this.state.loading) {
+      return (
+        <Loading loading={this.state.loading}></Loading>
+      );
+    }
     return (
       <>
-      <div className="animated fadeIn">
-        <WidgetO1
-          header={'$'+ new Intl.NumberFormat().format(this.state.gastoTotal.toString())}
-          mainText='Gastos totales de este mes'
-        />
-      </div>
-      <div className="animated fadeIn">
-        <div>
+        <div className="animated fadeIn">
+          <WidgetO1
+            header={'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}
+            mainText='Gastos totales de este mes'
+          />
+        </div>
+        <div className="animated fadeIn">
+          <div>
             <div className="row">
               {this.state.mes.map(
                 (item, index) =>
                   <div className="col-sm" key={index}>
                     <Card>
                       <CardHeader>
-                        <strong>{ mes_nombre[item.mes-1] } { item.anio }</strong>
+                        <strong>{mes_nombre[item.mes - 1]} {item.anio}</strong>
                       </CardHeader>
                       <CardBody>
-                        Tus gastos de {mes_nombre[item.mes-1]} del { item.anio } fueron de: { `$ ${new Intl.NumberFormat().format(item.precio_total_mes)}`}
-                      <hr></hr>
+                        Tus gastos de {mes_nombre[item.mes - 1]} del {item.anio} fueron de: {`$ ${new Intl.NumberFormat().format(item.precio_total_mes)}`}
+                        <hr></hr>
 
                       </CardBody>{/* 
                       <CardFooter>
@@ -99,12 +102,12 @@ class Dashboard extends Component {
                       </CardFooter> */}
                     </Card>
                   </div>
-                )
+              )
               }
 
+            </div>
           </div>
         </div>
-      </div>
       </>
     );
   }

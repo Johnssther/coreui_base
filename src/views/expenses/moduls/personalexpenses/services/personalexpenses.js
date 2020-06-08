@@ -15,7 +15,7 @@ export const getExpenses = async () => {
     try {
         const expenses = await API.getExpenses(data);
         store.dispatch(actions.personalexpenses.setPersonalexpenses(expenses))
-        
+        return true;
     } catch (e) {
         handleErrors(e)
     }
