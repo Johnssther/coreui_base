@@ -1,0 +1,1 @@
+{"version":3,"sources":["views/expenses/reports/rpersonalexpenses/containers/index.js"],"names":["Index"],"mappings":"6KAAA,2BAQeA,UAPf,WAEE,OACE","file":"static/js/40.773ebb0d.chunk.js","sourcesContent":["import  React from 'react';\nfunction Index() {\n    \n  return (\n    <h2>reportes</h2>\n  );\n}\n\nexport default Index"],"sourceRoot":""}
