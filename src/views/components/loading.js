@@ -7,13 +7,13 @@ function Loading() {
 
     return (
         <>
-            <div class="container">
+            <div className="container">
 
-                <div class="row">
-                    <div class="col-md-3 offset-md-4">
+                <div className="row">
+                    <div className="col-md-3 offset-md-4">
                         <div className="container center-block">
 
-                            <div class="lds-facebook">
+                            <div className="lds-facebook">
                                 <div></div>
                                 <div></div>
                                 <div></div>

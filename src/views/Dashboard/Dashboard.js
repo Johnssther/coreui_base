@@ -1,14 +1,18 @@
+
 import React, { Component } from 'react';
-import WidgetO1 from '../Widgets/Widget02'
+import WidgetO from '../Widgets/Widget02'
 // Main Chart
-import API from '../../api/api'
+import ApiDashboard from '../../api/dashboard';
 import {
   Card, CardBody,
   CardHeader,
-  CardFooter,
-  Button,
+  CardColumns
 } from 'reactstrap';
 import Loading from '../components/loading'
+import Gbarras from '../Dashboard/gbarras'
+import { Bar, Doughnut, Line, Pie, Polar, Radar } from 'react-chartjs-2';
+
+import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -21,51 +25,34 @@ class Dashboard extends Component {
     }
   }
   componentDidMount() {
-    this.getGastos()
-    this.getGastosMensuales()
+    this.getExpensesMonths()
+    this.getExpensesMonth()
 
   }
-  getGastos() {
-    this.setState({
-      data: []
-    })
-    let data = {
-      mes: null,
-    }
-    API.getExpenses(data)
-      .then((response) => {
 
-        const total = response.map((item) => {
-          return item.precio_total;
-        })
-
-        if (total.length > 0) {
-          const reducer = (accumulator, currentValue) => accumulator + currentValue;
-          var Preciototal = total.reduce(reducer);
-        } else {
-          var Preciototal = 0;
-        }
-
-        this.setState({
-          gastoTotal: Preciototal,
-        })
-      })
-  }
-
-  getGastosMensuales() {
-    let data = {
-      mes: 11,
-    }
-
-    API.getExpenses(data)
+  //getExpenseMont
+  getExpensesMonth() {
+    ApiDashboard.getTotalExpensesMonth()
       .then((response) => {
         this.setState({
-          mes: response,
-          loading: false,
-        })
+          gastoTotal: response,
+          loading: false
+        });
       })
       .catch(e => console.log(e))
   }
+  //getExpenseMonts
+  getExpensesMonths() {
+    ApiDashboard.getTotalExpensesMonths()
+      .then((response) => {
+        this.setState({
+          mes: response,
+          loading: false
+        });
+      })
+      .catch(e => console.log(e))
+  }
+
 
   render() {
     let mes_nombre = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',]
@@ -77,7 +64,7 @@ class Dashboard extends Component {
     return (
       <>
         <div className="animated fadeIn">
-          <WidgetO1
+          <WidgetO
             header={'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}
             mainText='Gastos totales de este mes'
           />
@@ -89,17 +76,16 @@ class Dashboard extends Component {
                 (item, index) =>
                   <div className="col-sm" key={index}>
                     <Card>
-                      <CardHeader>
-                        <strong>{mes_nombre[item.mes - 1]} {item.anio}</strong>
+                      <CardHeader className="bg-primary">
+                        <h4> {mes_nombre[item.mes - 1]} {item.anio} </h4>
                       </CardHeader>
-                      <CardBody>
-                        Tus gastos de {mes_nombre[item.mes - 1]} del {item.anio} fueron de: {`$ ${new Intl.NumberFormat().format(item.precio_total_mes)}`}
+                      <CardBody className="bg-info text-dark">
+                        Gastos: <h3> {`$ ${new Intl.NumberFormat().format(item.precio_total_mes)}`} </h3>
                         <hr></hr>
-
-                      </CardBody>{/* 
-                      <CardFooter>
-                        <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Imprimir Gastos</Button>
-                      </CardFooter> */}
+                      </CardBody>
+                      {/* <CardFooter>
+                          <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Imprimir Gastos</Button>
+                        </CardFooter> */}
                     </Card>
                   </div>
               )
@@ -108,6 +94,7 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
+        <Gbarras mes={this.state.mes} />
       </>
     );
   }

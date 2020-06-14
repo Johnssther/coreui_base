@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
+import MetisMenu from 'react-metismenu';
 
 import {
   AppAside,
@@ -17,6 +18,9 @@ import {
 } from '@coreui/react';
 // sidebar nav config
 import navigation from '../../_nav';
+import navigation1 from '../../_nav1';
+
+
 // routes config
 import routes from '../../routes';
 
@@ -47,9 +51,9 @@ class DefaultLayout extends Component {
   render() {
     return (
       <div className="app">
-        <AppHeader fixed style={{ background:'#428bca', border:'none' }}>
+        <AppHeader fixed style={{ background: '#428bca', border: 'none' }}>
           <Suspense fallback={this.loading()}>
-            <DefaultHeader onLogout={e => this.signOut(e)} onProfile={e => this.onProfile(e) }/>
+            <DefaultHeader onLogout={e => this.signOut(e)} onProfile={e => this.onProfile(e)} />
           </Suspense>
         </AppHeader>
         <div className="app-body">
@@ -57,7 +61,9 @@ class DefaultLayout extends Component {
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>
+              {/* https://github.com/alpertuna/react-metismenu */}
               <AppSidebarNav className="sidebar-nav" navConfig={navigation} {...this.props} router={router} />
+              {/* <MetisMenu content={navigation1} {...this.props} router={router}/>, */}
             </Suspense>
             <AppSidebarFooter />
             <AppSidebarMinimizer />
