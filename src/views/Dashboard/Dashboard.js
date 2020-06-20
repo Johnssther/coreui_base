@@ -6,13 +6,21 @@ import ApiDashboard from '../../api/dashboard';
 import {
   Card, CardBody,
   CardHeader,
-  CardColumns
+  CardColumns,
+  Col,
+  Row,
+  FormGroup,
 } from 'reactstrap';
+
 import Loading from '../components/loading'
 import Gbarras from '../Dashboard/gbarras'
 import { Bar, Doughnut, Line, Pie, Polar, Radar } from 'react-chartjs-2';
 
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { connect } from 'react-redux'
+import Select from 'react-select'
+
+import { getExpensesType } from '../expenses/references/expensestype/services/expensestype'
 
 class Dashboard extends Component {
   constructor(props) {
@@ -21,18 +29,28 @@ class Dashboard extends Component {
       gastoTotal: '',
       mes: [],
       loading: true,
-
+      expensestype: [],
+      valueSelectExpensestype: '',
     }
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.getExpensesMonths()
     this.getExpensesMonth()
+    await getExpensesType();
+
+    const expensestype = await this.props.expensestypes.map((item) => {
+      return { value: item.id, label: item.gasto }
+    })
+    
+    this.setState({
+      expensestype
+    })
 
   }
 
-  //getExpenseMont
-  getExpensesMonth() {
-    ApiDashboard.getTotalExpensesMonth()
+  //getExpenseMont card
+  getExpensesMonth(data) {
+    ApiDashboard.getTotalExpensesMonth(data)
       .then((response) => {
         this.setState({
           gastoTotal: response,
@@ -41,7 +59,7 @@ class Dashboard extends Component {
       })
       .catch(e => console.log(e))
   }
-  //getExpenseMonts
+  //getExpenseMonts slider
   getExpensesMonths() {
     ApiDashboard.getTotalExpensesMonths()
       .then((response) => {
@@ -52,9 +70,16 @@ class Dashboard extends Component {
       })
       .catch(e => console.log(e))
   }
+  //getExpenseMonts
+  async onChangeSelect(value) {
+    await this.setState({ valueSelectExpensestype: value })
+    this.getExpensesMonth(this.state.valueSelectExpensestype)
+  }
+
 
 
   render() {
+
     let mes_nombre = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',]
     if (this.state.loading) {
       return (
@@ -63,15 +88,29 @@ class Dashboard extends Component {
     }
     return (
       <>
-        <div className="animated fadeIn">
-          <WidgetO
-            header={'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}
-            mainText='Gastos totales de este mes'
-          />
+        <div className="row">
+          <div className="col-sm-6">
+            <div className="animated fadeIn">
+              <WidgetO
+                header={'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}
+                mainText='Gastos totales de este mes'
+              />
+            </div>
+          </div>
         </div>
+        <div className="row mb-2">
+          <div className="col-sm-6">
+            <Select
+              className="is-invalid"
+              options={this.state.expensestype}
+              onChange={(newValue) => { this.onChangeSelect(newValue.value) }}
+            />
+          </div>
+        </div>
+
         <div className="animated fadeIn">
           <div>
-            <div className="row">
+            <div className="row topContainer">
               {this.state.mes.map(
                 (item, index) =>
                   <div className="col-sm" key={index}>
@@ -95,10 +134,16 @@ class Dashboard extends Component {
           </div>
         </div>
         <Gbarras mes={this.state.mes} />
+        
       </>
     );
   }
 
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  expensestypes: state.expensestype.expensestype,
+  expense: state.personalexpenses.createpersonalexpense,
+})
+
+export default connect(mapStateToProps)(Dashboard)

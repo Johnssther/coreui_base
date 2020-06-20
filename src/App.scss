@@ -129,3 +129,10 @@ I.metismenu-state-icon.rotate-minus-90 {
     transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg)
 }
+
+/* List horizotles */
+
+.topContainer{
+    white-space: nowrap;
+    overflow-x: auto;
+  }

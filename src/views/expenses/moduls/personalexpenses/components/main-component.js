@@ -27,6 +27,7 @@ getExpenses();
 
 const LoginComponent = (props) => {
     const { count, onCreate, expensestype, success, expense } = props;
+    console.log(expensestype, 'ju');
 
     return (
         <Main success={success}>

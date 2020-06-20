@@ -34,8 +34,9 @@ class ApiDashboard {
                 throw error;
             });
     }
-    getTotalExpensesMonth() {
-        return fetch(`${this.URL}dashboard/totalexpensesmonth?api_token=${this.API_TOKEN}&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
+    getTotalExpensesMonth(data) {
+        
+        return fetch(`${this.URL}dashboard/totalexpensesmonth?api_token=${this.API_TOKEN}&user_id=${JSON.parse(localStorage.getItem('auth')).id}&tipogasto=${data}`)
             .then((response) => response.json())
             .then((responseJson) => {
                 return responseJson;

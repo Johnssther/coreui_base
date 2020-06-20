@@ -8,9 +8,6 @@ import { store } from '../../../../../store';
 export const getExpensesType = async () => {
     try {
         const expensestypes =  await API.getExpensesType();
-        // const expensestype = expensestypes.map((item) => {
-        //     return { value: item.id, label: item.gasto }
-        // })
         store.dispatch(actions.expensestype.setExpensestype(expensestypes))
     } catch (e) {
         console.log('Ha ocurrido un error');
