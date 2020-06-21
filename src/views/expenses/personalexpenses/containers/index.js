@@ -5,8 +5,7 @@ import IndexComponent from '../components/index-component'
 import { connect } from 'react-redux'
 
 //services
-import { getExpenses } from '../services/personalexpenses'
-
+import { getExpenses } from '../../../../services/expenses/personalexpenses'
 
 function Index(props) {
   const { expenses } = props;

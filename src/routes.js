@@ -29,17 +29,17 @@ const GastosMensuales = React.lazy(() => import('./views/Gastos/Informegastos/ga
 //------------------------------------------
 
 // Expenses Module.
-const PersonalExpensesIndex = React.lazy(() => import('./views/expenses/moduls/personalexpenses/containers/index'));
-const PersonalExpensesCreate = React.lazy(() => import('./views/expenses/moduls/personalexpenses/containers/create'));
-const PersonalExpensesShow = React.lazy(() => import('./views/expenses/moduls/personalexpenses/containers/show'));
-const PersonalExpensesEdit = React.lazy(() => import('./views/expenses/moduls/personalexpenses/containers/edit'));
+const PersonalExpensesIndex = React.lazy(() => import('./views/expenses/personalexpenses/containers/index'));
+const PersonalExpensesCreate = React.lazy(() => import('./views/expenses/personalexpenses/containers/create'));
+const PersonalExpensesShow = React.lazy(() => import('./views/expenses/personalexpenses/containers/show'));
+const PersonalExpensesEdit = React.lazy(() => import('./views/expenses/personalexpenses/containers/edit'));
 
 // Expenses References.
-const ExpensesTypeIndex = React.lazy(() => import('./views/expenses/references/expensestype/containers/index'));
-const ExpensesTypeCreate = React.lazy(() => import('./views/expenses/references/expensestype/containers/create'));
+const ExpensesTypeIndex = React.lazy(() => import('./views/expenses/expensestype/containers/index'));
+const ExpensesTypeCreate = React.lazy(() => import('./views/expenses/expensestype/containers/create'));
 
 // Expenses Reports.
-const ReportExpensesIndex = React.lazy(() => import('./views/expenses/reports/rpersonalexpenses/containers/index'));
+const ReportExpensesIndex = React.lazy(() => import('./views/expenses/rpersonalexpenses/containers/index'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },

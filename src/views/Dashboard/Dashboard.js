@@ -20,7 +20,7 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { connect } from 'react-redux'
 import Select from 'react-select'
 
-import { getExpensesType } from '../expenses/references/expensestype/services/expensestype'
+import { getExpensesType } from '../../services/expenses/expensestype'
 
 class Dashboard extends Component {
   constructor(props) {

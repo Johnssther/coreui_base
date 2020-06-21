@@ -52,6 +52,7 @@ class GastosReport extends Component {
     }
     
     API_REPORT.getGastosReport(data)
+    
       .then((response) => {
         console.log(response, 'Estos son los gastos de las fechas que seleccionaste');
         const data = response.map((item) => {

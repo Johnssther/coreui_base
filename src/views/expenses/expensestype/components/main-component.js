@@ -5,23 +5,14 @@ import {
     CardHeader,
     Col,
     Row,
-    FormGroup,
     Container,
     Button,
 } from 'reactstrap';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import moment from 'moment-jalaali'
 
-import InputField from '../../../../components/form/inputField';
-import InputCalendar from '../../../../components/form/inputCalendar'
-import InputCheckbox from '../../../../components/form/inputCheckbox'
-import InputSelect from '../../../../components/form/inputSelect'
-
-//services
-// import { getExpenses } from '../services/personalexpenses'
-
-// getExpenses();
+import InputField from '../../../components/form/inputField';
+import InputCheckbox from '../../../components/form/inputCheckbox'
 
 const LoginComponent = (props) => {
     const { onCreate } = props;

@@ -1,10 +1,10 @@
 //Llamadas al api
-import API from '../../../../../api/typeexpense/api';
-import { handleErrors } from '../../../../../utils/errors';
+import API from '../../api/typeexpense/api';
+import { handleErrors } from '../../utils/errors';
 
 //redux
-import { actions } from '../../../../../redux/actions/index';
-import { store } from '../../../../../store';
+import { actions } from '../../redux/actions/index';
+import { store } from '../../store';
 
 export const getExpensesType = async () => {
     try {

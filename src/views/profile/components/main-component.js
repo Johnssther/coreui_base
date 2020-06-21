@@ -20,7 +20,7 @@ import InputField from '../../components/form/inputField';
 // import InputCheckbox from '../../../../components/form/inputCheckbox'
 
 //services
-import { getExpenses } from '../services/personalexpenses'
+import { getExpenses } from '../../../services/expenses/personalexpenses'
 
 const LoginComponent = (props) => {
     const { onCreate, expensestype, success, expense } = props;

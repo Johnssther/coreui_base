@@ -1,12 +1,9 @@
 import React from 'react';
 import IndexComponent from '../components/index-component'
-
 //redux
 import { connect } from 'react-redux'
-
-//services
-// import { getExpenses } from '../services/personalexpenses'
-import { getExpensesType } from '../services/expensestype'
+// import { getExpensesType } from '../services/expensestype'
+import { getExpensesType } from '../../../../services/expenses/expensestype'
 getExpensesType();
 
 function Index(props) {

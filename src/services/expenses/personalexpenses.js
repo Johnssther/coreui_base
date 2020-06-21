@@ -1,11 +1,10 @@
 //Llamadas al api
-import API from '../../../../../api/api';
-import { handleErrors, generalErrorApi } from '../../../../../utils/errors';
-
+import API from '../../api/api';
+import { handleErrors, generalErrorApi } from '../../utils/errors';
 
 //redux
-import { actions } from '../../../../../redux/actions/index';
-import { store } from '../../../../../store';
+import { actions } from '../../redux/actions/index';
+import { store } from '../../store';
 
 //index
 export const getExpenses = async () => {

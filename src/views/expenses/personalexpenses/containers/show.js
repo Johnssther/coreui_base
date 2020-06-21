@@ -3,10 +3,9 @@ import React, { useEffect } from 'react';
 //redux
 import { connect } from 'react-redux'
 //services
-import { showExpense } from '../services/personalexpenses'
+import { showExpense } from '../../../../services/expenses/personalexpenses'
 import ShowComponent from '../components/show-component'
-import Loading from '../../../../components/loading';
-
+import Loading from '../../../components/loading';
 
 function Show(props) {
     const { match, expense } = props

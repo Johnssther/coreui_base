@@ -2,8 +2,10 @@ import React from 'react';
 
 import MainComponent from '../components/main-component'
 //services
-import { getExpensesType } from '../services/expensestype'
-import { getExpenses, updateExpense, showExpense } from '../services/personalexpenses'
+import { getExpensesType } from '../../../../services/expenses/expensestype'
+
+import { getExpenses, updateExpense, showExpense } from '../../../../services/expenses/personalexpenses'
+
 //redux
 import { connect } from 'react-redux'
 

@@ -4,8 +4,8 @@ import Swal from 'sweetalert2'
 
 import MainComponent from '../components/main-component'
 //services
-import { getExpensesType } from '../services/expensestype'
-import { getExpenses, createExpense } from '../services/personalexpenses'
+import { getExpensesType } from '../../../../services/expenses/expensestype'
+import { getExpenses, createExpense } from '../../../../services/expenses/personalexpenses'
 //redux
 import { connect } from 'react-redux'
 
@@ -32,6 +32,7 @@ function Create(props) {
       await getExpenses()
       setCount(count+1); 
       if(parseInt(values.numeroregistros) === count) {
+        // window.open(link, "_blank");
         props.history.push('/expenses/moduls/personalexpenses')
       } else {
         if(res.success === true) {

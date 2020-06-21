@@ -2,11 +2,9 @@ import React from 'react';
 
 import MainComponent from '../components/main-component'
 //services
-import { getExpensesType, createExpenseType } from '../services/expensestype'
+import { getExpensesType, createExpenseType } from '../../../../services/expenses/expensestype'
 //redux
 import { connect } from 'react-redux'
-
-// getExpensesType();
 
 function Create(props) {
     const { expensestype } = props
