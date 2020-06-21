@@ -66,17 +66,17 @@ const routes = [
   //------------------------------------------
   //    Routes Expenses
   //------------------------------------------
-  // module - expenses
+  // expenses
   { exact: true, path: '/expenses/moduls/personalexpenses', name: 'Expenses', component: PersonalExpensesIndex },
   { exact: true, path: '/expenses/moduls/personalexpenses/create', name: 'ExpensesCreate', component: PersonalExpensesCreate },
   { exact: true, path: '/expenses/moduls/personalexpenses/show/:id', name: 'ExpensesShow', component: PersonalExpensesShow },
   { exact: true, path: '/expenses/moduls/personalexpenses/edit/:id', name: 'ExpensesEdit', component: PersonalExpensesEdit },
 
-  // references - typeexpenses
+  // typeexpenses
   { exact: true, path: '/expenses/references/expensestype', name: 'Expenses Type', component: ExpensesTypeIndex },
   { exact: true, path: '/expenses/references/expensestype/create', name: 'ExpensesTypeCreate', component: ExpensesTypeCreate },
 
-  // report - typeexpenses
+  // typeexpenses
   { exact: true, path: '/expenses/reports/rpersonalexpenses', name: 'Personal Report Expenses', component: ReportExpensesIndex },
 ];
 

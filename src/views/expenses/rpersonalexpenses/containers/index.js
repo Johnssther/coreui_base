@@ -36,11 +36,12 @@ function Index(props) {
     getRpersonalexpenses(value)
   }
   const onPrint = (value) => {
-    console.log(value);
-    
+    getRpersonalexpenses(value)
   }
 
   return (
+    <>
+    <a href="http://localhost/coysa/public/api/gastosreport?api_token=AFF8tI4L4iK1i6exDkExHINKi3RqlrAg9f4sFzsuDwWL4mfMw7hsowmxSDiaCFhKmFpkpxnFgBhWef2V&user_id=1&&filterDate_in=2019-11-12&&filterDate_out=2019-11-12&&filterTipogasto=4">link</a>
     <IndexComponent 
     expenses={expenses} 
     expensestype={expensestype} 
@@ -49,6 +50,7 @@ function Index(props) {
     onPrint={onPrint} 
     loading={loading} 
     />
+    </>
   );
 }
 

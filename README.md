@@ -185,3 +185,6 @@ http://clauderic.github.io/react-infinite-calendar/#/enhance-default-functionali
 
 ## lista anidada para el sidebar menu
 https://material-ui.com/es/components/lists/#simple-list
+
+## modales en forma de ruta
+https://www.youtube.com/watch?v=PbBmE8VDYZs&t=325s
