@@ -160,19 +160,19 @@ function IndexComponent(props) {
           <div className="row">
             <div className="col-sm">
               <FormGroup>
-                <Label htmlFor="filterDate_in">Fecha Inicial</Label>
+                <Label htmlFor="filterDate_in">Initial Date</Label>
                 <Input value={filterDate_in.format('YYYY/M/D')} onClick={() => { Toggle('filterDate_in') }} placeholder='Fecha de inicio' type="texty" id="filterDate_in" name="filterDate_in" />
               </FormGroup>
             </div>
             <div className="col-sm">
               <FormGroup>
-                <Label htmlFor="filterDate_out">Fecha Final</Label>
+                <Label htmlFor="filterDate_out">Final Date</Label>
                 <Input value={filterDate_out.format('YYYY/M/D')} onClick={() => { Toggle('filterDate_out') }} placeholder='Fecha Fin' type="text" id="filterDate_out" name="filterDate_out" />
               </FormGroup>
             </div>
             <div className="col-sm">
               <FormGroup>
-                <Label htmlFor="inputTipogasto">Tipo Gasto</Label>
+                <Label htmlFor="inputTipogasto">Type Expense</Label>
                 <Select options={expensestype}
                   onChange={(newValue) => { onChangeSelect(newValue.value) }}
                 />

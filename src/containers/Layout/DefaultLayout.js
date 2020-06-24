@@ -19,6 +19,7 @@ import {
 // sidebar nav config
 import navigation from '../../_nav';
 import navigation1 from '../../_nav1';
+import AsideList from './AsideList'
 
 
 // routes config
@@ -57,12 +58,13 @@ class DefaultLayout extends Component {
           </Suspense>
         </AppHeader>
         <div className="app-body">
-          <AppSidebar fixed display="lg">
+          <AppSidebar fixed display="lg" className="primary">
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>
               {/* https://github.com/alpertuna/react-metismenu */}
-              <AppSidebarNav className="sidebar-nav" navConfig={navigation} {...this.props} router={router} />
+              {/* <AppSidebarNav className="sidebar-nav" navConfig={navigation} {...this.props} router={router} /> */}
+              <AsideList className="sidebar-nav" {...this.props} router={router}/>
               {/* <MetisMenu content={navigation1} {...this.props} router={router}/>, */}
             </Suspense>
             <AppSidebarFooter />

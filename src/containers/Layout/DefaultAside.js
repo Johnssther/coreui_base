@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { AppSwitch } from '@coreui/react'
 import AsideList from './AsideList'
+import * as router from 'react-router-dom';
 
 //redux
 import { connect } from 'react-redux'
@@ -77,7 +78,7 @@ class DefaultAside extends Component {
 
           {/* Tab 1 */}
           <TabPane tabId="1">
-            <AsideList />
+            <AsideList {...this.props} router={router} />
           </TabPane>
 
           {/* Tab 2 */}

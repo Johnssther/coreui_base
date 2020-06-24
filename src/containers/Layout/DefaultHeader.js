@@ -46,7 +46,7 @@ class DefaultHeader extends Component {
             <NavLink to="/dashboard" className="nav-link" style={{ color: 'white' }} >Dashboard</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink to="/gastos/ingresargastos" className="nav-link" style={{ color: 'white' }}>Registrar de gastos</NavLink>
+            <NavLink to="/expenses/moduls/personalexpenses/create" className="nav-link" style={{ color: 'white' }}>Register Expenses</NavLink>
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>

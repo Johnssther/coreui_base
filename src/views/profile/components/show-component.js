@@ -7,6 +7,7 @@ import {
     Button,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import perfil from '../../../assets/img/avatars/6.jpg'
 
 const ShowComponent = (props) => {
     const { onEdit } = props
@@ -14,7 +15,8 @@ const ShowComponent = (props) => {
         <Container>
             <Card>
                 <div className="bg-primary text-center">
-                    <img className="img-circle" src="assets/img/avatars/6.jpg" alt="admin@bootstrapmaster.com" width="200"></img>
+                    {/* <img className="img-circle" src="assets/img/avatars/6.jpg" alt="admin@bootstrapmaster.com" width="200"></img> */}
+                    <img className="img-circle" src={perfil} alt="admin@bootstrapmaster.com" width="200" height="200"></img>
                     <h1>{JSON.parse(localStorage.getItem('auth')).name}</h1>
                 </div>
                 <CardHeader className="row bg-success">

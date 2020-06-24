@@ -7,87 +7,225 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
+import { DashboardRounded, TrendingDownRounded, MergeTypeRounded } from '@material-ui/icons';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import DescriptionRounded from '@material-ui/icons/DescriptionRounded';
+import { blue, green } from '@material-ui/core/colors';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+
+// https://medium.com/@modularcoder/reactjs-multi-level-sidebar-navigation-menu-with-typescrip-materialui-251943c12dda
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    maxWidth: 560,
+    fontSize: '10px',
+    // backgroundColor: theme.palette.warning.light,
   },
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(3),
   },
 }));
 
-export default function AsideList() {
+function AsideList(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [openrevenues, setOpenrevenues] = React.useState(false);
+  const [route1, setRoute1] = React.useState('#212121');
+  const [route2, setRoute2] = React.useState('#212121');
+  const [route3, setRoute3] = React.useState('#212121');
+  const [path, setPath] = React.useState();
 
-  const handleClick = () => {
+  function bg() {
+    if (props.location) {
+      console.log(props.location.pathname);
+      let pathname = props.location.pathname;
+      if (pathname === '/expenses/moduls/personalexpenses') {
+        setOpen(true);
+        setOpenrevenues(false);
+        setRoute1('orange');
+        setRoute2('#212121');
+        setRoute3('#212121');
+      }
+      if (pathname === '/expenses/references/expensestype') {
+        setOpen(true);
+        setOpenrevenues(false);
+        setRoute1('#212121');
+        setRoute2('orange');
+        setRoute3('#212121');
+      }
+      if (pathname === '/expenses/reports/rpersonalexpenses') {
+        setOpen(true);
+        setOpenrevenues(false);
+        setRoute1('#212121');
+        setRoute2('#212121');
+        setRoute3('orange');
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    async function anyNameFunction() {
+      bg();
+    }
+    anyNameFunction()
+  }, [])
+
+  // props.history.push('/expenses/moduls/personalexpenses/create')
+  const handleClickProfile = () => {
+    props.history.push('/profile')
+    setOpen(false);
+    setOpenrevenues(false)
+  };
+
+  const handleClickDashboard = () => {
+    props.history.push('/dashboard')
+    setOpen(false);
+    setOpenrevenues(false)
+  };
+
+  const handleClickExpenses = () => {
     setOpen(!open);
+    setOpenrevenues(false)
+  };
+  const handleClickExpensesReg = async () => {
+    await props.history.push('/expenses/moduls/personalexpenses');
+    setRoute1('orange');
+    setRoute2('#212121');
+    setRoute3('#212121');
+  };
+  const handleClickTypeExpenses = async () => {
+    await props.history.push('/expenses/references/expensestype');
+    setRoute1('#212121');
+    setRoute2('orange');
+    setRoute3('#212121');
+  };
+  const handleClickReportExpenses = async () => {
+    await props.history.push('/expenses/reports/rpersonalexpenses');
+    setRoute1('#212121');
+    setRoute2('#212121');
+    setRoute3('orange');
+  };
+
+  const handleClickRevenues = () => {
+    setOpen(false);
+    setOpenrevenues(!openrevenues)
+  };
+  const handleClickRevenuesReg = () => {
+    //props.history.push('/expenses/moduls/personalexpenses')
+  };
+  const handleClickReportRevenues = () => {
+    //props.history.push('/expenses/reports/rpersonalexpenses')
   };
 
   return (
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
+      dense={true}
       subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
-          Nested List Items
+        <ListSubheader component="div" id="nested-list-subheader" color="inherit" /* className="text-center" */>
+          <ListItem alignItems="flex-start" button onClick={handleClickProfile}>
+            <ListItemAvatar>
+              <Avatar alt={JSON.parse(localStorage.getItem('auth')).name} src="/static/images/avatar/2.jpg" />
+            </ListItemAvatar>
+            <ListItemText
+              primary={JSON.parse(localStorage.getItem('auth')).name}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    className={classes.inline}
+                    style={{ color: green[500] }}
+                  >
+                    Online
+              </Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
         </ListSubheader>
       }
       className={classes.root}
     >
-
-      <ListItem button>
+      <Divider variant="inset" component="li" style={{ color: blue[50] }} />
+      <ListItem dense={true} button onClick={handleClickDashboard}>
         <ListItemIcon>
-          <SendIcon />
+          <DashboardRounded style={{ color: blue[50] }} />
         </ListItemIcon>
-        <ListItemText primary="Sent mail" />
+        <ListItemText primary="Dashboard" />
       </ListItem>
 
-      <ListItem button>
+      <ListItem dense={true} button onClick={handleClickExpenses}>
         <ListItemIcon>
-          <DraftsIcon />
+          <InboxIcon style={{ color: blue[50] }} />
         </ListItemIcon>
-        <ListItemText primary="Drafts" />
-      </ListItem>
-
-      <ListItem button onClick={handleClick}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary="Expenses" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
 
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
+
+          <ListItem style={{ background: route1 }} dense={true} button onClick={handleClickExpensesReg} className={classes.nested} autoFocus={true}>
             <ListItemIcon>
-              <StarBorder />
+              <TrendingDownRounded style={{ color: blue[50] }} />
             </ListItemIcon>
-            <ListItemText primary="Starred" />
+            <ListItemText primary="My Expenses" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+
+          <ListItem style={{ background: route2 }} dense={true} button onClick={handleClickTypeExpenses} className={classes.nested} >
             <ListItemIcon>
-              <StarBorder />
+              <MergeTypeRounded style={{ color: blue[50] }} />
             </ListItemIcon>
-            <ListItemText primary="Starred" />
+            <ListItemText primary="Expenses Type" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+
+          <ListItem style={{ background: route3 }} dense={true} button onClick={handleClickReportExpenses} className={classes.nested} >
             <ListItemIcon>
-              <StarBorder />
+              <DescriptionRounded style={{ color: blue[50] }} />
             </ListItemIcon>
-            <ListItemText primary="Starred" />
+            <ListItemText primary="R. Expenses" style={{ fontSize: '8px' }} />
           </ListItem>
+
+        </List>
+      </Collapse>
+
+      <ListItem dense={true} button onClick={handleClickRevenues}>
+        <ListItemIcon style={{ color: blue[50] }}>
+          <InboxIcon style={{ color: blue[50] }} />
+          Beta
+        </ListItemIcon>
+        <ListItemText primary="Revenues" />
+        {openrevenues ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+
+      <Collapse in={openrevenues} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+
+          <ListItem style={{ background: '#212121' }} dense={true} button onClick={handleClickRevenuesReg} className={classes.nested} autoFocus={true}>
+            <ListItemIcon>
+              <TrendingDownRounded style={{ color: blue[50] }} />
+            </ListItemIcon>
+            <ListItemText primary="My Revenues" />
+          </ListItem>
+
+          <ListItem style={{ background: '#212121' }} dense={true} button onClick={handleClickReportRevenues} className={classes.nested}>
+            <ListItemIcon>
+              <MergeTypeRounded style={{ color: blue[50] }} />
+            </ListItemIcon>
+            <ListItemText primary="R. Revenues" />
+          </ListItem>
+
         </List>
       </Collapse>
     </List>
   );
 }
+
+export default AsideList;

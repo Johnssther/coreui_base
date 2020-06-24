@@ -41,7 +41,7 @@ class Dashboard extends Component {
     const expensestype = await this.props.expensestypes.map((item) => {
       return { value: item.id, label: item.gasto }
     })
-    
+
     this.setState({
       expensestype
     })
@@ -88,6 +88,17 @@ class Dashboard extends Component {
     }
     return (
       <>
+        
+        <div className="row mb-2">
+          <div className="offset-sm-3 col-sm-6">
+            <Select
+              className="is-invalid"
+              options={this.state.expensestype}
+              onChange={(newValue) => { this.onChangeSelect(newValue.value) }}
+            />
+          </div>
+        </div>
+
         <div className="row">
           <div className="col-sm-6">
             <div className="animated fadeIn">
@@ -96,15 +107,6 @@ class Dashboard extends Component {
                 mainText='Gastos totales de este mes'
               />
             </div>
-          </div>
-        </div>
-        <div className="row mb-2">
-          <div className="col-sm-6">
-            <Select
-              className="is-invalid"
-              options={this.state.expensestype}
-              onChange={(newValue) => { this.onChangeSelect(newValue.value) }}
-            />
           </div>
         </div>
 
@@ -134,7 +136,7 @@ class Dashboard extends Component {
           </div>
         </div>
         <Gbarras mes={this.state.mes} />
-        
+
       </>
     );
   }
