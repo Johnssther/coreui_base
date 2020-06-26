@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d62b7e8f6628a56d3d58e5b1da596b55",
+    "revision": "eb581d8bafa3899d2195837d1be3050d",
     "url": "/coreui_base/index.html"
   },
   {
@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/css/16.40eae278.chunk.css"
   },
   {
-    "revision": "afe00aaa9a849369d45b",
+    "revision": "f7aa057f3e56bc3b542c",
     "url": "/coreui_base/static/css/23.40eae278.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/css/9.02f0b733.chunk.css"
   },
   {
-    "revision": "25b1c06cadc51721f3cd",
-    "url": "/coreui_base/static/css/main.86abc128.chunk.css"
+    "revision": "b8cae4dc978ef8bb4fff",
+    "url": "/coreui_base/static/css/main.02237128.chunk.css"
   },
   {
     "revision": "2bb15f857b3233ed22f0",
@@ -32,12 +32,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/js/1.af262f8e.chunk.js"
   },
   {
-    "revision": "47124e5ef0743d279a2b",
-    "url": "/coreui_base/static/js/10.6708ef79.chunk.js"
+    "revision": "83056fcb050ac1b47c26",
+    "url": "/coreui_base/static/js/10.f79f1269.chunk.js"
   },
   {
     "revision": "e7cad5e8c80a4a756b57f883a8b131b2",
-    "url": "/coreui_base/static/js/10.6708ef79.chunk.js.LICENSE.txt"
+    "url": "/coreui_base/static/js/10.f79f1269.chunk.js.LICENSE.txt"
   },
   {
     "revision": "6f302e41812c4b2aa297",
@@ -128,8 +128,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/js/22.c511df0d.chunk.js"
   },
   {
-    "revision": "afe00aaa9a849369d45b",
-    "url": "/coreui_base/static/js/23.748d3ff8.chunk.js"
+    "revision": "f7aa057f3e56bc3b542c",
+    "url": "/coreui_base/static/js/23.acc2c20c.chunk.js"
   },
   {
     "revision": "7e3aab49ef381d15a205",
@@ -212,12 +212,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coreui_base/static/js/9.af12814e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "25b1c06cadc51721f3cd",
+    "revision": "b8cae4dc978ef8bb4fff",
     "url": "/coreui_base/static/js/main.53310b52.chunk.js"
   },
   {
-    "revision": "4eb84d0eea1911b491ac",
-    "url": "/coreui_base/static/js/runtime-main.32358abc.js"
+    "revision": "4de6398d5256ccc83ab7",
+    "url": "/coreui_base/static/js/runtime-main.e37cfe1a.js"
   },
   {
     "revision": "0087dce419a7376eb06c837f740d31eb",
