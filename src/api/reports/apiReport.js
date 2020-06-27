@@ -1,22 +1,12 @@
-// http://localhost/coysa/public/api/gastosreport?user_id=1&&filterDate_in=2019-11-12&&filterDate_out=2019-11-12
-/**
-*Peticiones api
-* @author John Alejandro || @Johnssther
-* @link http://JohnAlejandro.com
-* link Api
-* http://104.236.57.82/accesspark/public/api/login
-*/
+
+import { connection } from '../conection';
+
 class ApiReport {
     constructor() {
-        let host = window.location.host
-        if (host === "localhost:3000") {
-            this.URL = "http://localhost/coysa/public/api/";
-        }
-        if (host === "johnssther.github.io") {
-            this.URL = "http://coysa.herokuapp.com/api/";
-        }
+        this.URL = connection().URL;
         this.API_TOKEN = localStorage.getItem('token');
     }
+
     // 3. Obtener todos los gastos
     getGastosReport(data) {
         console.log(data);

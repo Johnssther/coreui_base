@@ -1,22 +1,17 @@
 
 import React, { Component } from 'react';
-import WidgetO from '../Widgets/Widget02'
 // Main Chart
 import ApiDashboard from '../../api/dashboard';
+import Carrucelinfinite from '../components/carrucelinfinite';
 import {
   Card, CardBody,
-  CardHeader,
-  CardColumns,
-  Col,
-  Row,
-  FormGroup,
+  CardHeader, CardColumns
 } from 'reactstrap';
 
 import Loading from '../components/loading'
 import Gbarras from '../Dashboard/gbarras'
-import { Bar, Doughnut, Line, Pie, Polar, Radar } from 'react-chartjs-2';
+import Datos from '../Dashboard/table'
 
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { connect } from 'react-redux'
 import Select from 'react-select'
 
@@ -31,6 +26,7 @@ class Dashboard extends Component {
       loading: true,
       expensestype: [],
       valueSelectExpensestype: '',
+      color: '#F55457',
     }
   }
   async componentDidMount() {
@@ -57,7 +53,12 @@ class Dashboard extends Component {
           loading: false
         });
       })
-      .catch(e => console.log(e))
+      .catch(e => {
+        console.log(e)
+         this.setState({
+          loading: false
+        });
+      })
   }
   //getExpenseMonts slider
   getExpensesMonths() {
@@ -68,7 +69,12 @@ class Dashboard extends Component {
           loading: false
         });
       })
-      .catch(e => console.log(e))
+      .catch(e => {
+        console.log(e)
+         this.setState({
+          loading: false
+        });
+      })
   }
   //getExpenseMonts
   async onChangeSelect(value) {
@@ -80,7 +86,6 @@ class Dashboard extends Component {
 
   render() {
 
-    let mes_nombre = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',]
     if (this.state.loading) {
       return (
         <Loading loading={this.state.loading}></Loading>
@@ -88,7 +93,7 @@ class Dashboard extends Component {
     }
     return (
       <>
-        
+
         <div className="row mb-2">
           <div className="offset-sm-3 col-sm-6">
             <Select
@@ -99,43 +104,63 @@ class Dashboard extends Component {
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-sm-6">
-            <div className="animated fadeIn">
-              <WidgetO
-                header={'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}
-                mainText='Gastos totales de este mes'
-              />
-            </div>
-          </div>
-        </div>
 
-        <div className="animated fadeIn">
-          <div>
-            <div className="row topContainer">
-              {this.state.mes.map(
-                (item, index) =>
-                  <div className="col-sm" key={index}>
-                    <Card>
-                      <CardHeader className="bg-primary">
-                        <h4> {mes_nombre[item.mes - 1]} {item.anio} </h4>
-                      </CardHeader>
-                      <CardBody className="bg-info text-dark">
-                        Gastos: <h3> {`$ ${new Intl.NumberFormat().format(item.precio_total_mes)}`} </h3>
-                        <hr></hr>
-                      </CardBody>
-                      {/* <CardFooter>
-                          <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Imprimir Gastos</Button>
-                        </CardFooter> */}
-                    </Card>
-                  </div>
-              )
-              }
+        <CardColumns className="cols-2">
+          <Gbarras mes={this.state.mes} color={this.state.color} />
+          <Card>
+            <CardHeader>
+              Mis datos de este mes
+          </CardHeader>
+            <CardBody>
+              <div className="row">
+                <div className="col">
+                  <Card onClick={() => this.setState({ color: 'green' })}>
+                    <CardHeader style={{ background: '#4caf50' }} className="bg-success text-white">
+                      Ingresos
+                </CardHeader>
+                    <CardBody>
+                      <h3>
+                        {'$0.00'}
+                      </h3>
+                    </CardBody>
+                  </Card>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <Card onClick={() => this.setState({ color: 'red' })}>
+                    <CardHeader style={{ background: '#f50057' }} className="text-white">
+                      Gastos
+                </CardHeader>
+                    <CardBody>
+                      <h3>
+                        {'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}
+                      </h3>
+                    </CardBody>
+                  </Card>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <Card onClick={() => this.setState({ color: 'orange' })}>
+                    <CardHeader style={{ background: 'orange' }} className="text-white">
+                      Ahorro
+                </CardHeader>
+                    <CardBody>
+                      <h3>
+                        {'$0.00'}
+                      </h3>
+                    </CardBody>
+                  </Card>
+                </div>
+              </div>
+            </CardBody>
+          </Card>
+        </CardColumns>
 
-            </div>
-          </div>
-        </div>
-        <Gbarras mes={this.state.mes} />
+        <Datos />
+        {/* {this.state.mes.length > 0 ? <Carrucelinfinite data={this.state.mes} color={this.state.color} /> : null} */}
+
 
       </>
     );

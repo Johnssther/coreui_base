@@ -19,7 +19,7 @@ const ShowComponent = (props) => {
                     <img className="img-circle" src={perfil} alt="admin@bootstrapmaster.com" width="200" height="200"></img>
                     <h1>{JSON.parse(localStorage.getItem('auth')).name}</h1>
                 </div>
-                <CardHeader className="row bg-success">
+                <CardHeader className="row bg-warning">
                     <div className="col-sm">
                         <h2>Profile</h2>
                     </div>

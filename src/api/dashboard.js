@@ -7,23 +7,14 @@
 */
 
 import { generalErrorApi } from '../utils/errors';
+import { connection } from './conection';
 
 class ApiDashboard {
     constructor() {
-        let host = window.location.host
-        if (host === "localhost:3000") {
-            this.URL = "http://localhost/coysa/public/api/";
-        }
-        if (host === "johnssther.github.io") {
-            this.URL = "http://coysa.herokuapp.com/api/";
-        }
-        if (host === "http://159.65.226.161:3000") {
-            this.URL = "http://localhost/coysa/public/api/";
-        }
-
+        this.URL = connection().URL;
         this.API_TOKEN = localStorage.getItem('token');
     }
-
+    
     getTotalExpensesMonths() {
         return fetch(`${this.URL}dashboard/totalexpensesmonths?api_token=${this.API_TOKEN}&user_id=${JSON.parse(localStorage.getItem('auth')).id}`)
             .then((response) => response.json())

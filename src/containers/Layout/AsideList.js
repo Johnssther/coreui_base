@@ -39,6 +39,7 @@ function AsideList(props) {
   const [route2, setRoute2] = React.useState('#212121');
   const [route3, setRoute3] = React.useState('#212121');
   const [path, setPath] = React.useState();
+  const [name, setName] = React.useState(localStorage.getItem('auth') === null ? '' : JSON.parse(localStorage.getItem('auth')).name);
 
   function bg() {
     if (props.location) {
@@ -131,10 +132,10 @@ function AsideList(props) {
         <ListSubheader component="div" id="nested-list-subheader" color="inherit" /* className="text-center" */>
           <ListItem alignItems="flex-start" button onClick={handleClickProfile}>
             <ListItemAvatar>
-              <Avatar alt={JSON.parse(localStorage.getItem('auth')).name} src="/static/images/avatar/2.jpg" />
+              <Avatar alt={name} src="/static/images/avatar/2.jpg" />
             </ListItemAvatar>
             <ListItemText
-              primary={JSON.parse(localStorage.getItem('auth')).name}
+              primary={name}
               secondary={
                 <React.Fragment>
                   <Typography

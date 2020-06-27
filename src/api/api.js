@@ -1,23 +1,10 @@
-/**
-*Peticiones api
-* @author John Alejandro || @Johnssther
-* @link http://JohnAlejandro.com
-* link Api
-* http://104.236.57.82/accesspark/public/api/login
-*/
 
 import { generalErrorApi } from '../utils/errors';
+import { connection } from './conection';
 
 class Api {
     constructor() {
-        let host = window.location.host
-        if (host === "localhost:3000") {
-            this.URL = "http://localhost/coysa/public/api/";
-        }
-        if (host === "johnssther.github.io") {
-            this.URL = "http://coysa.herokuapp.com/api/";
-        }
-
+        this.URL = connection().URL;
         this.API_TOKEN = localStorage.getItem('token');
     }
 
@@ -112,7 +99,7 @@ class Api {
     /* Expense */
     updateExpense(data) {
         console.log(data);
-        
+
         // B. Guardar los gastos
         return fetch(`${this.URL}gastos/${data.id}`, {
             method: 'PUT',

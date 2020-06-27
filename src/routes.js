@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Dashboard = React.lazy(() => import('./views/Dashboard'));
+// const Dashboard = React.lazy(() => import('./views/Dashboard'));
+const Dashboard = React.lazy(() => import('./views/Dashboard/Dashboard'));
 
 // ejemplo
 const Alerts = React.lazy(() => import('./views/Notifications/Alerts'));

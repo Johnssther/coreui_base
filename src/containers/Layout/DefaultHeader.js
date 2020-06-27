@@ -40,7 +40,7 @@ class DefaultHeader extends Component {
           minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
-        
+
         <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
             <NavLink to="/dashboard" className="nav-link" style={{ color: 'white' }} >Dashboard</NavLink>
@@ -50,20 +50,14 @@ class DefaultHeader extends Component {
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
-          <strong style={{ color: 'white' }}>{this.state.usuario_nombre}</strong>
-          <UncontrolledDropdown nav direction="down">
-            <DropdownToggle nav>
-              <img src={'assets/img/avatars/4.jpg'} className="img-avatar" alt="avatar" />
-            </DropdownToggle>
-            <DropdownMenu right>
-              <DropdownItem header tag="div" className="text-center"><strong>{this.state.usuario_nombre}</strong></DropdownItem>
-              <DropdownItem active={true} onClick={ e => this.props.onProfile(e) }><i className="fa fa-user"></i> Perfil</DropdownItem>
-              <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Cerrar sesión</DropdownItem>
-              <Dialog />
-            </DropdownMenu>
-          </UncontrolledDropdown>
+          <NavItem className="px-3">
+            <strong style={{ color: 'white' }}>{this.state.usuario_nombre}</strong>
+          </NavItem>
+          <NavItem className="px-3">
+            <AppAsideToggler className="d-md-down-none" style={{ background: 'white' }} />
+          </NavItem>
         </Nav>
-        <AppAsideToggler className="d-md-down-none" style={{ background: 'white' }} />
+        
         {/*<AppAsideToggler className="d-lg-none" mobile />*/}
       </React.Fragment>
     );

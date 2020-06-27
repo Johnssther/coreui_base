@@ -19,64 +19,52 @@ class Gbarras extends Component {
     super(props)
     this.state = {
       gastoTotal: '',
-
     }
   }
-  componentDidMount() {
-    
-  }
-
 
   render() {
-    const  mes  = this.props.mes;
-    console.log(mes,'a');
-    
+    const mes = this.props.mes;
+    console.log(mes, 'a');
+
     return (
       <>
-        <div className="animated fadeIn">
-          <CardColumns className="cols-2">
-            <Card>
-              <CardHeader>
-                Bar Chart
+        <Card>
+          <CardHeader>
+            Histograma del 2020
               <div className="card-header-actions">
-                  <a href="http://www.chartjs.org" className="card-header-action">
-                    <small className="text-muted">docs</small>
-                  </a>
-                </div>
-              </CardHeader>
-              <CardBody>
-                <div className="chart-wrapper">
-                  <Bar 
-                  data={
+            </div>
+          </CardHeader>
+          <CardBody>
+            <div className="chart-wrapper">
+              <Bar
+                data={
+                  {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    datasets: [
                       {
-                        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                        datasets: [
-                          {
-                            label: 'My First dataset',
-                            backgroundColor: 'rgba(17,168,141)',
-                            borderColor: 'rgba(255,99,132,1)',
-                            borderWidth: 1,
-                            hoverBackgroundColor: 'rgba(168,132,8,66)',
-                            hoverBorderColor: 'rgba(255,99,132,1)',
-                            data: mes.map((item)=>item.precio_total_mes),
-                          },
-                        ],
-                      }
-                  } 
-                  options={
-                      {
-                        tooltips: {
-                            enabled: false,
-                            custom: CustomTooltips
-                          },
-                          maintainAspectRatio: false
-                      }
-                  } />
-                </div>
-              </CardBody>
-            </Card>
-          </CardColumns>
-        </div>
+                        label: 'Gastos mensuales',
+                        backgroundColor: this.props.color,
+                        borderColor: 'rgba(255,99,132,1)',
+                        borderWidth: 1,
+                        hoverBackgroundColor: 'rgba(168,132,8,66)',
+                        hoverBorderColor: 'rgba(255,99,132,1)',
+                        data: mes.map((item) => item.precio_total_mes),
+                      },
+                    ],
+                  }
+                }
+                options={
+                  {
+                    tooltips: {
+                      enabled: false,
+                      custom: CustomTooltips
+                    },
+                    maintainAspectRatio: false
+                  }
+                } />
+            </div>
+          </CardBody>
+        </Card>
       </>
     );
   }

@@ -13,6 +13,7 @@ export const getExpensesType = async () => {
     } catch (e) {
         console.log('Ha ocurrido un error');
         console.log(e);
+        handleErrors(e)
     }
 }
 

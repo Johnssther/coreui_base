@@ -1,15 +1,9 @@
-import Api from '../api'
+
+import { connection } from '../conection';
 
 class ApiTypeExpense {
     constructor() {
-        let host = window.location.host
-        if (host === "localhost:3000") {
-            this.URL = "http://localhost/coysa/public/api/";
-        }
-        if (host === "johnssther.github.io") {
-            this.URL = "http://coysa.herokuapp.com/api/";
-        }
-
+        this.URL = connection().URL;
         this.API_TOKEN = localStorage.getItem('token');
     }
 

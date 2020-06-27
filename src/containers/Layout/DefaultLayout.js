@@ -94,7 +94,7 @@ class DefaultLayout extends Component {
           </main>
           <AppAside fixed>
             <Suspense fallback={this.loading()}>
-              <DefaultAside />
+              <DefaultAside {...this.props} router={router} />
             </Suspense>
           </AppAside>
         </div>

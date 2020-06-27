@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { AppSwitch } from '@coreui/react'
 import AsideList from './AsideList'
+import AsideListDerecha from './AsideListDerecha'
 import * as router from 'react-router-dom';
 
 //redux
@@ -57,7 +58,7 @@ class DefaultAside extends Component {
               <i className="icon-list"></i>
             </NavLink>
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
             <NavLink className={classNames({ active: this.state.activeTab === '2' })}
               onClick={() => {
                 this.toggle('2');
@@ -72,13 +73,13 @@ class DefaultAside extends Component {
               }}>
               <i className="icon-settings"></i>
             </NavLink>
-          </NavItem>
+          </NavItem> */}
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
 
           {/* Tab 1 */}
           <TabPane tabId="1">
-            <AsideList {...this.props} router={router} />
+            <AsideListDerecha {...this.props} router={router} />
           </TabPane>
 
           {/* Tab 2 */}
