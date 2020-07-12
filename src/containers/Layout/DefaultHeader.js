@@ -54,11 +54,11 @@ class DefaultHeader extends Component {
             <strong style={{ color: 'white' }}>{this.state.usuario_nombre}</strong>
           </NavItem>
           <NavItem className="px-3">
-            <AppAsideToggler className="d-md-down-none" style={{ background: 'white' }} />
+            <AppAsideToggler className="d-md-down-none" style={{ background: 'white' }} mobile/>
           </NavItem>
         </Nav>
         
-        {/*<AppAsideToggler className="d-lg-none" mobile />*/}
+        <AppAsideToggler className="d-lg-none" mobile />
       </React.Fragment>
     );
   }

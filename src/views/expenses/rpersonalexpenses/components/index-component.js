@@ -9,6 +9,8 @@ import Select from 'react-select'
 import { Calendar } from 'react-datepicker2';
 import moment from 'moment-jalaali'
 import { setExpensestype } from '../../../../redux/actions/expensestype';
+import styled from 'styled-components';
+
 
 // DataTables
 const rowTheme = {
@@ -27,6 +29,40 @@ const rowTheme = {
     separatorStyle: 'none',
   },
 };
+const TextField = styled.input`
+  height: 32px;
+  width: 200px;
+  border-radius: 3px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid #e5e5e5;
+  padding: 0 32px 0 16px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const ClearButton = styled(Button)`
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 34px;
+  width: 32px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const FilterComponent = ({ filterText, onFilter, onClear }) => (
+  <>
+    <TextField id="search" type="text" placeholder="Browser Expense" value={filterText} onChange={onFilter} />
+    <ClearButton type="button" onClick={onClear}>X</ClearButton>
+  </>
+);
 
 const columns = [
   {
@@ -98,6 +134,21 @@ function IndexComponent(props) {
   const [filterDate_out, setFilterDate_out] = React.useState(moment());
   const [expensetype, setExpensetype] = React.useState('');
   const [inputType, setInputType] = React.useState('');
+  const [filterText, setFilterText] = React.useState('');
+  const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
+
+  const filteredItems = expenses.filter(item => item.gasto && item.gasto.toLowerCase().includes(filterText.toLowerCase()));
+
+  const subHeaderComponentMemo = React.useMemo(() => {
+    const handleClear = () => {
+      if (filterText) {
+        setResetPaginationToggle(!resetPaginationToggle);
+        setFilterText('');
+      }
+    };
+
+    return <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />;
+  }, [filterText, resetPaginationToggle]);
 
   // Toggle Modal
   const Toggle = (value) => {
@@ -202,16 +253,18 @@ function IndexComponent(props) {
           <DataTable
             title={'Report Personal Expenses'}
             columns={columns}
-            data={expenses}
+            data={filteredItems}
             actions={<Button name="Add" onClick={onNew} ><i className="fa fa-plus m-1"></i>Add</Button>}
             highlightOnHover={true}
             pagination={true}
             customTheme={rowTheme}
             progressPending={loading}
-            progressComponent={<LinearIndeterminate data={expenses} />}
+            progressComponent={<LinearIndeterminate data={filteredItems} />}
             progressShowTableHead
             ignoreRowClick={true}
             theme="solarized"
+            subHeader
+            subHeaderComponent={subHeaderComponentMemo}
           />
         </CardBody>
       </Card >

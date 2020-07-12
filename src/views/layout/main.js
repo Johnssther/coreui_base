@@ -12,16 +12,16 @@ const Main = (props) => {
     const onDismiss = () => setVisible(false);
 
     return (
-        <Container>
-            {success.success === false ? null :
-                <Alert className="bg-danger" isOpen={visible} /* toggle={onDismiss} */>
+        <div>
+            {/* {success.success === false ? null :
+                <Alert className="bg-danger" isOpen={visible}>
                     <b>Error: {success.error}</b><br></br>
                     <b>{success.error === 'Error de conexion' ? 'Ocurrio un error inesperado al momento de intetar establecer conexión por favor recargue su navegador nuevamente.':''}  </b><br></br>
                 </Alert>
-            }
-            <Errors text={success} />
+            } */}
+            {/* <Errors text={success} /> */}
             {children}
-        </Container>
+        </div>
     );
 };
 

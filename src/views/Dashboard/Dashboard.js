@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 // Main Chart
 import ApiDashboard from '../../api/dashboard';
 import Carrucelinfinite from '../components/carrucelinfinite';
+import Main from '../layout/main'
+
 import {
   Card, CardBody,
   CardHeader, CardColumns
@@ -92,7 +94,7 @@ class Dashboard extends Component {
       );
     }
     return (
-      <>
+      <Main success={false}>
 
         <div className="row mb-2">
           <div className="offset-sm-3 col-sm-6">
@@ -159,10 +161,7 @@ class Dashboard extends Component {
         </CardColumns>
 
         <Datos />
-        {/* {this.state.mes.length > 0 ? <Carrucelinfinite data={this.state.mes} color={this.state.color} /> : null} */}
-
-
-      </>
+      </Main>
     );
   }
 
