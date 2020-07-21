@@ -28,8 +28,8 @@ class Gbarras extends Component {
 
     return (
       <>
-        <Card>
-          <CardHeader>
+        <Card style={{ borderRadius:'10px' }}>
+          <CardHeader style={{ borderRadius:'10px 10px 0px 0px' }}>
             Histograma del 2020
               <div className="card-header-actions">
             </div>

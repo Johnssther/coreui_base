@@ -18,6 +18,7 @@ import { connect } from 'react-redux'
 import Select from 'react-select'
 
 import { getExpensesType } from '../../services/expenses/expensestype'
+import { indexRevenue, storeRevenue, showRevenue ,updateRevenue, deleteRevenue } from '../../services/revenues/revenues'
 
 class Dashboard extends Component {
   constructor(props) {
@@ -35,6 +36,33 @@ class Dashboard extends Component {
     this.getExpensesMonths()
     this.getExpensesMonth()
     await getExpensesType();
+
+    // --------------------------------------------------------------------------
+    //Ingresos api <prueba>
+    //index
+    await indexRevenue();
+    //store
+    await storeRevenue({
+      revenue_dt: '2020-07-20 23:05:19',
+      revenue_name: 'Ingreso desde el dasboard',
+      revenue_amount: 1200000,
+      revenue_description: 'Envio este ingreso desde la aplicacion de react',
+      revenue_saving_percentaje: 5,
+    });
+    //update
+    await updateRevenue({
+      id:1,
+      revenue_dt: '2020-07-20 23:05:19',
+      revenue_name: 'Ingreso EDITADO',
+      revenue_amount: 1200000,
+      revenue_description: 'descripcion -- -- EDITAD--A',
+      revenue_saving_percentaje: 5,
+    });
+    //show
+    await showRevenue(8)
+    //destroy
+    await deleteRevenue(13)
+    // --------------------------------------------------------------------------
 
     const expensestype = await this.props.expensestypes.map((item) => {
       return { value: item.id, label: item.gasto }
@@ -57,7 +85,7 @@ class Dashboard extends Component {
       })
       .catch(e => {
         console.log(e)
-         this.setState({
+        this.setState({
           loading: false
         });
       })
@@ -73,7 +101,7 @@ class Dashboard extends Component {
       })
       .catch(e => {
         console.log(e)
-         this.setState({
+        this.setState({
           loading: false
         });
       })
@@ -105,62 +133,26 @@ class Dashboard extends Component {
             />
           </div>
         </div>
-
-
-        <CardColumns className="cols-2">
-          <Gbarras mes={this.state.mes} color={this.state.color} />
-          <Card>
-            <CardHeader>
-              Mis datos de este mes
-          </CardHeader>
-            <CardBody>
-              <div className="row">
-                <div className="col">
-                  <Card onClick={() => this.setState({ color: 'green' })}>
-                    <CardHeader style={{ background: '#4caf50' }} className="bg-success text-white">
-                      Ingresos
-                </CardHeader>
-                    <CardBody>
-                      <h3>
-                        {'$0.00'}
-                      </h3>
-                    </CardBody>
-                  </Card>
+        <div className="row mb-2">
+          <div className="offset-sm-3 col-sm-6">
+            <Card style={{ borderRadius: '10px' }}>
+              <CardBody>
+                <div className="row">
+                  <div className="col">
+                    <h6>Mis Gastos</h6>
+                    <h3>{'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}</h3>
+                  </div>
                 </div>
-              </div>
-              <div className="row">
-                <div className="col">
-                  <Card onClick={() => this.setState({ color: 'red' })}>
-                    <CardHeader style={{ background: '#f50057' }} className="text-white">
-                      Gastos
-                </CardHeader>
-                    <CardBody>
-                      <h3>
-                        {'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}
-                      </h3>
-                    </CardBody>
-                  </Card>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col">
-                  <Card onClick={() => this.setState({ color: 'orange' })}>
-                    <CardHeader style={{ background: 'orange' }} className="text-white">
-                      Ahorro
-                </CardHeader>
-                    <CardBody>
-                      <h3>
-                        {'$0.00'}
-                      </h3>
-                    </CardBody>
-                  </Card>
-                </div>
-              </div>
-            </CardBody>
-          </Card>
-        </CardColumns>
-
-        <Datos />
+              </CardBody>
+            </Card>
+          </div>
+        </div>
+        <div className="row mb-2">
+          <div className="offset-sm-3 col-sm-6">
+            <Gbarras mes={this.state.mes} color={this.state.color} />
+          </div>
+        </div>
+        {/* <Datos /> */}
       </Main>
     );
   }

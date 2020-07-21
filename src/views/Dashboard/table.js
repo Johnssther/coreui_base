@@ -39,7 +39,7 @@ class Datos extends Component {
                     <CardBody>
                         <Table responsive striped>
                             <thead>
-                                <tr className="bg-success">
+                                <tr style={{ background:'#FFA73D', color:'white' }}>
                                     <th>2020</th>
                                     <th>Enero</th>
                                     <th>Febrero</th>

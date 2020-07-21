@@ -20,6 +20,7 @@ class DefaultHeader extends Component {
     this.state = {
       usuario: JSON.parse(localStorage.getItem('auth')),
       usuario_nombre: '',
+      color:'white',
     }
 
   }
@@ -43,15 +44,15 @@ class DefaultHeader extends Component {
 
         <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
-            <NavLink to="/dashboard" className="nav-link" style={{ color: 'white' }} >Dashboard</NavLink>
+            <NavLink to="/dashboard" className="nav-link" style={{ color: this.state.color }} >Dashboard</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink to="/expenses/moduls/personalexpenses/create" className="nav-link" style={{ color: 'white' }}>Register Expenses</NavLink>
+            <NavLink to="/expenses/moduls/personalexpenses/create" className="nav-link" style={{ color: this.state.color }}>Register Expenses</NavLink>
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
           <NavItem className="px-3">
-            <strong style={{ color: 'white' }}>{this.state.usuario_nombre}</strong>
+            <strong style={{ color: this.state.color }}>{this.state.usuario_nombre}</strong>
           </NavItem>
           <NavItem className="px-3">
             <AppAsideToggler className="d-md-down-none" style={{ background: 'white' }} mobile/>

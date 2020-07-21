@@ -97,7 +97,8 @@ class Login extends Component {
                         <Col xs="6" className="text-right">
                           <Link to="/register">
                             Crear una cuenta.
-                          </Link>
+                          </Link><br></br>
+                          <a href="http://coysa.herokuapp.com/password/reset" target="blank">Olvidé mi contraseña</a>
                           {/* <Button color="link" className="px-0">Olvide mi contraceña</Button> */}
                         </Col>
                       </Row>
@@ -105,7 +106,7 @@ class Login extends Component {
                     </Form>
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-warning py-5 d-md-down-none" style={{ width: '44%' }}>
+                <Card className="text-white py-5 d-md-down-none" style={{ background:'#FFA73D' ,width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
                       <h2>Crea tu cuenta</h2>

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Button, Card, CardBody, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row,
+  Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row,
 
 } from 'reactstrap';
+import { Link, Redirect } from 'react-router-dom';
 import API from '../../../api/api'
 
 class Register extends Component {
@@ -108,6 +109,9 @@ class Register extends Component {
                 <CardBody className="p-4">
                   <Form>
                     <h1>Registrate</h1>
+                    <Link to="/login">
+                      Regresar al Login.
+                    </Link><br></br>
                     <p className="text-muted"></p>Crea tu cuenta
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -148,7 +152,7 @@ class Register extends Component {
                       </InputGroupAddon>
                       <Input type="password" placeholder="Repita tu  contraseña" autoComplete="new-password" name='password_confirmation' onChange={this.validateForm} />
                     </InputGroup>
-                    <Button color="primary" block onClick={this.registerUser}>Registrarme</Button>
+                    <Button style={{ background:'#FFA73D' }} block onClick={this.registerUser}>Registrarme</Button>
                     <p>{ this.state.errors_example }</p>
                   </Form>
                 </CardBody>
