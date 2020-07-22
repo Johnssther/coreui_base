@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 // Main Chart
 import ApiDashboard from '../../api/dashboard';
 import Carrucelinfinite from '../components/carrucelinfinite';
+import { Link } from 'react-router-dom';
 import Main from '../layout/main'
 
 import {
   Card, CardBody,
-  CardHeader, CardColumns
+  Alert,
 } from 'reactstrap';
 
 import Loading from '../components/loading'
@@ -18,7 +19,7 @@ import { connect } from 'react-redux'
 import Select from 'react-select'
 
 import { getExpensesType } from '../../services/expenses/expensestype'
-import { indexRevenue, storeRevenue, showRevenue ,updateRevenue, deleteRevenue } from '../../services/revenues/revenues'
+import { indexRevenue, storeRevenue, showRevenue, updateRevenue, deleteRevenue } from '../../services/revenues/revenues'
 
 class Dashboard extends Component {
   constructor(props) {
@@ -36,34 +37,7 @@ class Dashboard extends Component {
     this.getExpensesMonths()
     this.getExpensesMonth()
     await getExpensesType();
-
-    // --------------------------------------------------------------------------
-    //Ingresos api <prueba>
-    //index
-    await indexRevenue();
-    //store
-    await storeRevenue({
-      revenue_dt: '2020-07-20 23:05:19',
-      revenue_name: 'Ingreso desde el dasboard',
-      revenue_amount: 1200000,
-      revenue_description: 'Envio este ingreso desde la aplicacion de react',
-      revenue_saving_percentaje: 5,
-    });
-    //update
-    await updateRevenue({
-      id:1,
-      revenue_dt: '2020-07-20 23:05:19',
-      revenue_name: 'Ingreso EDITADO',
-      revenue_amount: 1200000,
-      revenue_description: 'descripcion -- -- EDITAD--A',
-      revenue_saving_percentaje: 5,
-    });
-    //show
-    await showRevenue(8)
-    //destroy
-    await deleteRevenue(13)
-    // --------------------------------------------------------------------------
-
+   
     const expensestype = await this.props.expensestypes.map((item) => {
       return { value: item.id, label: item.gasto }
     })
@@ -126,6 +100,14 @@ class Dashboard extends Component {
 
         <div className="row mb-2">
           <div className="offset-sm-3 col-sm-6">
+            <Alert color="success">
+              Novedades:  <br></br>
+              -Ahora puedes registrar tus ingresos y verlos en el modulo de ingresos que hemos creado para tí. <br></br>
+              -Una vista mas limpia y minimalista. <br></br>
+              -Aun continuamos mejorando. <br></br>
+              <Link title="Ir al modulo de ingresos" className="btn btn-warning" to={`/revenues`}>Explorar</Link>
+
+            </Alert>
             <Select
               className="is-invalid"
               options={this.state.expensestype}

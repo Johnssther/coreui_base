@@ -7,7 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { DashboardRounded, TrendingDownRounded, MergeTypeRounded } from '@material-ui/icons';
+import { AssignmentReturnRounded, AssignmentReturnedRounded ,DashboardRounded, TrendingDownRounded, TrendingUpRounded, MergeTypeRounded } from '@material-ui/icons';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import DescriptionRounded from '@material-ui/icons/DescriptionRounded';
@@ -116,8 +116,8 @@ function AsideList(props) {
     setOpen(false);
     setOpenrevenues(!openrevenues)
   };
-  const handleClickRevenuesReg = () => {
-    //props.history.push('/expenses/moduls/personalexpenses')
+  const handleClickRevenuesReg = async () => {
+    await props.history.push('/revenues');
   };
   const handleClickReportRevenues = () => {
     //props.history.push('/expenses/reports/rpersonalexpenses')
@@ -164,7 +164,7 @@ function AsideList(props) {
 
       <ListItem dense={true} button onClick={handleClickExpenses}>
         <ListItemIcon>
-          <InboxIcon style={{ color: blue[50] }} />
+          <AssignmentReturnRounded style={{ color: blue[50] }} />
         </ListItemIcon>
         <ListItemText primary="Expenses" />
         {open ? <ExpandLess /> : <ExpandMore />}
@@ -199,8 +199,8 @@ function AsideList(props) {
 
       <ListItem dense={true} button onClick={handleClickRevenues}>
         <ListItemIcon style={{ color: blue[50] }}>
-          <InboxIcon style={{ color: blue[50] }} />
-          Beta
+          <AssignmentReturnedRounded style={{ color: blue[50] }} />
+          {/* Beta */}
         </ListItemIcon>
         <ListItemText primary="Revenues" />
         {openrevenues ? <ExpandLess /> : <ExpandMore />}
@@ -211,17 +211,17 @@ function AsideList(props) {
 
           <ListItem style={{ background: '#212121' }} dense={true} button onClick={handleClickRevenuesReg} className={classes.nested} autoFocus={true}>
             <ListItemIcon>
-              <TrendingDownRounded style={{ color: blue[50] }} />
+              <TrendingUpRounded style={{ color: blue[50] }} />
             </ListItemIcon>
             <ListItemText primary="My Revenues" />
           </ListItem>
 
-          <ListItem style={{ background: '#212121' }} dense={true} button onClick={handleClickReportRevenues} className={classes.nested}>
+       {/*    <ListItem style={{ background: '#212121' }} dense={true} button onClick={handleClickReportRevenues} className={classes.nested}>
             <ListItemIcon>
-              <MergeTypeRounded style={{ color: blue[50] }} />
+              <DescriptionRounded style={{ color: blue[50] }} />
             </ListItemIcon>
             <ListItemText primary="R. Revenues" />
-          </ListItem>
+          </ListItem> */}
 
         </List>
       </Collapse>

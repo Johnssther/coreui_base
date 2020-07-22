@@ -15,52 +15,46 @@ import * as Yup from 'yup';
 
 import InputField from '../../../components/form/inputField';
 import InputCalendar from '../../../components/form/inputCalendar'
-import InputSelect from '../../../components/form/inputSelect'
 
 //services
 import { getExpenses } from '../../../../services/expenses/personalexpenses'
 
 getExpenses();
 
-const LoginComponent = (props) => {
-    const { count, onCreate, expensestype, success, expense } = props;
-    console.log(expensestype, 'ju');
+const MainComponent = (props) => {
+    const { count, onCreate, success, revenue } = props;
 
     return (
         <Main success={success}>
             <Card>
-                <CardHeader className="bg-danger">
-                    Ingresar Gasto {count-1}
+                <CardHeader className="bg-success">
+                    Registrar Ingreso {count - 1}
                 </CardHeader>
                 <CardBody>
                     <Formik
                         initialValues={{
-                            gasto: expense.gasto,
-                            cantidad: expense.cantidad,
-                            precio_unidad: expense.precio_unidad,
-                            precio_total: expense.precio_total,
-                            fecha: expense.fecha,//moment().format('YYYY/M/D  HH:mm:ss'),
-                            tipogasto_id: expense.tipogasto_id,
-                            id: expense.id,
+                            revenue_name: revenue.revenue_name,
+                            revenue_description: revenue.revenue_description,
+                            revenue_amount: revenue.revenue_amount,
+                            revenue_dt: revenue.revenue_dt,//moment().format('YYYY/M/D  HH:mm:ss'),
+                            revenue_saving_percentaje: 1,
                             numeroregistros: 1,
                         }}
                         validationSchema={Yup.object({
-                            gasto: Yup.string()
-                                .min(3, 'Un gasto debe tener minimo 3 caracteres.')
-                                .required('El gasto es obligatorio'),
-                            cantidad: Yup.number()
-                                .max(99999, 'La cantidad no puede exceder de 99.999')
-                                .positive('La cantidad no puede ser negativa.')
+                            revenue_name: Yup.string()
+                                .required('El ingreso es obligatorio'),
+                            revenue_description: Yup.string()
+                                .min(3, 'Agrega una descripcion')
+                                .required('El ingreso es obligatorio'),
+                            revenue_amount: Yup.number()
+                                .positive('Ingreso de dinero.')
                                 .required('La cantiad es obligatoria'),
-                            precio_unidad: Yup.number()
-                                .positive('El precio de la unidad no puede ser negativo.')
-                                .required('La cantiad es obligatoria'),
-                            precio_total: Yup.number()
-                                .positive('La cantidad no puede ser negativa.'),
-                            fecha: Yup.date()
+                            revenue_dt: Yup.date()
                                 .required('La fecha es obligatoria'),
-                            tipogasto_id: Yup.string()
-                                .required('Debe seleccionar un tipo de gasto'),
+                            revenue_saving_percentaje: Yup.number()
+                                .max(99999, 'La ahorro no puede exceder de 99.999')
+                                .positive('La ahorro no puede ser negativa.')
+                                .required('La cantiad es obligatoria'),
                             numeroregistros: Yup.number()
                                 .max(99999, 'La cantidad no puede exceder de 99.999')
                                 .positive('La cantidad no puede ser negativa.')
@@ -86,28 +80,23 @@ const LoginComponent = (props) => {
                             </Row>
                             <Row>
                                 <Col sm="6">
-                                    <InputCalendar name="fecha" type="text" label="Fecha" placeholder="Ingrese la fecha del gasto." />
-                                </Col>
-                                <Col sm="6">
-                                    <FormGroup>
-                                        <InputSelect type="input" label="Tipo Gasto" name="tipogasto_id" expensestype={expensestype} />
-                                    </FormGroup>
+                                    <InputCalendar name="revenue_dt" type="text" label="Fecha" placeholder="Ingrese la fecha del ingreso." />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col sm="3">
-                                    <InputField name="cantidad" type="text" label="Cantidad" placeholder="Ingrese una cantidad." />
+                                    <InputField name="revenue_saving_percentaje" type="text" label="Porcentaje de ahorro" placeholder="Ingrese un porcentaje de ahorro." />
                                 </Col>
-                                <Col sm="9">
-                                    <InputField name="gasto" type="text" label="Gasto" placeholder="Ingrese un gasto." />
+                                <Col sm="4">
+                                    <InputField name="revenue_name" type="text" label="Nombre del ingreso" placeholder="Nombre del ingreso." />
+                                </Col>
+                                <Col sm="4">
+                                    <InputField name="revenue_description" type="text" label="Descripción del ingreso" placeholder="Ingrese una descripción." />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col sm="6">
-                                    <InputField name="precio_unidad" type="text" label="Precio unid." placeholder="Ingrese el precio por unidad." />
-                                </Col>
-                                <Col sm="6">
-                                    <InputField name="precio_total" type="text" label="Precio total" placeholder="Ingrese el precio total (opcional)." />
+                                    <InputField name="revenue_amount" type="text" label="Monto del ingreso" placeholder="Ingrese el monto del ingreso." />
                                 </Col>
                             </Row>
                             <hr></hr>
@@ -125,4 +114,4 @@ const LoginComponent = (props) => {
     );
 };
 
-export default LoginComponent
+export default MainComponent

@@ -10,8 +10,7 @@ import { store } from '../../store';
 export const indexRevenue = async () => {
     try {
         const revenues = await ApiRevenue.index();
-        console.log(revenues, '---revenues---');
-        //store.dispatch(actions.personalexpenses.setPersonalexpenses(expenses))
+        store.dispatch(actions.revenues.setRevenueIndex(revenues))
         return true;
     } catch (e) {
         handleErrors(e)
