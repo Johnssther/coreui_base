@@ -19,7 +19,11 @@ import { connect } from 'react-redux'
 import Select from 'react-select'
 
 import { getExpensesType } from '../../services/expenses/expensestype'
-import { indexRevenue, storeRevenue, showRevenue, updateRevenue, deleteRevenue } from '../../services/revenues/revenues'
+
+//traslate
+import dasboard_es from '../../traslate/es/dashboard'
+import dasboard_en from '../../traslate/en/dashboard'
+import dasboard_fr from '../../traslate/fr/dashboard'
 
 class Dashboard extends Component {
   constructor(props) {
@@ -31,13 +35,15 @@ class Dashboard extends Component {
       expensestype: [],
       valueSelectExpensestype: '',
       color: '#F55457',
+      languaje: dasboard_es,
+      btn_color: false,
     }
   }
   async componentDidMount() {
     this.getExpensesMonths()
     this.getExpensesMonth()
     await getExpensesType();
-   
+
     const expensestype = await this.props.expensestypes.map((item) => {
       return { value: item.id, label: item.gasto }
     })
@@ -86,10 +92,8 @@ class Dashboard extends Component {
     this.getExpensesMonth(this.state.valueSelectExpensestype)
   }
 
-
-
   render() {
-
+    const { languaje, btn_color } = this.state
     if (this.state.loading) {
       return (
         <Loading loading={this.state.loading}></Loading>
@@ -100,19 +104,27 @@ class Dashboard extends Component {
 
         <div className="row mb-2">
           <div className="offset-sm-3 col-sm-6">
+            <Alert color="primary">
+            {languaje.coming_soon}<br></br>
+            {languaje.coming_soon_item1}<br></br>
+            </Alert>
             <Alert color="success">
-              Novedades:  <br></br>
-              -Ahora puedes registrar tus ingresos y verlos en el modulo de ingresos que hemos creado para tí. <br></br>
-              -Una vista mas limpia y minimalista. <br></br>
-              -Aun continuamos mejorando. <br></br>
-              <Link title="Ir al modulo de ingresos" className="btn btn-warning" to={`/revenues`}>Explorar</Link>
-
+              {languaje.news}<br></br>
+              {languaje.news_item1}<br></br>
+              {languaje.news_item2}<br></br>
+              {languaje.news_item3}<br></br>
+            <Link title="Ir al modulo de ingresos" className="btn btn-warning" to={`/revenues`}>{languaje.to_explore}</Link>
             </Alert>
             <Select
               className="is-invalid"
               options={this.state.expensestype}
               onChange={(newValue) => { this.onChangeSelect(newValue.value) }}
             />
+          </div>
+          <div className=" col-sm-3">
+            <button className={`btn btn-sm btn-${btn_color?'warning':'warning'} m-1`} onClick={()=>{ this.setState({ languaje: dasboard_es, btn_color:!btn_color }) }}>{languaje.btn_es}</button>
+            <button className={`btn btn-sm btn-${btn_color?'warning':'warning'} m-1`} onClick={()=>{ this.setState({ languaje: dasboard_en, btn_color:!btn_color }) }}>{languaje.btn_en}</button>
+            <button className={`btn btn-sm btn-${btn_color?'warning':'warning'} m-1`} onClick={()=>{ this.setState({ languaje: dasboard_fr, btn_color:!btn_color }) }}>{languaje.btn_fr}</button>
           </div>
         </div>
         <div className="row mb-2">
@@ -121,7 +133,7 @@ class Dashboard extends Component {
               <CardBody>
                 <div className="row">
                   <div className="col">
-                    <h6>Mis Gastos</h6>
+                    <h6>{languaje.my_expenses}</h6>
                     <h3>{'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}</h3>
                   </div>
                 </div>

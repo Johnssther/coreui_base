@@ -119,6 +119,9 @@ function AsideList(props) {
   const handleClickRevenuesReg = async () => {
     await props.history.push('/revenues');
   };
+  const handleClickBudgetsReg = async () => {
+    await props.history.push('/budget');
+  };
   const handleClickReportRevenues = () => {
     //props.history.push('/expenses/reports/rpersonalexpenses')
   };
@@ -214,6 +217,13 @@ function AsideList(props) {
               <TrendingUpRounded style={{ color: blue[50] }} />
             </ListItemIcon>
             <ListItemText primary="My Revenues" />
+          </ListItem>
+
+          <ListItem style={{ background: '#212121' }} dense={true} button onClick={handleClickBudgetsReg} className={classes.nested} autoFocus={true}>
+            <ListItemIcon>
+              <TrendingUpRounded style={{ color: blue[50] }} />
+            </ListItemIcon>
+            <ListItemText primary="My Budget" />
           </ListItem>
 
        {/*    <ListItem style={{ background: '#212121' }} dense={true} button onClick={handleClickReportRevenues} className={classes.nested}>

@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AsideList(props) {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
 
   const handleClickProfile = () => {
     props.history.push('/profile')
@@ -40,6 +41,9 @@ function AsideList(props) {
   const handleClickLogout = () => {
     props.history.push('/login')
     localStorage.clear()
+  };
+  const handleClickLanguaje = () => {
+    setOpen(!open);
   };
 
   return (
@@ -80,6 +84,42 @@ function AsideList(props) {
         </ListItemIcon>
         <ListItemText primary="Cerrar Sesión" />
       </ListItem>
+
+
+      <ListItem dense={true} button onClick={handleClickLanguaje}>
+        <ListItemIcon>
+          <DashboardRounded style={{ color: blue[50] }} />
+        </ListItemIcon>
+        <ListItemText primary="Language" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+
+          <ListItem dense={true} button onClick={()=>{}} className={classes.nested} autoFocus={true}>
+            <ListItemIcon>
+              <TrendingDownRounded style={{ color: blue[50] }} />
+            </ListItemIcon>
+            <ListItemText primary="English" />
+          </ListItem>
+
+          <ListItem dense={true} button onClick={()=>{}} className={classes.nested} >
+            <ListItemIcon>
+              <MergeTypeRounded style={{ color: blue[50] }} />
+            </ListItemIcon>
+            <ListItemText primary="Spanish" />
+          </ListItem>
+
+          <ListItem dense={true} button onClick={()=>{}} className={classes.nested} >
+            <ListItemIcon>
+              <DescriptionRounded style={{ color: blue[50] }} />
+            </ListItemIcon>
+            <ListItemText primary="French" style={{ fontSize: '8px' }} />
+          </ListItem>
+
+        </List>
+      </Collapse>
     </List>
   );
 }

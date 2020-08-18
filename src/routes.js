@@ -34,6 +34,11 @@ const ReportExpensesIndex = React.lazy(() => import('./views/expenses/rpersonale
 //------------------------------------------
 const RevenuesIndex = React.lazy(() => import('./views/revenues/revenues/containers/index'));
 const RevenuesCreate = React.lazy(() => import('./views/revenues/revenues/containers/create'));
+//------------------------------------------
+//    Budgets
+//------------------------------------------
+const BudgetIndex = React.lazy(() => import('./views/budget/budget/containers/index'));
+const BudgetCreate = React.lazy(() => import('./views/budget/budget/containers/create'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -68,6 +73,12 @@ const routes = [
   //------------------------------------------
   { exact: true, path: '/revenues', name: 'Revenues', component: RevenuesIndex },
   { exact: true, path: '/revenues/create', name: 'RevenuesCreate', component: RevenuesCreate },
+
+  //------------------------------------------
+  //    Routes Budget
+  //------------------------------------------
+  { exact: true, path: '/budget', name: 'Budget', component: BudgetIndex },
+  { exact: true, path: '/budget/create', name: 'BudgetCreate', component: BudgetCreate },
 ];
 
 export default routes;

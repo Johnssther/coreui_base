@@ -10,6 +10,15 @@
 // Import Main styles for this application
 @import './scss/style.scss';
 
+//animacion
+.anim-appear {
+    opacity: 0.01;
+  }
+   
+  .anim-appear.anim-appear-active{
+    opacity: 2;
+    transition: opacity 1s ease-in;
+  }
 // overide styles sidebarmenu
 
 .metismenu {
