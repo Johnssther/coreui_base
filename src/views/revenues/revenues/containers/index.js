@@ -5,7 +5,7 @@ import IndexComponent from '../components/index-component'
 import { connect } from 'react-redux'
 
 //services
-import { indexRevenue } from '../../../../services/revenues/revenues'
+import { serviceIndexRevenues } from '../../../../services/revenues/revenues'
 
 function Index(props) {
   const { revenues } = props;
@@ -14,7 +14,7 @@ function Index(props) {
 
   useEffect(() => {
     async function anyNameFunction() {
-      let loading = await indexRevenue();
+      let loading = await serviceIndexRevenues();
       setLoading(!loading);
 
     }

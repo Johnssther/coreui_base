@@ -1,18 +1,14 @@
-//Llamadas al api
-import API from '../../api/typeexpense/api';
-import { handleErrors } from '../../utils/errors';
+import { getExpensesTyped, saveExpenseType } from '../../api/typeexpense/typeexpense';
 
-//redux
+import { handleErrors } from '../../utils/errors';
 import { actions } from '../../redux/actions/index';
 import { store } from '../../store';
 
 export const getExpensesType = async () => {
     try {
-        const expensestypes = await API.getExpensesType();
+        let expensestypes = await getExpensesTyped();
         store.dispatch(actions.expensestype.setExpensestype(expensestypes))
     } catch (e) {
-        console.log('Ha ocurrido un error');
-        console.log(e);
         handleErrors(e)
     }
 }
@@ -20,7 +16,7 @@ export const getExpensesType = async () => {
 //store
 export const createExpenseType = async (data) => {
     try {
-        const createExpense = await API.saveExpenseType(data);
+        const createExpense = await saveExpenseType(data);
         console.log(createExpense);
     } catch (e) {
         handleErrors(e)

@@ -48,7 +48,7 @@ function AsideList(props) {
       if (pathname === '/expenses/moduls/personalexpenses') {
         setOpen(true);
         setOpenrevenues(false);
-        setRoute1('orange');
+        setRoute1('green');
         setRoute2('#212121');
         setRoute3('#212121');
       }
@@ -56,7 +56,7 @@ function AsideList(props) {
         setOpen(true);
         setOpenrevenues(false);
         setRoute1('#212121');
-        setRoute2('orange');
+        setRoute2('green');
         setRoute3('#212121');
       }
       if (pathname === '/expenses/reports/rpersonalexpenses') {
@@ -64,7 +64,7 @@ function AsideList(props) {
         setOpenrevenues(false);
         setRoute1('#212121');
         setRoute2('#212121');
-        setRoute3('orange');
+        setRoute3('green');
       }
     }
   }
@@ -95,21 +95,21 @@ function AsideList(props) {
   };
   const handleClickExpensesReg = async () => {
     await props.history.push('/expenses/moduls/personalexpenses');
-    setRoute1('orange');
+    setRoute1('green');
     setRoute2('#212121');
     setRoute3('#212121');
   };
   const handleClickTypeExpenses = async () => {
     await props.history.push('/expenses/references/expensestype');
     setRoute1('#212121');
-    setRoute2('orange');
+    setRoute2('green');
     setRoute3('#212121');
   };
   const handleClickReportExpenses = async () => {
     await props.history.push('/expenses/reports/rpersonalexpenses');
     setRoute1('#212121');
     setRoute2('#212121');
-    setRoute3('orange');
+    setRoute3('green');
   };
 
   const handleClickRevenues = () => {

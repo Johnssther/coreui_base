@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-import API from '../../../api/api'
+import { onLogin } from '../../../api/login';
+
 import { LinearProgress } from '@material-ui/core';
 
 class Login extends Component {
@@ -18,32 +19,26 @@ class Login extends Component {
     this.onLogin = this.onLogin.bind(this);
   }
 
-  onLogin() {
+  async onLogin() {
     this.setState({ loading: true, errorLogin: false })
-    return new Promise((resolve, reject) => {
-      API.onLogin(this.state.inputUsername, this.state.inputPassword)
-        .then((data) => {
-          //Valida si existe un username valido
-          if (data.username) {
-            localStorage.setItem('auth', JSON.stringify(data));
-            localStorage.setItem('token', data.api_token);
-            // localStorage.clear()
-            this.props.history.push('/')
+    try {
+      const data = await onLogin(this.state.inputUsername, this.state.inputPassword);
+      if (data.username) {
+        localStorage.setItem('auth', JSON.stringify(data));
+        localStorage.setItem('token', data.api_token);
+        this.props.history.push('/')
+      }
 
-          }
-          if (data.message !== "The given data was invalid.") {
+      if (data.message === "The given data was invalid.") {
+        this.setState({ errorLogin: true, loading: false })
+      }
 
-            //Valida si el usuario esta o no bloqueado.
+    } catch (err) {
+      this.setState({ loading: false })
+      console.log(err);
+    }
 
-          } else {
-            this.setState({ errorLogin: true, loading: false })
-          }
-          resolve(data);
-        }, (error) => {
-          this.setState({ loading: false })
-          reject(error);
-        });
-    });
+  
   }
 
   render() {

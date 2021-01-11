@@ -1,15 +1,16 @@
-//Llamadas al api
 import ApiRevenue from '../../api/revenues/revenues';
-import { handleErrors, generalErrorApi } from '../../utils/errors';
+import { indexRevenues, storeRevenue, updateRevenue, showRevenue, destroyRevenue } from '../../api/revenues/revenues';
 
-//redux
+import { handleErrors, generalErrorApi } from '../../utils/errors';
 import { actions } from '../../redux/actions/index';
 import { store } from '../../store';
 
-//index
-export const indexRevenue = async () => {
+/**
+ * index
+ */
+export const serviceIndexRevenues = async () => {
     try {
-        const revenues = await ApiRevenue.index();
+        const revenues = await indexRevenues();
         store.dispatch(actions.revenues.setRevenueIndex(revenues))
         return true;
     } catch (e) {
@@ -17,10 +18,12 @@ export const indexRevenue = async () => {
     }
 }
 
-//store
-export const storeRevenue = async (data) => {
+/**
+ * store
+ */
+export const serviceStoreRevenue = async (data) => {
     try {
-        const response = await ApiRevenue.store(data);
+        const response = await storeRevenue(data);
         
         if(response.success === false) {
             generalErrorApi(response)
@@ -31,10 +34,13 @@ export const storeRevenue = async (data) => {
         handleErrors(e)
     }
 }
-//update
-export const updateRevenue = async (data) => {
+
+/**
+ * update
+ */
+export const serviceUpdateRevenue = async (data) => {
     try {
-        const response = await ApiRevenue.update(data);
+        const response = await updateRevenue(data);
         
         if(response.success === false) {
             generalErrorApi(response)
@@ -47,9 +53,9 @@ export const updateRevenue = async (data) => {
 }
 
 //show
-export const showRevenue = async (data) => {
+export const serviceShowRevenue = async (data) => {
     try {
-        const response = await ApiRevenue.show(data);
+        const response = await showRevenue(data);
         console.log('show: ', response);
         // await store.dispatch(actions.personalexpenses.setPersonalexpense(showExpense))
         return true
@@ -59,9 +65,9 @@ export const showRevenue = async (data) => {
 }
 
 //delete
-export const deleteRevenue = async (data) => {
+export const serviceDeleteRevenue = async (data) => {
     try {
-        const response = await ApiRevenue.delete(data);
+        const response = await destroyRevenue(data);
         console.log(response);
         return true
     } catch (e) {

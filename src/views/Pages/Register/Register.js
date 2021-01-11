@@ -4,7 +4,7 @@ import {
 
 } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
-import API from '../../../api/api'
+import { registerUser } from '../../../api/registerUser';
 
 class Register extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class Register extends Component {
         break;
     }
   }
-  registerUser() {
+  async registerUser() {
 
     let data = {
       name: this.state.name,
@@ -92,7 +92,7 @@ class Register extends Component {
     }
     if (validForm(data) === true) {
       this.setState({ errors_example: 'Campos validos, puede continuar'});
-      API.registerUser(data)
+      await registerUser(data)  
       this.props.history.push('/login')
     }
 

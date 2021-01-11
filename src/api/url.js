@@ -2,14 +2,12 @@
 /**
 *Peticiones api
 * @author John Alejandro || @Johnssther
-* @link http://johnAlejandro.com
+* @link http://johnalejandro.com
 * link Api
 * http://coysa.herokuapp.com/api/
 */
 
-
 export const connection = () => {
-
     const host = window.location.host
     let URL = null;
     const API_TOKEN = localStorage.getItem('token');
@@ -24,8 +22,11 @@ export const connection = () => {
         URL = "http://localhost/coysa/public/api/";
     }
 
-    return {
-        URL: URL,
-        API_TOKEN: API_TOKEN
-    }
+    return { URL, API_TOKEN }
 };
+
+export default {
+    URL: connection().URL,
+    API_TOKEN: connection().API_TOKEN,
+    id:JSON.parse(localStorage.getItem('auth')).id
+}

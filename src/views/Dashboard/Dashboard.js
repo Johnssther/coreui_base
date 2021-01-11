@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react';
 // Main Chart
-import ApiDashboard from '../../api/dashboard';
+import { getTotalExpensesMonths, getTotalExpensesMonth } from '../../api/dashboard';
+
 import Carrucelinfinite from '../components/carrucelinfinite';
 import { Link } from 'react-router-dom';
 import Main from '../layout/main'
@@ -48,44 +49,36 @@ class Dashboard extends Component {
       return { value: item.id, label: item.gasto }
     })
 
-    this.setState({
-      expensestype
-    })
+    this.setState({ expensestype })
 
   }
 
   //getExpenseMont card
-  getExpensesMonth(data) {
-    ApiDashboard.getTotalExpensesMonth(data)
-      .then((response) => {
-        this.setState({
-          gastoTotal: response,
-          loading: false
-        });
-      })
-      .catch(e => {
-        console.log(e)
-        this.setState({
-          loading: false
-        });
-      })
+  async getExpensesMonth(data) {
+    try {
+      const response = await getTotalExpensesMonth(data)
+      this.setState({ gastoTotal: response, loading: false });
+
+    } catch (err) {
+      console.log(err)
+      this.setState({
+        loading: false
+      });
+    }
   }
-  //getExpenseMonts slider
-  getExpensesMonths() {
-    ApiDashboard.getTotalExpensesMonths()
-      .then((response) => {
-        this.setState({
-          mes: response,
-          loading: false
-        });
-      })
-      .catch(e => {
-        console.log(e)
-        this.setState({
-          loading: false
-        });
-      })
+  async getExpensesMonths() {
+    try {
+      const response = await getTotalExpensesMonths()
+      this.setState({ mes: response, loading: false});
+
+    } catch (err) {
+      console.log(err)
+      this.setState({
+        loading: false
+      });
+    }
   }
+
   //getExpenseMonts
   async onChangeSelect(value) {
     await this.setState({ valueSelectExpensestype: value })
@@ -101,32 +94,13 @@ class Dashboard extends Component {
     }
     return (
       <Main success={false}>
-
-        <div className="row mb-2">
-          <div className="offset-sm-3 col-sm-6">
-            <Alert color="primary">
-            {languaje.coming_soon}<br></br>
-            {languaje.coming_soon_item1}<br></br>
-            </Alert>
-            <Alert color="success">
-              {languaje.news}<br></br>
-              {languaje.news_item1}<br></br>
-              {languaje.news_item2}<br></br>
-              {languaje.news_item3}<br></br>
-            <Link title="Ir al modulo de ingresos" className="btn btn-warning" to={`/revenues`}>{languaje.to_explore}</Link>
-            </Alert>
+         <div className="offset-sm-3 col-sm-6">
             <Select
               className="is-invalid"
               options={this.state.expensestype}
               onChange={(newValue) => { this.onChangeSelect(newValue.value) }}
             />
-          </div>
-          <div className=" col-sm-3">
-            <button className={`btn btn-sm btn-${btn_color?'warning':'warning'} m-1`} onClick={()=>{ this.setState({ languaje: dasboard_es, btn_color:!btn_color }) }}>{languaje.btn_es}</button>
-            <button className={`btn btn-sm btn-${btn_color?'warning':'warning'} m-1`} onClick={()=>{ this.setState({ languaje: dasboard_en, btn_color:!btn_color }) }}>{languaje.btn_en}</button>
-            <button className={`btn btn-sm btn-${btn_color?'warning':'warning'} m-1`} onClick={()=>{ this.setState({ languaje: dasboard_fr, btn_color:!btn_color }) }}>{languaje.btn_fr}</button>
-          </div>
-        </div>
+          </div><br></br>
         <div className="row mb-2">
           <div className="offset-sm-3 col-sm-6">
             <Card style={{ borderRadius: '10px' }}>

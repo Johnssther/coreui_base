@@ -1,8 +1,6 @@
-//Llamadas al api
-import API from '../../api/api';
-import { handleErrors, generalErrorApi } from '../../utils/errors';
+import { _getExpenses, _saveExpenses, _updateExpense, _showExpense } from '../../../src/api/expenses/expenses';
 
-//redux
+import { handleErrors, generalErrorApi } from '../../utils/errors';
 import { actions } from '../../redux/actions/index';
 import { store } from '../../store';
 
@@ -12,7 +10,7 @@ export const getExpenses = async () => {
         mes: null,
     }
     try {
-        const expenses = await API.getExpenses(data);
+        const expenses = await _getExpenses(data);
         store.dispatch(actions.personalexpenses.setPersonalexpenses(expenses))
         return true;
     } catch (e) {
@@ -23,7 +21,7 @@ export const getExpenses = async () => {
 //store
 export const createExpense = async (data) => {
     try {
-        const response = await API.saveExpenses(data);
+        const response = await _saveExpenses(data);
         
         if(response.success === false) {
             generalErrorApi(response)
@@ -34,10 +32,11 @@ export const createExpense = async (data) => {
         handleErrors(e)
     }
 }
+
 //update
 export const updateExpense = async (data) => {
     try {
-        const response = await API.updateExpense(data);
+        const response = await _updateExpense(data);
         
         if(response.success === false) {
             generalErrorApi(response)
@@ -52,7 +51,7 @@ export const updateExpense = async (data) => {
 //show
 export const showExpense = async (data) => {
     try {
-        const showExpense = await API.showExpense(data);
+        const showExpense = await _showExpense(data);
         await store.dispatch(actions.personalexpenses.setPersonalexpense(showExpense))
         return true
     } catch (e) {

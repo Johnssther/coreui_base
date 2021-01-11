@@ -3,7 +3,6 @@ import {
   Button, Card, CardBody, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row,
   FormGroup, Label, FormFeedback, FormText
 } from 'reactstrap';
-import API from '../../../api/api'
 import validateForm from '../../../utils/validateForms'
 
 class Register extends Component {
@@ -21,7 +20,6 @@ class Register extends Component {
     this.validateForm = this.validateForm.bind(this);
   }
   componentDidMount() {
-    API.registerUser()
 
   }
 

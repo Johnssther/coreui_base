@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import MainComponent from '../components/main-component'
 //services
 
-import { indexRevenue, storeRevenue } from '../../../../services/revenues/revenues'
+import { serviceIndexRevenues, serviceStoreRevenue } from '../../../../services/revenues/revenues'
 //redux
 import { connect } from 'react-redux'
 
@@ -17,8 +17,8 @@ function Create(props) {
 
   const onCreate = async (values) => {
     try {
-      let res = await storeRevenue(values) //save revenue api
-      await indexRevenue()
+      let res = await serviceStoreRevenue(values) //save revenue api
+      await serviceIndexRevenues()
       setCount(count+1); 
       if(parseInt(values.numeroregistros) === count) {
         // window.open(link, "_blank");

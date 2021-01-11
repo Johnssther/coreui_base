@@ -38,3 +38,42 @@ export const handleErrors = response => {
 export const generalErrorApi = response => {
     throw response
 };
+
+/*
+responseServer: function ( model, resp, opts ) {
+    window.Misc.removeSpinner(this.spinner);
+    if (!_.isUndefined(resp.success)) {
+        // response success or error
+        var text = resp.success ? '' : resp.errors;
+        if (_.isObject(resp.errors)) {
+            text = window.Misc.parseErrors(resp.errors);
+        }
+
+        if (!resp.success) {
+            alertify.error(text);
+            return;
+        }
+
+        window.Misc.redirect(window.Misc.urlFull(Route.route('facturas.show', {facturas: resp.id})));
+    }
+
+       /**
+        * Build URI with route and base url
+        */
+     /*  parseErrors: function ( errors ){
+        var text = '';
+        if( _.isObject( errors ) ){
+
+            var listError = '<ul>';
+
+            $.each(errors, function(field, item) {
+                 listError += '<li>'+ item[0] +'</li>';
+            });
+            listError += '</ul>';
+
+            text = listError;
+        }
+        return text;
+    },
+
+    */
