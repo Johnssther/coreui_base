@@ -62,7 +62,7 @@ function Create(props) {
 
   return (
     <>
-    <MainComponent count={count} onCreate={onCreate} expensestype={expensestype} success={success} expense={expense}/>
+      <MainComponent count={count} onCreate={onCreate} expensestype={expensestype} success={success} expense={expense}/>
     </>
   );
 }

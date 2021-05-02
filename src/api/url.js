@@ -13,13 +13,13 @@ export const connection = () => {
     const API_TOKEN = localStorage.getItem('token');
 
     if (host === "localhost:3000") {
-        URL = "http://localhost/coysa/public/api/";
+        URL = "http://localhost/coysa-laravel6/public/api/";
     }
     if (host === "johnssther.github.io") {
         URL = "http://coysa.herokuapp.com/api/";
     }
     if (host === "http://159.65.226.161:3000") {
-        URL = "http://localhost/coysa/public/api/";
+        URL = "http://localhost/coysa-laravel6/public/api/";
     }
 
     return { URL, API_TOKEN }

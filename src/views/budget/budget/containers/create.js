@@ -1,17 +1,18 @@
 import React from 'react';
-
 import Swal from 'sweetalert2'
-
 import MainComponent from '../components/main-component'
-//services
-
 import { serviceIndexRevenues, serviceStoreRevenue } from '../../../../services/revenues/revenues'
-//redux
 import { connect } from 'react-redux'
+import { getExpensesType } from '../../../../services/expenses/expensestype'
+getExpensesType();
 
 function Create(props) {
-  const { revenue } = props  
-
+  
+  const { revenue, expensestypes } = props
+  const expensestype = expensestypes.map((item) => {
+    return { value: item.id, label: item.gasto }
+  })
+  console.log(expensestype)
   const [success, setSuccess] = React.useState({success:false, error:null});
   const [count, setCount] = React.useState(1);
 
@@ -50,14 +51,19 @@ function Create(props) {
   }
 
   return (
-    <>
-    <MainComponent count={count} onCreate={onCreate} success={success} revenue={revenue}/>
-    </>
+    <MainComponent 
+      count={count} 
+      onCreate={onCreate} 
+      success={success} 
+      revenue={revenue}
+      expensestype={expensestype}
+    />
   );
 }
 
 const mapStateToProps = state => ({
   revenue: state.revenues.storerevenue,
+  expensestypes: state.expensestype.expensestype,
 })
 
 export default connect(mapStateToProps)(Create)

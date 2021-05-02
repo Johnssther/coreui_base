@@ -15,15 +15,15 @@ const TargetBudget = (props) => {
     return (
         <Card>
             <CardHeader>
-                Agosto 2020
+                Presupuesto
         </CardHeader>
             <CardBody>
                 <div className="row mb-2">
                     <div className="offset-sm-4 col-sm-5 text-center">
-                        <ul class="list-group list-group-horizontal-xl">
-                            <li class="list-group-item list-group-item-success">Presupuestado: ${new Intl.NumberFormat().format(item.reduce((prev, next) => prev + next.precio, 0))}</li>
-                            <li class="list-group-item list-group-item-danger">Gastado: $0</li>
-                            <li class="list-group-item list-group-item-primary">Balance: $0</li>
+                        <ul className="list-group list-group-horizontal-xl">
+                            <li className="list-group-item list-group-item-success">Presupuestado: ${new Intl.NumberFormat().format(item.reduce((prev, next) => prev + next.precio, 0))}</li>
+                            <li className="list-group-item list-group-item-danger">Gastado: ${new Intl.NumberFormat().format(item.reduce((prev, next) => prev + next.gastado, 0))}</li>
+                            <li className="list-group-item list-group-item-primary">Balance: ${new Intl.NumberFormat().format(item.reduce((prev, next) => prev + next.balance, 0))}</li>
                         </ul>
                     </div>
                 </div>
@@ -40,13 +40,13 @@ const TargetBudget = (props) => {
                         <tbody>
                             {
                                 item.map((value, index) => {
-                                    const { name, precio } = value
+                                    const { name, precio, gastado } = value
                                     return (
                                         <tr key={index}>
                                             <th scope="row">{index + 1}</th>
                                             <td>{name}</td>
                                             <td>${new Intl.NumberFormat().format(precio)}</td>
-                                            <td>$0</td>
+                                            <td>${new Intl.NumberFormat().format(gastado)}</td>
                                         </tr>
                                     )
                                 })
@@ -56,7 +56,7 @@ const TargetBudget = (props) => {
                                 <th scope="row"></th>
                                 <th>TOTAL</th>
                                 <th>${ new Intl.NumberFormat().format(item.reduce((prev, next) => prev + next.precio, 0)) }</th>
-                                <th>$0</th>
+                                <th>${ new Intl.NumberFormat().format(item.reduce((prev, next) => prev + next.gastado, 0)) }</th>
                             </tr>
                         </tbody>
                     </table>

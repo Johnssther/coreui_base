@@ -13,7 +13,6 @@ const InputSelect = ({ label, expensestype, ...props }) => {
             return item;
         }
     })
-    console.log(expensestype, 'expensestype STEFFY');
     
     return (
         <>
