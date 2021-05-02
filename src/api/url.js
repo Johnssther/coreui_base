@@ -28,5 +28,5 @@ export const connection = () => {
 export default {
     URL: connection().URL,
     API_TOKEN: connection().API_TOKEN,
-    id:JSON.parse(localStorage.getItem('auth')).id
+    id:JSON.parse(localStorage.getItem('auth')) == null ? null:JSON.parse(localStorage.getItem('auth')).id
 }
