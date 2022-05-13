@@ -15,6 +15,8 @@ export const _saveExpenses = async (data) => {
             body: JSON.stringify({
                 api_token: url.API_TOKEN,
                 gasto: data.gasto,
+                justification: data.justification,
+                urlfile: data.urlfile,
                 cantidad: data.cantidad,
                 precio_unidad: data.precio_unidad,
                 precio_total: data.precio_total,
@@ -38,6 +40,8 @@ export const _updateExpense = async (data) => {
             body: JSON.stringify({
                 api_token: url.API_TOKEN,
                 gasto: data.gasto,
+                justification: data.justification,
+                urlfile: data.urlfile,
                 cantidad: data.cantidad,
                 precio_unidad: data.precio_unidad,
                 precio_total: data.precio_total,

@@ -73,7 +73,11 @@ const columns = [
       return (
         <>
           {/* <Link to={`/expenses/moduls/personalexpenses/edit/${row.id}`}><i title="Edit" className="text-primary cui-pencil m-1"></i></Link> */}
-          <Link to={`/expenses/moduls/personalexpenses/show/${row.id}`}><i title="Show" className="text-success icon-eye m-1"></i></Link>
+          <Link to={`/expenses/moduls/personalexpenses/show/${row.id}`}><i title="Show" className="text-success fa fa-eye m-1"></i></Link>
+          {
+            row.urlfile === null ? null:
+            <a href={row.urlfile} target="_blank"><i title="File" className="text-success fa fa-file m-1"></i></a>
+          }
           {/* <Link to={`/expenses/moduls/personalexpenses/show/${row.id}`}><i title="Delete" className="text-danger fa fa-eraser m-1"></i></Link> */}
         </>
       )

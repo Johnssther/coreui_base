@@ -22,7 +22,7 @@ const ShowComponent = (props) => {
                             Show Expense
                         </Col>
                         <Col className="text-right" sm="10">
-                            <i style={{ fontSize: 17, cursor:'pointer' }} title="Destroy" className="text-danger fa fa-eraser"></i>
+                            <i style={{ fontSize: 17, cursor: 'pointer' }} title="Destroy" className="text-danger fa fa-eraser"></i>
                         </Col>
                     </Row>
                 </CardHeader>
@@ -56,6 +56,17 @@ const ShowComponent = (props) => {
                         <Row xs="1" sm="2" md="4">
                             <Col className="text-right" sm={{ size: 5 }}><b><label>Precio Total:</label></b></Col>
                             <Col xs="6">{`$${new Intl.NumberFormat().format(expense.precio_total)}`}</Col>
+                        </Row>
+                        <Row xs="3">
+                            <Col className="text-right" sm={{ size: 5 }}><b><label>Justificación:</label></b></Col>
+                            <Col>{expense.justification}</Col>
+                        </Row>
+                        <Row xs="3">
+                            <Col className="text-right" sm={{ size: 5 }}><b><label>Url:</label></b></Col>
+                            {
+                                expense.urlfile === null ? <Col>-</Col>:
+                                <Col><a href={expense.urlfile} target="blank">Navegar al archivo</a></Col>
+                            }
                         </Row>
                     </Container>
                 </CardBody>

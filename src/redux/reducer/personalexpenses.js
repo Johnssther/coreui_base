@@ -2,6 +2,8 @@ const initialState = {
     createpersonalexpense: {
         id:null,
         gasto: '',
+        justification: '',
+        urlfile: '',
         cantidad: '',
         precio_unidad: '',
         precio_total: '',
@@ -16,6 +18,8 @@ const initialState = {
     personalexpense: {
         id:null,
         gasto: '',
+        justification: '',
+        urlfile: '',
         cantidad: '',
         precio_unidad: '',
         precio_total: '',
