@@ -16,11 +16,13 @@ export const connection = () => {
         URL = "http://localhost/coysa-laravel6/public/api/";
     }
     if (host === "johnssther.github.io") {
-        URL = "https://x.johnr.top/";
+        URL = "https://x.johnr.top/api/";
     }
     if (host === "http://159.65.226.161:3000") {
         URL = "http://localhost/coysa-laravel6/public/api/";
     }
+
+    URL = "https://x.johnr.top/api/";
 
     return { URL, API_TOKEN }
 };

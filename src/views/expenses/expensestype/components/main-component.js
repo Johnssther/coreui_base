@@ -32,7 +32,7 @@ const LoginComponent = (props) => {
                         validationSchema={Yup.object({
                             tipogastos_name: Yup.string() 
                                 .min(11, 'Un gasto debe tener minimo 10 caracteres.')
-                                .max(30, 'Un gasto debe tener maximo 30 caracteres.')
+                                .max(100, 'Un gasto debe tener maximo 30 caracteres.')
                                 .required('El gasto es obligatorio'),
                             tipogastos_active: Yup.boolean()
                                 .required("Required")

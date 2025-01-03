@@ -30,7 +30,7 @@ class Gbarras extends Component {
       <>
         <Card style={{ borderRadius:'10px' }}>
           <CardHeader style={{ borderRadius:'10px 10px 0px 0px' }}>
-            Histograma del 2020
+            Histograma del 2025
               <div className="card-header-actions">
             </div>
           </CardHeader>

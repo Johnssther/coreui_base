@@ -22,9 +22,13 @@ import { getExpenses } from '../../../../services/expenses/personalexpenses'
 
 getExpenses();
 
-const LoginComponent = (props) => {
+const MainComponent = (props) => {
     const { count, onCreate, expensestype, success, expense } = props;
-    console.log(expensestype, 'ju');
+
+    const handleFileUploadComplete = (url) => {
+        console.log('Archivo subido:', url);
+        // Puedes guardar la URL en el estado o hacer algo con ella
+    };
 
     return (
         <Main success={success}>
@@ -137,7 +141,8 @@ const LoginComponent = (props) => {
                     </Card>
                     <Card>
                         <CardBody>
-                            <File />
+                            {/* <File /> */}
+                            <File onFileUploadComplete={handleFileUploadComplete} />
                         </CardBody>
                     </Card>
                 </Form>
@@ -146,4 +151,4 @@ const LoginComponent = (props) => {
     );
 };
 
-export default LoginComponent
+export default MainComponent

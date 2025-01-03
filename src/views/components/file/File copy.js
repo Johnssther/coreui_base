@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import storage from '../../../firebase/firebase.config';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 
-const File = ({ onFileUploadComplete }) => {
+const File = () => {
     const [files, setFiles] = useState([]);
     const [deletingFile, setDeletingFile] = useState(null);
 
@@ -50,11 +50,6 @@ const File = ({ onFileUploadComplete }) => {
                                     : f
                             )
                         );
-
-                        // Llama al callback con la URL del archivo subido
-                        if (onFileUploadComplete) {
-                            onFileUploadComplete(downloadURL);
-                        }
                     });
                 }
             );
@@ -118,9 +113,6 @@ const File = ({ onFileUploadComplete }) => {
                             >
                                 Eliminar
                             </button>
-                        </div>
-                        <div>
-                            <p>{file.url}</p>
                         </div>
                         <div className="mt-2">
                             <div className="progress" style={{ height: '8px' }}>
