@@ -44,10 +44,10 @@ class Gbarras extends Component {
                       {
                         label: 'Gastos mensuales',
                         backgroundColor: this.props.color,
-                        borderColor: 'rgba(255,99,132,1)',
+                        borderColor: 'purple',
                         borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(168,132,8,66)',
-                        hoverBorderColor: 'rgba(255,99,132,1)',
+                        hoverBackgroundColor: 'purple',
+                        hoverBorderColor: 'rgb(92, 7, 132)',
                         data: mes.map((item) => item.precio_total_mes),
                       },
                     ],

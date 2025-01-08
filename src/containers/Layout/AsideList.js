@@ -11,7 +11,7 @@ import { AssignmentReturnRounded, AssignmentReturnedRounded ,DashboardRounded, T
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import DescriptionRounded from '@material-ui/icons/DescriptionRounded';
-import { blue, green } from '@material-ui/core/colors';
+import { blue, green, purple } from '@material-ui/core/colors';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
@@ -48,7 +48,7 @@ function AsideList(props) {
       if (pathname === '/expenses/moduls/personalexpenses') {
         setOpen(true);
         setOpenrevenues(false);
-        setRoute1('green');
+        setRoute1('purple');
         setRoute2('#212121');
         setRoute3('#212121');
       }
@@ -56,7 +56,7 @@ function AsideList(props) {
         setOpen(true);
         setOpenrevenues(false);
         setRoute1('#212121');
-        setRoute2('green');
+        setRoute2('purple');
         setRoute3('#212121');
       }
       if (pathname === '/expenses/reports/rpersonalexpenses') {
@@ -64,7 +64,7 @@ function AsideList(props) {
         setOpenrevenues(false);
         setRoute1('#212121');
         setRoute2('#212121');
-        setRoute3('green');
+        setRoute3('purple');
       }
     }
   }
@@ -95,21 +95,21 @@ function AsideList(props) {
   };
   const handleClickExpensesReg = async () => {
     await props.history.push('/expenses/moduls/personalexpenses');
-    setRoute1('green');
+    setRoute1('purple');
     setRoute2('#212121');
     setRoute3('#212121');
   };
   const handleClickTypeExpenses = async () => {
     await props.history.push('/expenses/references/expensestype');
     setRoute1('#212121');
-    setRoute2('green');
+    setRoute2('purple');
     setRoute3('#212121');
   };
   const handleClickReportExpenses = async () => {
     await props.history.push('/expenses/reports/rpersonalexpenses');
     setRoute1('#212121');
     setRoute2('#212121');
-    setRoute3('green');
+    setRoute3('purple');
   };
 
   const handleClickRevenues = () => {

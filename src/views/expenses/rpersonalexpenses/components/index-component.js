@@ -64,6 +64,13 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
   </>
 );
 
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(value);
+};
+
 const columns = [
   {
     name: 'Actions',
@@ -113,11 +120,13 @@ const columns = [
     grow: 4,
   },
   {
+    cell: row => <span>{formatCurrency(row.precio_unidad)}</span>,
     name: 'Unit price',
     selector: 'precio_unidad',
     sortable: true,
   },
   {
+    cell: row => <span>{formatCurrency(row.precio_total)}</span>,
     name: 'Total price',
     selector: 'precio_total',
     sortable: true,

@@ -94,6 +94,32 @@ class Dashboard extends Component {
     }
     return (
       <Main success={false}>
+         <div className="offset-sm-3 col-sm-6">
+            <Select
+              className="is-invalid"
+              options={this.state.expensestype}
+              onChange={(newValue) => { this.onChangeSelect(newValue.value) }}
+            />
+          </div><br></br>
+        <div className="row mb-2">
+          <div className="offset-sm-3 col-sm-6">
+            <Card style={{ borderRadius: '10px' }}>
+              <CardBody>
+                <div className="row">
+                  <div className="col">
+                    <h6>{languaje.my_expenses}</h6>
+                    <h3>{'$' + new Intl.NumberFormat().format(this.state.gastoTotal.toString())}</h3>
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </div>
+        </div>
+        <div className="row mb-2">
+          <div className="offset-sm-3 col-sm-6">
+          </div>
+        </div>
+        {/* <Datos /> */}
             <Gbarras mes={this.state.mes} color={this.state.color} />
       </Main>
     );

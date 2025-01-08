@@ -59,6 +59,13 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
   </>
 );
 
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(value);
+};
+
 const columns = [
   {
     name: 'Actions',
@@ -80,12 +87,30 @@ const columns = [
     grow: 0,
   },
   {
-    name: 'Date',
-    selector: 'fecha',
+    name: 'Unids',
+    selector: 'cantidad',
+    sortable: true,
+    grow: 0.5,
+  },
+  {
+    cell: row => <span style={{ fontWeight: 'bold' }}>{row.gasto}</span>,
+    name: 'Expense',
+    selector: 'gasto',
     wrap: true,
     sortable: true,
-    cell: row => <div><div style={{ fontWeight: 700, }}>{row.fecha}</div>{row.summary}</div>,
-    grow: 0,
+    grow: 4,
+  },
+  {
+    cell: row => <span>{formatCurrency(row.precio_unidad)}</span>,
+    name: 'Unit price',
+    selector: 'precio_unidad',
+    sortable: true,
+  },
+  {
+    cell: row => <span>{formatCurrency(row.precio_total)}</span>,
+    name: 'Total price',
+    selector: 'precio_total',
+    sortable: true,
   },
   {
     name: 'Expense type',
@@ -95,27 +120,12 @@ const columns = [
     grow: 0,
   },
   {
-    name: 'Count',
-    selector: 'cantidad',
-    sortable: true,
-    grow: 0,
-  },
-  {
-    name: 'Expense',
-    selector: 'gasto',
+    name: 'Date',
+    selector: 'fecha',
     wrap: true,
     sortable: true,
-    grow: 4,
-  },
-  {
-    name: 'Unit price',
-    selector: 'precio_unidad',
-    sortable: true,
-  },
-  {
-    name: 'Total price',
-    selector: 'precio_total',
-    sortable: true,
+    cell: row => <div><div style={{ fontWeight: 700, }}>{row.fecha}</div>{row.summary}</div>,
+    grow: 0,
   },
   {
     cell: row => <></>,
@@ -167,7 +177,6 @@ function IndexComponent(props) {
           theme="solarized"
           subHeader
           subHeaderComponent={subHeaderComponentMemo}
-
         />
       </CardBody>
     </Card >

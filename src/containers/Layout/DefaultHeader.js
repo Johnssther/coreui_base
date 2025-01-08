@@ -36,10 +36,31 @@ class DefaultHeader extends Component {
     return (
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <AppNavbarBrand
+        {/* <AppNavbarBrand
           full={{ src: logo, width: 89, height: 25, alt: 'Gastos' }}
           minimized={{ src: sygnet, width: 30, height: 30, alt: 'Gastos' }}
-        />
+        /> */}
+        <p
+  style={{
+    fontFamily: 'Arial, sans-serif',
+    fontSize: '1.5rem',
+    color: '#4CAF50',
+    background: 'linear-gradient(90deg, white, white)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    margin: '10px',
+    paading: '2px',
+    borderRadius: '2px',
+    display: 'inline-block',
+    cursor: 'pointer',
+    transition: 'transform 0.2s',
+  }}
+  onMouseOver={(e) => (e.target.style.transform = 'scale(1.1)')}
+  onMouseOut={(e) => (e.target.style.transform = 'scale(1)')}
+>
+  Savvi
+</p>
+
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
         <Nav className="d-md-down-none" navbar>

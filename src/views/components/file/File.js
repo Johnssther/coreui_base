@@ -119,9 +119,7 @@ const File = ({ onFileUploadComplete }) => {
                                 Eliminar
                             </button>
                         </div>
-                        <div>
-                            <p>{file.url}</p>
-                        </div>
+                        
                         <div className="mt-2">
                             <div className="progress" style={{ height: '8px' }}>
                                 <div

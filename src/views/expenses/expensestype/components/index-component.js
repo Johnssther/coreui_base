@@ -32,6 +32,7 @@ const columns = [
     grow: 0,
   },
   {
+    cell: row => <span style={{ fontWeight: 'bold' }}>{row.gasto}</span>,
     name: 'Expense',
     selector: 'gasto',
     wrap: true,
