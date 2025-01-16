@@ -28,7 +28,7 @@ const columns = [
     name: 'Code',
     selector: 'id',
     sortable: true,
-    cell: row => <Link to={`/expenses/moduls/personalexpenses/show/${row.id}`}>{row.id}</Link>,
+    cell: row => <span style={{ fontWeight: 'bold' }}>{row.id}</span>,
     grow: 0,
   },
   {

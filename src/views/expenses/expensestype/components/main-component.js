@@ -36,8 +36,8 @@ const LoginComponent = (props) => {
                                 .required('El gasto es obligatorio'),
                             tipogastos_active: Yup.boolean()
                                 .required("Required")
-                                .oneOf([true], "El tipo de gasto debe estar activo ."),
-                        })}
+                                .oneOf([true, false], "El estado debe ser activo o inactivo."), // Accept only true or false
+                            })}
                         onSubmit={(values, { setSubmitting }) => {
                             onCreate(values);
                             setSubmitting(true);

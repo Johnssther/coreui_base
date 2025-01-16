@@ -21,9 +21,9 @@ const ShowComponent = (props) => {
                         <Col sm="2">
                             Show Expense
                         </Col>
-                        <Col className="text-right" sm="10">
+                        {/* <Col className="text-right" sm="10">
                             <i style={{ fontSize: 17, cursor: 'pointer' }} title="Destroy" className="text-danger fa fa-eraser"></i>
-                        </Col>
+                        </Col> */}
                     </Row>
                 </CardHeader>
                 <CardBody>

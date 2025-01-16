@@ -63,11 +63,13 @@ const MainComponent = (props) => {
                         .positive('La cantidad no puede ser negativa.'),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
-                    onCreate(values);
-                    setSubmitting(true);
+                    setSubmitting(true); // Activar estado de carga
+                    onCreate(values).finally(() => {
+                        setSubmitting(false); // Desactivar estado de carga después de finalizar
+                    });
                 }}
             >
-                {({ setFieldValue }) => (
+                {({ setFieldValue, isSubmitting }) => (
                     <Form>
                         {/* <h3> Ingresar Gasto {count - 1} </h3> */}
                         <Card>
@@ -239,7 +241,7 @@ const MainComponent = (props) => {
                                         >
                                             Reset
                                         </Button>
-                                        <Button
+                                        {/* <Button
                                             className="m-1"
                                             type="submit"
                                             color="dark"
@@ -262,36 +264,29 @@ const MainComponent = (props) => {
                                             }}
                                         >
                                             Register
+                                        </Button> */}
+                                        <Button
+                                            className="m-1"
+                                            type="submit"
+                                            color="dark"
+                                            size="sm"
+                                            style={{
+                                                backgroundColor: "#1f2937",
+                                                color: "#f9fafb",
+                                                border: "none",
+                                                borderRadius: "4px",
+                                                padding: "8px 16px",
+                                                fontSize: "14px",
+                                                fontWeight: "500",
+                                            }}
+                                            disabled={isSubmitting} // Deshabilitar botón mientras se envía
+                                        >
+                                            {isSubmitting ? 'Enviando...' : 'Registrar'} {/* Cambiar texto según el estado */}
                                         </Button>
                                     </Col>
                                 </Row>
                             </CardBody>
                         </Card>
-
-                        {/* <Card>
-                            <CardBody>
-                                <Row>
-                                    <Col sm={{ size: 6, offset: 4 }}>
-                                        <Button
-                                            className="col-sm-3 m-1"
-                                            type="reset"
-                                            color="secondary"
-                                            size="sm"
-                                        >
-                                            Reset
-                                        </Button>
-                                        <Button
-                                            className="col-sm-3 m-1"
-                                            type="submit"
-                                            color="dark"
-                                            size="sm"
-                                        >
-                                            Register
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                        </Card> */}
 
                     </Form>
                 )}
